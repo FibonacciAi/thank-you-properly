@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#000000">
 <title>Thank You, Properly.</title>
-<meta name="description" content="A thank-you slide to Elon Musk that actually says what for. Tesla, SpaceX, Starlink, Neuralink, X, xAI — with receipts.">
+<meta name="description" content="A thank-you slide to Elon Musk that actually says what for. Tesla, SpaceX, Starlink, Neuralink, X, xAI. Every number sourced.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thank You, Properly.">
 <meta property="og:title" content="Thank You, Properly.">
@@ -81,25 +83,55 @@ body.light #sig{color:#b0b0b0}
 #panel a{color:#9cc8ff}
 #panel .x{position:fixed;top:max(16px,env(safe-area-inset-top));right:16px}
 @media (max-width:640px){#big{bottom:118px}#big .n{font-size:22vw}#hud .s{max-width:none}#bar .hide-s{display:none}}
+
+:root{--serif:"Instrument Serif","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+#act{position:fixed;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;opacity:0;text-align:center;padding:0 6vw;font-family:var(--sans)}
+#act .n{font:400 italic clamp(22px,2.6vw,34px)/1 var(--serif);color:rgba(255,255,255,.55);margin-bottom:1.6vh}
+#act .w{font:400 italic clamp(68px,15vw,250px)/.9 var(--serif);letter-spacing:-.02em;color:#fff;text-shadow:0 0 90px rgba(255,255,255,.28)}
+#act .t{font-size:clamp(15px,1.7vw,22px);line-height:1.4;color:rgba(255,255,255,.75);margin-top:3.2vh;max-width:620px}
+#act.on{animation:act 2.7s cubic-bezier(.2,.7,.1,1) forwards}
+#act.on .w{animation:actw 2.7s cubic-bezier(.16,.8,.1,1) forwards}
+@keyframes act{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
+@keyframes actw{0%{transform:scale(1.5);filter:blur(18px);letter-spacing:.25em}28%{filter:blur(0)}100%{transform:scale(1);letter-spacing:-.02em}}
+#lb::before,#lb::after{content:"";position:fixed;left:0;right:0;height:0;background:#000;z-index:4;transition:height 1s cubic-bezier(.7,0,.2,1);pointer-events:none}
+#lb::before{top:0}#lb::after{bottom:0}
+body.lb #lb::before,body.lb #lb::after{height:10.5vh}
+body.acton #hud,body.acton #big{opacity:0}
+#mont{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+#mont .m{position:absolute;left:50%;top:50%;text-align:center;opacity:0;white-space:nowrap;animation:fly 1.6s cubic-bezier(.55,0,.85,.55) forwards;text-shadow:0 0 60px rgba(0,0,0,.6)}
+#mont .m b{display:block;font:250 clamp(84px,17vw,270px)/.9 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+#mont .m i{display:block;font:400 italic clamp(20px,2.4vw,32px)/1.2 var(--serif);color:rgba(255,255,255,.82);margin-top:12px}
+@keyframes fly{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}18%{opacity:1}68%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
+#hud .h.wf{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.012em;font-size:clamp(36px,5.8vw,88px);line-height:1.03}
+body.wf #hud{top:50%;transform:translateY(-50%)}
+body.wf #hud .k{color:rgba(255,255,255,.5)}
+#snd{position:fixed;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:8;display:flex;align-items:center;gap:8px;font-size:12px}
+#snd svg{width:16px;height:16px;flex:none}
+#snd .x{display:none} #snd.off .x{display:inline} #snd.off .w{display:none}
+body.light #snd{color:#333;background:rgba(255,255,255,.92);border-color:#ccc}
+#snd:focus-visible,.b:focus-visible{outline:2px solid #6aa8ff;outline-offset:2px}
+@media (max-width:640px){#hud{top:max(70px,calc(env(safe-area-inset-top) + 62px))}body.wf #hud{top:50%}#act .t{max-width:88vw}}
+@media (prefers-reduced-motion:reduce){#act.on .w{animation:none}#mont .m{animation-duration:2.4s}}
 </style>
 </head>
 <body class="light pre">
 <canvas id="gl"></canvas><div id="bg"></div>
 <canvas id="slide"></canvas>
 <canvas id="fx"></canvas>
-<div id="flash"></div>
+<div id="flash"></div><div id="lb"></div><div id="mont"></div>
+<div id="act" aria-live="polite"><div class="n" id="an"></div><div class="w" id="aw"></div><div class="t" id="at"></div></div>
 <div id="ui">
   <div id="hud"><div class="k" id="hk"></div><div class="h" id="hh"></div><div class="s" id="hs"></div><div class="src" id="hsrc"></div></div>
   <div id="big"><div class="n" id="bn"></div><div class="l" id="bl"></div></div>
-  <div id="start">Click or tap to begin · sound on</div>
+  <div id="start">Tap anywhere to begin. Sound on.</div>
   <div id="end"><button class="b" id="replay">↺ Replay</button><button class="b" id="srcbtn2">Sources</button><button class="b" id="share">Share</button></div>
   <div id="sig">sevenfourone</div>
+  <button class="b" id="snd" aria-label="Mute sound" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg><span id="sndt">Sound on</span></button>
   <div id="bar">
     <div id="where"><div id="wt"></div><div id="dots"></div></div>
     <button class="b nav" id="prev" aria-label="Previous">‹</button>
     <button class="b" id="play" aria-label="Pause">❚❚</button>
     <button class="b nav" id="next" aria-label="Next">›</button>
-    <button class="b" id="snd" aria-label="Sound">♪ on</button>
     <button class="b hide-s" id="srcbtn">Sources</button>
     <div id="prog"></div>
   </div>
@@ -119,52 +151,73 @@ const SRC = {
   ef:{t:"ElonFacts.org data dashboard (cross-check of every figure below)", a:"as of Nov 25, 2026", u:"https://elonfacts.org/dashboard"},
   f1:{t:"Falcon 1 — Flight 4 reached orbit after three failures", a:"Sep 28, 2008", u:"https://en.wikipedia.org/wiki/Falcon_1"},
   ll2:{t:"Launch Library 2 (The Space Devs) — 165 Falcon 9/Heavy launches in 2025", a:"Dec 31, 2025", u:"https://thespacedevs.com/llapi"},
-  f9b:{t:"List of Falcon 9 first-stage boosters — 677 successful landings; B1067 flew its 37th mission", a:"as of Nov 22, 2026", u:"https://en.wikipedia.org/wiki/List_of_Falcon_9_first-stage_boosters"},
+  f9b:{t:"List of Falcon 9 first-stage boosters — first landing Dec 22, 2015; 678 successful landings in 691 attempts; B1067 flew its 37th mission", a:"as of Nov 26, 2026", u:"https://en.wikipedia.org/wiki/List_of_Falcon_9_first-stage_boosters"},
   mass:{t:"SpaceX investor presentation filed with the SEC — “more than 80%” of world mass to orbit in 2025 (SpaceX's figure; includes Starlink)", a:"2025", u:"https://elonfacts.org/dashboard"},
   ss:{t:"List of Starship launches — Flight 15 upper stage caught by the tower", a:"Nov 14, 2026", u:"https://en.wikipedia.org/wiki/List_of_Starship_launches"},
-  mcd:{t:"Jonathan McDowell, Starlink statistics — 11,204 in orbit, 11,190 working", a:"as of Nov 9, 2026", u:"https://planet4589.org/space/con/star/stats.html"},
-  q10:{t:"SpaceX Form 10-Q, Q3 2026 — 13.6M Starlink subscribers (service lines), 174 countries and markets", a:"as of Sep 30, 2026", u:"https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm"},
+  mcd:{t:"Jonathan McDowell, Starlink statistics — 11,195 in orbit, 11,181 working", a:"data of Nov 26, 2026", u:"https://planet4589.org/space/con/star/stats.html"},
+  q10:{t:"SpaceX Form 10-Q, Q3 2026 — 13.6M Starlink consumer subscribers (unique service lines), up from 7.2M a year earlier; 174 countries, territories and other markets", a:"as of Sep 30, 2026", u:"https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm"},
   nlp:{t:"Neuralink — FDA approval to launch the LINK Pivotal Study; “over 30 implanted participants”", a:"Nov 25, 2026", u:"https://neuralink.com/updates/neuralink-receives-fda-approval-to-launch-link-pivotal-study/"},
   nl2:{t:"Neuralink — Two Years of Telepathy; 21 participants, zero serious device-related adverse events (company report)", a:"Jan 28, 2026", u:"https://neuralink.com/updates/two-years-of-telepathy/"},
   xal:{t:"xai-org/x-algorithm — For You feed code incl. ranking weights, Apache-2.0", a:"release of Aug 13, 2026", u:"https://github.com/xai-org/x-algorithm"},
   cn:{t:"Community Notes public dataset — 3,263,626 notes (tally of the Nov 1 snapshot, via ElonFacts)", a:"through Oct 30, 2026", u:"https://communitynotes.x.com/guide/en/under-the-hood/download-data"},
   col:{t:"xAI — Colossus: built in 122 days, doubled to 200K GPUs in 92", a:"2025", u:"https://x.ai/colossus"},
+  pat:{t:"Tesla blog, “All Our Patent Are Belong To You” — EVs “far less than 1%” of major carmakers' sales; “Tesla will not initiate patent lawsuits against anyone who, in good faith, wants to use our technology.”", a:"Jun 12, 2014", u:"https://www.tesla.com/blog/all-our-patent-are-belong-you"},
+  nacs:{t:"North American Charging Standard — Tesla's connector, standardized by SAE International as J3400 in 2023", a:"accessed Nov 26, 2026", u:"https://en.wikipedia.org/wiki/North_American_Charging_Standard"},
+  st5:{t:"Starship flight test 5 — Super Heavy booster caught by the launch tower's arms", a:"Oct 13, 2024", u:"https://en.wikipedia.org/wiki/Starship_flight_test_5"},
+  hel:{t:"Ars Technica — FCC emergency authority; Starlink direct-to-cell satellites broadcast emergency alerts to phones on all networks in North Carolina after Hurricane Helene", a:"Oct 7, 2024", u:"https://arstechnica.com/tech-policy/2024/10/fcc-lets-starlink-provide-service-to-cell-phones-in-areas-hit-by-hurricane/"},
+  nol:{t:"Neuralink (Wikipedia) — first participant Noland Arbaugh, tetraplegic after a diving accident, shown moving a cursor and playing chess", a:"Mar 20, 2024", u:"https://en.wikipedia.org/wiki/Neuralink"},
+  g1:{t:"xai-org/grok-1 — open release of Grok-1 weights, 314B parameters, Apache-2.0", a:"released Mar 17, 2024", u:"https://github.com/xai-org/grok-1"},
   xco:{t:"xAI company page — “We build AI to understand the universe.”", a:"accessed Nov 26, 2026", u:"https://x.ai/company"},
 };
 // ---------------------------------------------------------------- story
 const SCENES = [
  { id:"slide", title:"Thank You", gl:null, beats:[{d:999},{d:999}] },
- { id:"title", title:"Thank You, Properly", gl:"dawn", chord:0, beats:[
-   {k:"A thank-you slide, rewritten", h:"Thank You, Properly.", s:"Six things, with receipts. Then the same two words again.", cls:"title", d:5.5}]},
- { id:"tesla", title:"Tesla", gl:"road", chord:1, beats:[
+ { id:"title", title:"Thank You, Properly", gl:"dawn", chord:0, inten:0, beats:[
+   {k:"A thank-you slide, rewritten", h:"Thank You, Properly.", s:"Six things, with receipts. What each one was for. Then the same two words again.", cls:"title", d:7}]},
+ { id:"tesla", title:"Tesla", gl:"road", chord:1, inten:1, act:["I","The car","Make the electric car the one people actually want."], beats:[
+   {k:"Tesla · June 12, 2014", h:"Electric cars: far less than 1%.", s:"Of the big carmakers' sales, by Musk's count that day. So Tesla took the wall of patents out of its lobby.", src:["pat"], d:6.5},
+   {k:"Tesla · June 12, 2014", h:"Then it gave the patents away.", s:"“Tesla will not initiate patent lawsuits against anyone who, in good faith, wants to use our technology.”", src:["pat"], d:7},
    {k:"Tesla · as of Sep 30, 2026", h:"About 10.2 million Teslas delivered.", s:"All-time. The electric car stopped being the compromise and became the one people wanted.", src:["tq3","ef"], big:{v:10.2,dec:1,suf:"M",l:"vehicles delivered, all-time"}, d:6},
-   {k:"Tesla Energy · 2025", h:"46.7 GWh of batteries for the grid.", s:"Megapack and Powerwall, in one year — a record. Sunlight, kept for after dark.", src:["t25","ef"], big:{v:46.7,dec:1,suf:" GWh",l:"storage deployed in 2025"}, d:6},
-   {k:"Supercharger · as of Sep 30, 2026", h:"Then the plug became the standard.", s:"84,465 connectors at 8,904 stations — and a continent's carmakers switched to the Tesla connector.", src:["tq3","ef"], d:6}]},
- { id:"spacex", title:"SpaceX", gl:"launch", chord:2, beats:[
+   {k:"Tesla Energy · 2025", h:"46.7 GWh of batteries for the grid.", s:"Megapack and Powerwall, in one record year. Sunlight, kept for after dark.", src:["t25","ef"], big:{v:46.7,dec:1,suf:" GWh",l:"storage deployed in 2025"}, d:6},
+   {k:"Charging · 2023 and Sep 30, 2026", h:"Then the plug became the standard.", s:"SAE made Tesla's connector a standard, J3400. 84,465 Supercharger connectors at 8,904 stations.", src:["nacs","tq3"], d:6.5},
+   {k:"What for", h:"So the next car doesn't need a refinery behind it.", cls:"wf", d:6.5}]},
+ { id:"spacex", title:"SpaceX", gl:"launch", chord:2, inten:2, act:["II","The sky","Make leaving Earth routine."], beats:[
    {k:"SpaceX · Kwajalein, 2008", h:"Falcon 1 failed three times.", s:"The fourth reached orbit on Sept 28, 2008. Almost everything after this slide hangs on that day.", src:["f1"], d:6.5},
+   {k:"SpaceX · Dec 22, 2015", h:"A booster came back. Standing up.", s:"The first time a Falcon 9 first stage flew home from an orbital launch and landed upright.", src:["f9b"], d:6.5},
+   {k:"SpaceX · as of Nov 26, 2026", h:"678 landings since.", s:"One booster has now flown 37 times. Rockets started behaving like airplanes.", src:["f9b","ef"], big:{v:678,l:"Falcon booster landings"}, d:6},
    {k:"SpaceX · 2025", h:"165 Falcon launches in one year.", s:"About one every 2.2 days. The sixth record year in a row.", src:["ll2","ef"], big:{v:165,l:"Falcon launches in 2025"}, d:6},
-   {k:"SpaceX · as of Nov 22, 2026", h:"677 boosters came back down. Upright.", s:"One of them has now flown 37 times. Rockets started behaving like airplanes.", src:["f9b","ef"], big:{v:677,l:"Falcon booster landings"}, d:6},
    {k:"SpaceX · 2025, SpaceX's figure", h:"More than 80% of the world's mass to orbit.", s:"One company. Starlink included. Space stopped being an event and became a schedule.", src:["mass"], big:{v:80,pre:">",suf:"%",l:"of world mass to orbit"}, d:6},
-   {k:"Starship · Nov 14, 2026", h:"Then the tower caught the ship.", s:"After 22 hours in orbit, a Starship upper stage came home to the launch tower's arms. A first.", src:["ss"], d:6}]},
- { id:"starlink", title:"Starlink", gl:"globe", chord:3, beats:[
-   {k:"Starlink · as of Nov 9, 2026", h:"11,204 satellites overhead.", s:"11,190 of them working. The largest constellation ever flown — counted by an independent astronomer, not the company.", src:["mcd","ef"], big:{v:11204,l:"Starlink satellites in orbit"}, d:6.5},
-   {k:"Starlink · as of Sep 30, 2026", h:"13.6 million subscribers.", s:"Homes, boats, farms, small businesses. A lot of them in places fiber was never going to reach.", src:["q10","ef"], big:{v:13.6,dec:1,suf:"M",l:"Starlink subscribers"}, d:6},
-   {k:"Starlink · as of Sep 30, 2026", h:"Across 174 countries and markets.", s:"The internet stopped ending at the edge of town.", src:["q10","ef"], d:5.5}]},
- { id:"neuralink", title:"Neuralink", gl:"neurons", chord:4, beats:[
-   {k:"Neuralink · Nov 25, 2026", h:"Over 30 people implanted.", s:"Thousands of hours of real use: studying, making art, gaming, talking with family — by thought.", src:["nlp"], big:{v:30,suf:"+",l:"implanted participants"}, d:6.5},
+   {k:"Starship · Oct 13, 2024", h:"Then the tower caught the booster.", s:"Mechanical arms on the launch tower plucked a returning Super Heavy out of the air.", src:["st5"], d:6},
+   {k:"Starship · Nov 14, 2026", h:"Then it caught the ship.", s:"After 22 hours in orbit, a Starship upper stage came home to the tower's arms. A first.", src:["ss"], d:6},
+   {k:"What for", h:"So leaving Earth becomes a schedule, not a miracle.", cls:"wf", d:6.5}]},
+ { id:"starlink", title:"Starlink", gl:"globe", chord:3, inten:2, act:["III","The signal","Put the internet where the map runs out."], beats:[
+   {k:"Starlink · data of Nov 26, 2026", h:"11,195 satellites overhead.", s:"11,181 of them working. The largest constellation ever flown, counted by an independent astronomer, not the company.", src:["mcd","ef"], big:{v:11195,l:"Starlink satellites in orbit"}, d:6.5},
+   {k:"Starlink · as of Sep 30, 2026", h:"13.6 million subscribers.", s:"Up from 7.2 million a year earlier. Homes, boats, farms, small businesses, many where fiber was never coming.", src:["q10","ef"], big:{v:13.6,dec:1,suf:"M",l:"Starlink subscribers"}, d:6.5},
+   {k:"Starlink · as of Sep 30, 2026", h:"Across 174 countries and markets.", s:"From a single pizza-box dish to a network over most of the planet.", src:["q10"], d:5.5},
+   {k:"Hurricane Helene · Oct 2024", h:"When the storm knocked out cell service,", s:"Starlink satellites broadcast emergency alerts to phones on every network in North Carolina, under emergency FCC authority.", src:["hel"], d:7},
+   {k:"What for", h:"So the internet doesn't end at the edge of town. Or at the edge of a storm.", cls:"wf", d:7}]},
+ { id:"neuralink", title:"Neuralink", gl:"neurons", chord:4, inten:1, act:["IV","The mind","Give people back control, by thought."], beats:[
+   {k:"Neuralink · Mar 20, 2024", h:"Noland Arbaugh played chess.", s:"Tetraplegic after a diving accident, the first participant moved the cursor with his mind.", src:["nol"], d:6.5},
+   {k:"Neuralink · Nov 25, 2026", h:"Now, over 30 people.", s:"Thousands of hours of real use: studying, making art, gaming, talking with family. By thought.", src:["nlp"], big:{v:30,suf:"+",l:"implanted participants"}, d:6.5},
    {k:"Neuralink · Jan 28, 2026, company report", h:"Zero serious device-related adverse events.", s:"Across the first 21 participants. In this field, safety isn't a feature. It's the whole job.", src:["nl2"], d:6},
-   {k:"Neuralink · Nov 25, 2026", h:"Now: a pivotal trial for people with ALS.", s:"The FDA cleared the first pivotal study of an implantable brain-computer interface in the U.S.", src:["nlp"], d:6}]},
- { id:"x", title:"X", gl:"graph", chord:5, beats:[
+   {k:"Neuralink · Nov 25, 2026", h:"Next: a pivotal trial for people with ALS.", s:"The FDA cleared the first pivotal study of an implantable brain-computer interface in the U.S.", src:["nlp"], d:6},
+   {k:"What for", h:"So someone who can't move can still reach the people they love.", cls:"wf", d:7}]},
+ { id:"x", title:"X", gl:"graph", chord:5, inten:2, act:["V","The record","Show the work in public."], beats:[
    {k:"X · Aug 13, 2026", h:"The feed's ranking code is public.", s:"For You, weights included, Apache 2.0. You can read why you see what you see.", src:["xal"], d:6},
-   {k:"X · public data through Oct 30, 2026", h:"3.26 million Community Notes.", s:"Written by users. A note only shows when people who usually disagree both rate it helpful.", src:["cn","ef"], big:{v:3.26,dec:2,suf:"M",l:"notes in the public dataset"}, d:6.5}]},
- { id:"xai", title:"xAI", gl:"racks", chord:6, beats:[
+   {k:"X · public data through Oct 30, 2026", h:"3.26 million Community Notes.", s:"Written by users. A note only shows when people who usually disagree both rate it helpful.", src:["cn","ef"], big:{v:3.26,dec:2,suf:"M",l:"notes in the public dataset"}, d:6.5},
+   {k:"What for", h:"So the argument happens in the open.", cls:"wf", d:5.5}]},
+ { id:"xai", title:"xAI", gl:"racks", chord:6, inten:3, act:["VI","The question","Ask why, at the scale of the universe."], beats:[
+   {k:"xAI · Mar 17, 2024", h:"Grok-1's weights, released.", s:"314 billion parameters, Apache 2.0. Anyone can download the model and build on it.", src:["g1"], d:6},
    {k:"xAI · Colossus", h:"200,000 GPUs in one cluster.", s:"Built in 122 days. Then doubled in 92.", src:["col"], big:{v:200,suf:"K",l:"GPUs, one cluster"}, d:6},
-   {k:"xAI · in its own words", h:"Pointed at one question.", s:"“We build AI to understand the universe.” A good thing to say out loud, and a harder thing to mean.", src:["xco"], d:6.5}]},
+   {k:"xAI · in its own words", h:"Pointed at one question.", s:"“We build AI to understand the universe.” A good thing to say out loud, and a harder thing to mean.", src:["xco"], d:6.5},
+   {k:"What for", h:"So the biggest question gets asked out loud.", cls:"wf", d:6}]},
  { id:"sum", title:"Adds up", gl:"sum", chord:7, beats:[
-   {k:"What it adds up to", h:"None of it was inevitable.", s:"Most of it was called impossible first. Then it got built. Then it got boring. That's the gift.", d:7}]},
+   {k:"", h:"", mont:true, d:9.2},
+   {k:"What it adds up to", h:"None of it was inevitable.", s:"Most of it was called impossible first. Then it got built. Then it got boring. That's the gift.", cls:"wf", d:8.5}]},
  { id:"close", title:"Thank You", gl:null, beats:[{d:999}]},
 ];
-const EDIT_ITEMS = ["Electric cars people actually wanted","Batteries that store sunlight for the grid","A charging plug a continent adopted","Rockets that land and fly again","A ship caught by its own tower","Internet from orbit, almost anywhere","Texts from places with no towers","A cursor moved by thought","A trial for people with ALS","A feed whose code you can read","Fact-checks written by users","A cluster built in 122 days","A machine built to ask why","Tunnels under Las Vegas","Online payments, back in 1999"];
+const MONT = [["10.2M","Teslas delivered"],["46.7 GWh","stored for the grid in a year"],["678","boosters landed"],["37","flights on one booster"],["165","launches in a year"],[">80%","of the world's mass to orbit"],["11,195","satellites overhead"],["13.6M","Starlink subscribers"],["174","countries and markets"],["30+","people, by thought"],["3.26M","Community Notes"],["200K","GPUs in one cluster"]];
+const EDIT_ITEMS = ["Electric cars people actually wanted","Patents, given away on purpose","Batteries that store sunlight for the grid","A charging plug that became the standard","Rockets that land and fly again","A booster caught by its own tower","Internet from orbit, almost anywhere","Alerts to phones after a hurricane","Chess, played by thought","A trial for people with ALS","A feed whose code you can read","Fact-checks written by users","Open model weights","A cluster built in 122 days","A machine built to ask why","Online payments, back in 1999"];
 const BGPAL = { title:["#05040c","#2a1a40"], tesla:["#07080d","#5a2a10"], spacex:["#020308","#1a2a5a"], starlink:["#000206","#123a6a"], neuralink:["#06020e","#4a1a7a"], x:["#000","#1a2230"], xai:["#010407","#0e4a5a"], sum:["#05040c","#4a2a20"] };
 const CHORDS = [[220,277.18,329.63,415.3],[196,246.94,293.66,369.99],[174.61,220,261.63,329.63],[164.81,207.65,246.94,311.13],[146.83,185,220,277.18],[130.81,164.81,196,246.94],[196,246.94,293.66,392],[220,277.18,329.63,440]];
 
@@ -173,7 +226,7 @@ const VS = `#version 300 es
 void main(){vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2));gl_Position=vec4(p*2.-1.,0.,1.);}`;
 const HEAD = `#version 300 es
 precision highp float;
-uniform vec2 R; uniform float T; uniform vec2 M; uniform float B; uniform float E;
+uniform vec2 R; uniform float T; uniform vec2 M; uniform float B; uniform float E; uniform float K;
 out vec4 O;
 float h1(float n){return fract(sin(n*12.9898)*43758.5453);}
 float h2(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
@@ -186,7 +239,7 @@ float fbm3(vec3 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*vn3(p);p=p*2.02+3.1
 float stars(vec2 p,float d){vec2 c=floor(p*d);vec2 f=fract(p*d)-.5;float r=h2(c);vec2 o=(h22(c)-.5)*.6;float s=smoothstep(.07,.0,length(f-o))*step(.86,r);return s*(.55+.45*sin(T*1.7+r*40.));}
 vec3 tail(vec3 c,vec2 fc){vec2 q=fc/R;c=1.-exp(-c*1.25);c*=.3+.7*pow(16.*q.x*q.y*(1.-q.x)*(1.-q.y),.2);c+=(h2(fc+fract(T*7.)*97.)-.5)*.03;return c*E;}
 `;
-const MAIN = `void main(){vec2 fc=gl_FragCoord.xy;O=vec4(tail(scene(fc),fc),1.);}`;
+const MAIN = `void main(){vec2 fc=gl_FragCoord.xy;vec2 cc=.5*R;vec2 zf=(fc-cc)*(1.-K*.022)+cc;O=vec4(tail(scene(zf),fc)*(1.+K*.3),1.);}`;
 const FS = {};
 FS.dawn = (conv) => HEAD + `
 vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;
@@ -336,46 +389,116 @@ const GL = (() => {
   E.ok = true; E.gl = gl; gl.bindVertexArray(gl.createVertexArray());
   function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { E.err += gl.getShaderInfoLog(s); console.warn(gl.getShaderInfoLog(s)); return null; } return s; }
   E.prog = key => { if (key in E.progs) return E.progs[key]; const v = sh(gl.VERTEX_SHADER, VS), f = sh(gl.FRAGMENT_SHADER, FS[key]); let P = null;
-    if (v && f) { const p = gl.createProgram(); gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p); if (gl.getProgramParameter(p, gl.LINK_STATUS)) { P = { p, u:{} }; ["R","T","M","B","E"].forEach(n => P.u[n] = gl.getUniformLocation(p, n)); } else E.err += gl.getProgramInfoLog(p); }
+    if (v && f) { const p = gl.createProgram(); gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p); if (gl.getProgramParameter(p, gl.LINK_STATUS)) { P = { p, u:{} }; ["R","T","M","B","E","K"].forEach(n => P.u[n] = gl.getUniformLocation(p, n)); } else E.err += gl.getProgramInfoLog(p); }
     E.progs[key] = P; return P; };
   E.scale = 1;
-  E.draw = (key, t, b, e, m) => { const P = E.prog(key); if (!P) return false;
+  E.draw = (key, t, b, e, m, k = 0) => { const P = E.prog(key); if (!P) return false;
     const dpr = Math.min(devicePixelRatio || 1, 1.75) * E.scale; const W = Math.max(2, innerWidth * dpr | 0), H = Math.max(2, innerHeight * dpr | 0);
     if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-    gl.viewport(0, 0, W, H); gl.useProgram(P.p); gl.uniform2f(P.u.R, W, H); gl.uniform1f(P.u.T, t); gl.uniform2f(P.u.M, m[0], m[1]); gl.uniform1f(P.u.B, b); gl.uniform1f(P.u.E, e);
+    gl.viewport(0, 0, W, H); gl.useProgram(P.p); gl.uniform2f(P.u.R, W, H); gl.uniform1f(P.u.T, t); gl.uniform2f(P.u.M, m[0], m[1]); gl.uniform1f(P.u.B, b); gl.uniform1f(P.u.E, e); gl.uniform1f(P.u.K, k);
     gl.drawArrays(gl.TRIANGLES, 0, 3); return true; };
   E.clear = () => { gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); };
   return E;
 })();
 
-// ---------------------------------------------------------------- audio
+// ---------------------------------------------------------------- audio (score + sound design, all synthesized live with WebAudio)
 const AU = (() => {
-  const A = { ctx:null, on:true, ready:false }; let master, padBus, sfx, lp, noiseBuf, pad = null, lastTick = 0;
-  A.init = () => { if (A.ctx) { A.ctx.resume && A.ctx.resume(); return; } const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
-    const c = A.ctx = new C(); master = c.createGain(); master.gain.value = A.on ? .8 : 0; const comp = c.createDynamicsCompressor(); master.connect(comp); comp.connect(c.destination);
-    lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1100; lp.Q.value = .4; padBus = c.createGain(); padBus.gain.value = .32; padBus.connect(lp); lp.connect(master);
-    // simple feedback delay for air
-    const dl = c.createDelay(1.5); dl.delayTime.value = .38; const fb = c.createGain(); fb.gain.value = .32; const wet = c.createGain(); wet.gain.value = .25; lp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(master);
-    sfx = c.createGain(); sfx.gain.value = .55; sfx.connect(master);
-    noiseBuf = c.createBuffer(1, c.sampleRate * 2, c.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; A.ready = true; };
+  const A = { ctx:null, on:true, ready:false, mode:"off", ch:0, inten:0, holdUntil:0, out:null };
+  let master, comp, out, an, anBuf, padBus, lp, sfx, mus, send, noiseBuf, pad = null, padIdx = -9, seqT = 0, step = 0, kicks = [], silentEl = null, lastTick = 0;
+  const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  function silentWav() { const sr = 8000, n = 4000, b = new ArrayBuffer(44 + n), v = new DataView(b); const w = (o, x) => { for (let i = 0; i < x.length; i++) v.setUint8(o + i, x.charCodeAt(i)); };
+    w(0, "RIFF"); v.setUint32(4, 36 + n, true); w(8, "WAVE"); w(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, sr, true); v.setUint32(28, sr, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, "data"); v.setUint32(40, n, true); for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    return URL.createObjectURL(new Blob([b], { type:"audio/wav" })); }
+  function build(C) {
+    let c; try { c = new C({ latencyHint:"interactive" }); } catch (e) { c = new C(); } A.ctx = c;
+    master = c.createGain(); master.gain.value = A.on ? 1 : 0;
+    comp = c.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .3;
+    out = A.out = c.createGain(); out.gain.value = .92; master.connect(comp); comp.connect(out); out.connect(c.destination);
+    an = c.createAnalyser(); an.fftSize = 2048; anBuf = new Float32Array(an.fftSize); out.connect(an);
+    const rvb = c.createConvolver(), len = c.sampleRate * 3.4 | 0, ir = c.createBuffer(2, len, c.sampleRate);
+    for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.8); }
+    rvb.buffer = ir; send = c.createGain(); send.gain.value = .5; send.connect(rvb); const rg = c.createGain(); rg.gain.value = .55; rvb.connect(rg); rg.connect(master);
+    lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1200; lp.Q.value = .5; padBus = c.createGain(); padBus.gain.value = .36; padBus.connect(lp); lp.connect(master); lp.connect(send);
+    sfx = c.createGain(); sfx.gain.value = .75; sfx.connect(master); const ss = c.createGain(); ss.gain.value = .4; sfx.connect(ss); ss.connect(send);
+    mus = c.createGain(); mus.gain.value = .55; mus.connect(master); const ms = c.createGain(); ms.gain.value = .28; mus.connect(ms); ms.connect(send);
+    noiseBuf = c.createBuffer(1, c.sampleRate * 2, c.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    A.ready = true; setInterval(sched, 25); }
+  // Call from inside any user gesture. Creates/resumes the context; on iOS also plays a silent buffer + silent <audio> so sound survives the ringer switch.
+  A.unlock = () => { const C = window.AudioContext || window.webkitAudioContext; if (!C) return false;
+    if (!A.ctx) build(C);
+    if (A.ctx.state !== "running") { try { const p = A.ctx.resume(); p && p.catch && p.catch(() => {}); } catch (e) {}
+      try { const s = A.ctx.createBufferSource(); s.buffer = A.ctx.createBuffer(1, 1, 22050); s.connect(A.ctx.destination); s.start(0); } catch (e) {} }
+    try { if (navigator.audioSession && navigator.audioSession.type !== "playback") navigator.audioSession.type = "playback"; } catch (e) {}
+    if (IOS && (!silentEl || silentEl.paused)) { try { if (!silentEl) { silentEl = new Audio(silentWav()); silentEl.loop = true; silentEl.playsInline = true; } const p = silentEl.play(); p && p.catch && p.catch(() => {}); } catch (e) {} }
+    return true; };
+  A.init = A.unlock;
+  A.state = () => A.ctx ? A.ctx.state : "none";
+  A.level = () => { if (!an) return 0; an.getFloatTimeDomainData(anBuf); let s = 0; for (let i = 0; i < anBuf.length; i++) s += anBuf[i] * anBuf[i]; return Math.sqrt(s / anBuf.length); };
+  A.pulse = () => { if (!A.ctx) return 0; const t = A.ctx.currentTime; let p = 0; for (const k of kicks) if (k.t <= t) p = Math.max(p, k.a * Math.exp(-(t - k.t) * 6.5)); return Math.min(1, p); };
+  A.vis = (hidden, started) => { if (!A.ctx) return; if (hidden) { A.ctx.suspend(); silentEl && silentEl.pause(); } else if (started) { A.ctx.resume(); } };
   const now = () => A.ctx.currentTime;
-  function noise(t, dur, peak, type, f0, f1, q = 1) { const c = A.ctx, s = c.createBufferSource(); s.buffer = noiseBuf; s.loop = true; const f = c.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + .004); g.gain.exponentialRampToValueAtTime(.0001, t + dur); s.connect(f); f.connect(g); g.connect(sfx); s.start(t, Math.random()); s.stop(t + dur + .05); }
-  function tone(t, f, dur, peak, type = "sine", f1) { const c = A.ctx, o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur); o.connect(g); g.connect(sfx); o.start(t); o.stop(t + dur + .05); }
-  A.sfx = (k) => { if (!A.ready || !A.on) return; const t = now();
+  function env(g, t, a, peak, dec) { g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0001, t + a + dec); }
+  function noise(t, dur, peak, type, f0, f1, q = 1, dest = sfx, att = .004) { const c = A.ctx, s = c.createBufferSource(); s.buffer = noiseBuf; s.loop = true; s.loopStart = Math.random(); const f = c.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); env(g, t, att, peak, Math.max(.01, dur - att)); s.connect(f); f.connect(g); g.connect(dest); s.start(t, Math.random()); s.stop(t + dur + .05); }
+  function tone(t, f, dur, peak, type = "sine", f1, dest = sfx, att = .01) { const c = A.ctx, o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); env(g, t, att, peak, dur); o.connect(g); g.connect(dest); o.start(t); o.stop(t + dur + att + .05); }
+  function kick(t, peak = .9, dest = mus) { const c = A.ctx, o = c.createOscillator(), g = c.createGain(); o.frequency.setValueAtTime(160, t); o.frequency.exponentialRampToValueAtTime(40, t + .24); env(g, t, .003, peak, .6); o.connect(g); g.connect(dest); o.start(t); o.stop(t + .75); noise(t, .03, peak * .12, "lowpass", 3000, 800, .7, dest, .001); kicks.push({ t, a:Math.min(1, peak) }); if (kicks.length > 24) kicks.shift(); }
+  function hat(t, peak = .04) { noise(t, .05, peak, "highpass", 8000, 7000, .7, mus, .001); }
+  function pluck(t, f, peak = .08, dec = .6) { const c = A.ctx, o = c.createOscillator(), o2 = c.createOscillator(), fl = c.createBiquadFilter(), g = c.createGain(), g2 = c.createGain(); o.type = "triangle"; o2.type = "sawtooth"; o.frequency.value = f; o2.frequency.value = f * 1.004; g2.gain.value = .22; fl.type = "lowpass"; fl.Q.value = 3; fl.frequency.setValueAtTime(Math.min(16000, f * 9), t); fl.frequency.exponentialRampToValueAtTime(f * 1.3, t + dec); o.connect(fl); o2.connect(g2); g2.connect(fl); fl.connect(g); g.connect(mus); env(g, t, .004, peak, dec); o.start(t); o2.start(t); o.stop(t + dec + .1); o2.stop(t + dec + .1); }
+  function bass(t, f, dur, peak = .2) { const c = A.ctx, o = c.createOscillator(), s2 = c.createOscillator(), fl = c.createBiquadFilter(), g = c.createGain(); o.type = "sawtooth"; o.frequency.value = f; s2.type = "sine"; s2.frequency.value = f; fl.type = "lowpass"; fl.frequency.value = 260; fl.Q.value = 2; o.connect(fl); s2.connect(fl); fl.connect(g); g.connect(mus); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + .02); g.gain.setTargetAtTime(peak * .6, t + .1, .3); g.gain.setTargetAtTime(.0001, t + dur * .85, .08); o.start(t); s2.start(t); o.stop(t + dur + .4); s2.stop(t + dur + .4); }
+  function marimba(t, f, peak = .05) { tone(t, f, .32, peak, "sine", null, mus, .002); tone(t, f * 4, .07, peak * .35, "sine", null, mus, .001); }
+  function piano(t, f, peak = .1) { [[1, 1, 3.2], [2, .38, 1.6], [3, .14, .8], [4.02, .06, .4]].forEach(([m, a, d]) => tone(t, f * m, d, peak * a, "sine", null, sfx, .004)); }
+  const BPM = { office:100, score:84, max:96, hush:60, piano:60, off:84 };
+  const MZ = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46, 523.25, 659.25, 783.99, 1046.5, 493.88, 587.33, 783.99, 587.33];
+  const ARP = [0, 1, 2, 3, 2, 1, 2, 3];
+  function sched() { if (!A.ctx || A.ctx.state !== "running") return; const c = A.ctx; if (seqT < c.currentTime - .25) seqT = c.currentTime + .05;
+    while (seqT < c.currentTime + .14) { if (seqT >= A.holdUntil && A.on) play(step, seqT); seqT += 60 / (BPM[A.mode] || 84) / 2; step++; } }
+  function play(s, t) { const m = A.mode, ch = CHORDS[A.ch] || CHORDS[0], i = s % 16;
+    if (m === "office") { if (s % 2 === 0) noise(t, .025, .05, "bandpass", 3300, 3000, 6, mus, .001); marimba(t, MZ[i], .05); if (i % 4 === 0) marimba(t, MZ[i] / 4, .06); return; }
+    if (m === "score" || m === "max") { const I = m === "max" ? 4 : A.inten;
+      if (i % 4 === 0 && (I >= 1 || i % 8 === 0)) kick(t, (I >= 1 ? .85 : .55) + (i === 0 ? .2 : 0));
+      if (I >= 3 && (i === 6 || i === 14)) kick(t, .4);
+      if (i % 8 === 0) bass(t, ch[0] / 4, 60 / (BPM[m]) * 3.8, .2 + I * .02);
+      pluck(t, ch[ARP[i % 8]] * (I >= 2 && i >= 8 ? 2 : 1), .05 + I * .011, I >= 2 ? .45 : .7);
+      if (I >= 2 && i % 2 === 1) hat(t, .028 + I * .008);
+      if (m === "max") { const h = 60 / 96 / 4; pluck(t + h, ch[ARP[(i + 3) % 8]] * 2, .045, .3); hat(t + h, .03); if (i % 2 === 0) noise(t, .12, .05, "bandpass", 1800, 1200, 2, mus, .002); }
+      return; }
+    if (m === "piano") { if (s % 4 === 0) { const k = (s / 4 | 0) % 6, sq = [0, 2, 1, 3, 2, 0]; piano(t, ch[sq[k]], .09); if (k === 0) piano(t, ch[0] / 2, .07); } return; } }
+  A.sfx = (k) => { if (!A.ready || !A.on || A.ctx.state !== "running") return; const t = now();
     if (k === "type" || k === "del") { if (performance.now() - lastTick < 34) return; lastTick = performance.now(); const f = k === "type" ? 2600 + Math.random() * 1600 : 1300 + Math.random() * 400; noise(t, .028, k === "type" ? .09 : .07, "bandpass", f, f * .8, 2.5); }
-    else if (k === "boom") { noise(t, 1.8, .55, "lowpass", 6000, 180, .7); tone(t, 62, 1.6, .7, "sine", 28); noise(t + .02, .5, .3, "highpass", 3000, 9000, .5); for (let i = 0; i < 10; i++) tone(t + .05 + Math.random() * .8, 2000 + Math.random() * 3000, .4, .03, "sine"); }
-    else if (k === "crack") { noise(t, .09, .22, "highpass", 2500, 1200, 1); }
-    else if (k === "whoosh") { noise(t, .7, .12, "bandpass", 300, 2400, 1.2); }
-    else if (k === "rewind") { noise(t, 1.2, .25, "bandpass", 3000, 200, 1); tone(t, 900, 1.1, .08, "sine", 120); }
-    else if (k === "bell") { [0, .18, .36].forEach((d, i) => tone(t + d, [659.25, 880, 1108.73][i], 2.4, .07, "sine")); }
+    else if (k === "crack") { noise(t, .09, .26, "highpass", 2500, 1200, 1); tone(t, 70 + Math.random() * 30, .25, .2, "sine", 40); }
+    else if (k === "whoosh") { noise(t, .8, .16, "bandpass", 250, 2600, 1.2, sfx, .45); }
+    else if (k === "act") { noise(t, .7, .2, "bandpass", 180, 3200, 1.1, sfx, .6); const h = t + .6; kick(h, 1.25, sfx); tone(h, 46, 2.6, .55, "sine", 38); tone(h, 110, .7, .3, "triangle", 66); noise(h, 1.8, .3, "lowpass", 4000, 90, .7, sfx, .003); }
+    else if (k === "hit") { kick(t, .75, sfx); tone(t, CHORDS[7][Math.random() * 4 | 0] * 2, .5, .05, "triangle"); }
+    else if (k === "rewind") { noise(t, 1.3, .3, "bandpass", 3200, 180, 1); tone(t, 900, 1.2, .1, "sine", 110); }
+    else if (k === "bell") { [0, .2, .4].forEach((d, i) => piano(t + d, [659.25, 880, 1108.73][i], .09)); }
     else if (k === "num") { tone(t, 1320, .12, .03, "sine"); } };
-  A.chord = (idx) => { if (!A.ready) return; const c = A.ctx, t = now(); if (pad) { const old = pad; old.g.gain.cancelScheduledValues(t); old.g.gain.setTargetAtTime(.0001, t, .8); setTimeout(() => old.o.forEach(o => { try { o.stop(); } catch (e) {} }), 5000); pad = null; }
-    if (idx < 0) return; const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.setTargetAtTime(.22, t, 1.2); g.connect(padBus); const os = [];
-    CHORDS[idx].forEach((f, i) => { [0, 1].forEach(j => { const o = c.createOscillator(); o.type = j ? "sine" : "triangle"; o.frequency.value = f * (j ? .5 : 1); o.detune.value = (Math.random() - .5) * 14; const og = c.createGain(); og.gain.value = (j ? .5 : .22) / (i + 1.5);
+  // the boring part: elevator muzak + a clock
+  A.office = () => { if (!A.ready) return; A.mode = "office"; A.holdUntil = 0; A.chord(-1); mus.gain.setTargetAtTime(.55, now(), .05); };
+  // the build into the break: noise + saw sweep, accelerating heartbeat, muzak gets strangled
+  A.riser = (d) => { if (!A.ready || !A.on) return; const c = A.ctx, t = now(); d = Math.max(1.5, d);
+    noise(t, d, .32, "bandpass", 180, 7200, 1.6, sfx, d * .92);
+    const o = c.createOscillator(), o2 = c.createOscillator(), f = c.createBiquadFilter(), g = c.createGain(); o.type = o2.type = "sawtooth"; o.frequency.setValueAtTime(55, t); o.frequency.exponentialRampToValueAtTime(440, t + d); o2.frequency.setValueAtTime(55.6, t); o2.frequency.exponentialRampToValueAtTime(446, t + d); f.type = "lowpass"; f.frequency.setValueAtTime(200, t); f.frequency.exponentialRampToValueAtTime(5000, t + d); f.Q.value = 6;
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.16, t + d); g.gain.setValueAtTime(.0001, t + d + .01); o.connect(f); o2.connect(f); f.connect(g); g.connect(sfx); o.start(t); o2.start(t); o.stop(t + d + .05); o2.stop(t + d + .05);
+    let x = t + .1, gap = .7; while (x < t + d - .08) { kick(x, .5 + .5 * (x - t) / d, sfx); x += gap; gap = Math.max(.11, gap * .82); }
+    mus.gain.setTargetAtTime(.0001, t + d * .5, d * .2); };
+  // THE BREAK: hard cut, impact, glass, sub drop, then a held breath before the score
+  A.drop = () => { if (!A.ready) return; const t = now(); A.mode = "off"; A.holdUntil = t + 1.9; mus.gain.cancelScheduledValues(t); mus.gain.setValueAtTime(.55, t + 1.8); if (!A.on) return;
+    kick(t, 1.6, sfx); tone(t, 95, 3.4, .9, "sine", 24); tone(t, 47, 4, .5, "triangle", 30); noise(t, 3, .7, "lowpass", 11000, 110, .7, sfx, .002); noise(t + .01, .7, .4, "highpass", 3000, 11000, .5, sfx, .002);
+    for (let i = 0; i < 30; i++) tone(t + .03 + Math.random() * 1.6, 1800 + Math.random() * 4800, .5, .035, "sine");
+    [55, 82.41, 110, 164.81].forEach((f, i) => tone(t + 1.5, f, 4.5, .12 / (i + 1), "sawtooth", null, padBus, 1.2)); };
+  A.chord = (idx) => { if (!A.ready) return; if (idx === padIdx) return; padIdx = idx; const c = A.ctx, t = now(); if (pad) { const old = pad; old.g.gain.cancelScheduledValues(t); old.g.gain.setTargetAtTime(.0001, t, .8); setTimeout(() => old.o.forEach(o => { try { o.stop(); } catch (e) {} }), 5000); pad = null; }
+    if (idx < 0) return; A.ch = idx; const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.setTargetAtTime(.24, t, 1.2); g.connect(padBus); const os = [];
+    CHORDS[idx].forEach((f, i) => { [0, 1].forEach(j => { const o = c.createOscillator(); o.type = j ? "sine" : "sawtooth"; o.frequency.value = f * (j ? .5 : 1); o.detune.value = (Math.random() - .5) * 16; const og = c.createGain(); og.gain.value = (j ? .5 : .1) / (i + 1.5);
       const lfo = c.createOscillator(); lfo.frequency.value = .07 + Math.random() * .12; const lg = c.createGain(); lg.gain.value = og.gain.value * .5; lfo.connect(lg); lg.connect(og.gain); lfo.start(t); os.push(lfo);
       o.connect(og); og.connect(g); o.start(t); os.push(o); }); });
-    pad = { g, o:os }; lp.frequency.setTargetAtTime(900 + idx * 120, t, 1.5); };
-  A.setOn = v => { A.on = v; if (master) master.gain.setTargetAtTime(v ? .8 : 0, now(), .1); };
+    pad = { g, o:os }; lp.frequency.setTargetAtTime(900 + idx * 140, t, 1.5); };
+  // what the music does for each scene/beat
+  A.scene = (id, sc, b) => { if (!A.ready) return;
+    if (id === "slide") { A.chord(-1); return; }
+    if (id === "close") { A.mode = "piano"; A.chord(7); padBus.gain.setTargetAtTime(.2, now(), 1); return; }
+    padBus.gain.setTargetAtTime(.36, now(), .5);
+    if (id === "sum") { A.chord(7); A.mode = b.mont ? "max" : "hush"; return; }
+    A.mode = "score"; A.inten = b.cls === "wf" ? 0 : (sc.inten || 0); if (sc.chord !== undefined) A.chord(sc.chord); };
+  A.setOn = v => { A.on = v; if (master) master.gain.setTargetAtTime(v ? 1 : 0, now(), .08); };
   return A;
 })();
 
@@ -467,8 +590,8 @@ function makeShards(dir) {
   const P = (i, j) => pts[j * (cols + 1) + i]; const tris = []; const cx = W * .42, cy = H * .58;
   for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const q = [P(i, j), P(i + 1, j), P(i + 1, j + 1), P(i, j + 1)]; const sp = rnd() > .5;
     (sp ? [[q[0], q[1], q[2]], [q[0], q[2], q[3]]] : [[q[0], q[1], q[3]], [q[1], q[2], q[3]]]).forEach(tr => { const mx = (tr[0][0] + tr[1][0] + tr[2][0]) / 3, my = (tr[0][1] + tr[1][1] + tr[2][1]) / 3; const dx = mx - cx, dy = my - cy, dd = Math.hypot(dx, dy) + 1;
-      tris.push({ tr, mx, my, vx:dx / dd * (380 + rnd() * 900), vy:dy / dd * (380 + rnd() * 900) - 200, r:(rnd() - .5) * 7, z:.4 + rnd() * 1.4, delay:dd / Math.hypot(W, H) * .25 }); }); }
-  SH = { img, tris, t0:performance.now(), dir, dur:dir > 0 ? 1.9 : 1.5, dpr, W, H };
+      tris.push({ tr, mx, my, vx:dx / dd * (520 + rnd() * 1300), vy:dy / dd * (520 + rnd() * 1300) - 260, r:(rnd() - .5) * 9, z:.8 + rnd() * 3.2, delay:dd / Math.hypot(W, H) * .25 }); }); }
+  SH = { img, tris, t0:performance.now(), dir, dur:dir > 0 ? 2.7 : 1.6, dpr, W, H };
 }
 function drawShards() {
   if (!SH) return false; const k0 = (performance.now() - SH.t0) / 1000 / SH.dur; fx.setTransform(SH.dpr, 0, 0, SH.dpr, 0, 0); fx.clearRect(0, 0, SH.W, SH.H);
@@ -482,22 +605,23 @@ function drawShards() {
 }
 
 // ---------------------------------------------------------------- HUD
-const HUD = { oldH:"", h:"", s:"", t0:0, shownH:null, shownS:null, src:"", big:null, bigShown:"", cls:"" };
-function setHud(b) { HUD.oldH = HUD.shownH || ""; HUD.h = b.h || ""; HUD.s = b.s || ""; HUD.t0 = performance.now() / 1000; $("hk").textContent = b.k || ""; HUD.cls = b.cls || "";
+const HUD = { delay:0, oldH:"", h:"", s:"", t0:0, shownH:null, shownS:null, src:"", big:null, bigShown:"", cls:"" };
+function setHud(b, delay = 0) { HUD.delay = delay; HUD.oldH = delay > 0 ? "" : (HUD.shownH || ""); document.body.classList.toggle("wf", b.cls === "wf"); if (b.mont) runMontage(); HUD.h = b.h || ""; HUD.s = b.s || ""; HUD.t0 = performance.now() / 1000 + delay; $("hk").textContent = b.k || ""; HUD.cls = b.cls || "";
   const src = $("hsrc"); src.classList.remove("on"); src.innerHTML = (b.src || []).map(id => SRC[id] ? `<a href="${SRC[id].u}" target="_blank" rel="noopener">${shortSrc(id)}</a>` : "").join("");
   HUD.big = b.big || null; $("big").classList.remove("on"); HUD.bigAt = null; }
-function shortSrc(id) { return ({ tq3:"Tesla Q3 2026 Update", t25:"Tesla 2025 updates", ef:"ElonFacts dashboard", f1:"Falcon 1 record", ll2:"Launch Library 2", f9b:"Falcon 9 booster list", mass:"SpaceX SEC filing", ss:"Starship flight log", mcd:"McDowell tracker", q10:"SpaceX 10-Q Q3 2026", nlp:"Neuralink, Nov 25 2026", nl2:"Neuralink, Jan 28 2026", xal:"github.com/xai-org/x-algorithm", cn:"Community Notes data", col:"xAI Colossus", xco:"xAI company page" })[id] || id; }
+function shortSrc(id) { return ({ tq3:"Tesla Q3 2026 Update", t25:"Tesla 2025 updates", ef:"ElonFacts dashboard", f1:"Falcon 1 record", ll2:"Launch Library 2", f9b:"Falcon 9 booster list", mass:"SpaceX SEC filing", ss:"Starship flight log", mcd:"McDowell tracker", q10:"SpaceX 10-Q Q3 2026", nlp:"Neuralink, Nov 25 2026", nl2:"Neuralink, Jan 28 2026", xal:"github.com/xai-org/x-algorithm", cn:"Community Notes data", col:"xAI Colossus", xco:"xAI company page", pat:"Tesla blog, Jun 12 2014", nacs:"SAE J3400 / NACS", st5:"Starship Flight 5", hel:"Ars Technica, Oct 7 2024", nol:"Neuralink history", g1:"github.com/xai-org/grok-1" })[id] || id; }
 function fmtBig(b, v) { let s = b.dec ? v.toFixed(b.dec) : Math.round(v).toLocaleString("en-US"); return (b.pre || "") + s + (b.suf || ""); }
 function hudFrame(nowS) {
-  const e = nowS - HUD.t0; const del = Math.min(.45, HUD.oldH.length / 90); let h, caret = true, s = "";
+  const e = nowS - HUD.t0; if (e < 0) { if (HUD.shownH) { $("hh").innerHTML = ""; HUD.shownH = ""; } return HUD.delay + HUD.h.length / 34 + HUD.s.length / 70 + .4; }
+  const del = Math.min(.45, HUD.oldH.length / 90); let h, caret = true, s = "";
   if (e < del) h = backsp(HUD.oldH, 0, e, HUD.oldH.length / Math.max(del, .01)); else { const te = e - del; h = typed(HUD.h, 0, te, 34); const hEnd = HUD.h.length / 34; if (te > hEnd) { caret = false; s = typed(HUD.s, hEnd + .2, te, 70); if (te > hEnd + .3) $("hsrc").classList.add("on"); if (HUD.big && HUD.bigAt === null) HUD.bigAt = nowS; } }
   const hh = $("hh"); if (h !== HUD.shownH || caret !== HUD._c) { hh.className = "h " + HUD.cls; hh.innerHTML = esc(h) + (caret ? '<span class="caret"></span>' : ""); tick("hud", h.length); HUD.shownH = h; HUD._c = caret; }
   if (s !== HUD.shownS) { $("hs").textContent = s; HUD.shownS = s; }
   if (HUD.big && HUD.bigAt !== null) { const k = ez((nowS - HUD.bigAt) / 1.8); const str = fmtBig(HUD.big, HUD.big.v * (1 - Math.pow(1 - k, 3))); if (str !== HUD.bigShown) { $("bn").textContent = str; $("bl").textContent = HUD.big.l || ""; HUD.bigShown = str; if (k < 1 && Math.random() < .25) AU.sfx("num"); } $("big").classList.add("on"); }
-  return HUD.h.length / 34 + del + HUD.s.length / 70 + .4;
+  return (HUD.delay || 0) + HUD.h.length / 34 + del + HUD.s.length / 70 + .4;
 }
 const esc = s => s.replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" })[c]);
-function hudClear() { $("hk").textContent = ""; $("hh").innerHTML = ""; $("hs").textContent = ""; $("hsrc").innerHTML = ""; $("big").classList.remove("on"); HUD.shownH = ""; HUD.oldH = ""; HUD.h = ""; HUD.s = ""; HUD.big = null; }
+function hudClear() { document.body.classList.remove("wf"); $("hk").textContent = ""; $("hh").innerHTML = ""; $("hs").textContent = ""; $("hsrc").innerHTML = ""; $("big").classList.remove("on"); HUD.shownH = ""; HUD.oldH = ""; HUD.h = ""; HUD.s = ""; HUD.big = null; }
 
 // ---------------------------------------------------------------- navigation
 const ORDER = SCENES.map(s => s.id); const STORY = ORDER.filter(id => id !== "slide" && id !== "close");
@@ -507,11 +631,13 @@ function updateBar() { const sc = byId[S.id]; const idx = STORY.indexOf(S.id); $
 function go(id, beat = 0, fromNav = false, instant = false) {
   const prev = S.id, sc = byId[id]; const sceneChange = prev !== id; S.id = id; S.beat = beat; S.beatT = 0; S.visited[id] = true;
   document.body.classList.toggle("light", id === "slide" || id === "close"); $("slide").classList.toggle("off", !(id === "slide" || id === "close"));
-  if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (sc.chord !== undefined) AU.chord(sc.chord); else if (id === "close") AU.chord(7); if (prev !== "slide" && id !== "close") AU.sfx("whoosh");
+  const actNow = sceneChange && sc.act && beat === 0 && !instant; $("mont").innerHTML = ""; S.montTok = (S.montTok || 0) + 1; if (!actNow) hideAct();
+  AU.scene(id, sc, sc.beats[beat] || {});
+  if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (actNow) showAct(sc); else if (prev !== "slide" && id !== "close" && id !== "title") AU.sfx("whoosh");
     const bg = BGPAL[id]; if (bg) $("bg").style.background = `radial-gradient(120% 90% at 70% 60%, ${bg[1]}, ${bg[0]} 70%)`; }
   if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
   else if (id === "slide") { hudClear(); }
-  else setHud(sc.beats[beat]);
+  else setHud(sc.beats[beat], actNow ? 2.2 : 0);
   $("end").classList.toggle("on", false || (id === "close" && S.endShown)); updateBar();
 }
 function next() { const sc = byId[S.id];
@@ -520,11 +646,17 @@ function next() { const sc = byId[S.id];
   if (S.beat < sc.beats.length - 1) go(S.id, S.beat + 1, true); else go(ORDER[sc.i + 1], 0, true); }
 function prev() { const sc = byId[S.id]; if (S.id === "slide") return; if (S.id === "close") return go("sum", 0, true);
   if (S.beat > 0) go(S.id, S.beat - 1, true); else if (sc.i > 1) { const p = byId[ORDER[sc.i - 1]]; if (p.id === "slide") return; go(p.id, p.beats.length - 1, true); } }
-function begin() { if (S.started) return; S.started = true; AU.init(); S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; }
-function shatter() { makeShards(1); AU.sfx("boom"); const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on"))); go("title", 0, false); }
-function replay() { S.started = false; S.endShown = false; $("end").classList.remove("on"); S.visited = {}; go("slide", 0); begin(); }
+function begin() { if (S.started) return; S.started = true; AU.unlock(); AU.office(); S.riserOn = false; S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; }
+function shatter() { makeShards(1); AU.drop(); SHK = 1; const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on")));
+  go("title", 0, false); S.E = -1.25; setHud(byId.title.beats[0], 2.0); document.body.classList.add("lb"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb"); }, 5200); }
+let actTok = 0, SHK = 0; const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, 2350); AU.sfx("act"); SHK = Math.max(SHK, .35); }
+function hideAct() { actTok++; $("act").classList.remove("on"); document.body.classList.remove("lb", "acton"); }
+function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1700); }, 350 + i * 600)); }
+function replay() { S.riserOn = false; S.started = false; S.endShown = false; $("end").classList.remove("on"); S.visited = {}; go("slide", 0); begin(); }
 
 // ---------------------------------------------------------------- input
+["touchend", "click", "keydown", "mousedown"].forEach(ev => addEventListener(ev, () => { if (S.started || ev !== "mousedown") AU.unlock(); }, { capture:true, passive:true }));
 let idleT = 0; const wake = () => { idleT = 0; document.body.classList.remove("idle"); };
 const P = { x:0, y:0, t:0, down:false };
 addEventListener("pointerdown", e => { wake(); if (e.target.closest("button,a,#panel")) return; P.down = true; P.x = e.clientX; P.y = e.clientY; P.t = performance.now(); });
@@ -538,13 +670,13 @@ addEventListener("keydown", e => { wake(); if ($("panel").classList.contains("on
   else if (e.key === " ") { e.preventDefault(); if (!S.started) begin(); else togglePause(); }
   else if (e.key === "m" || e.key === "M") toggleSound(); });
 function togglePause() { S.paused = !S.paused; $("play").textContent = S.paused ? "▶" : "❚❚"; $("play").classList.toggle("off", S.paused); }
-function toggleSound() { AU.init(); AU.setOn(!AU.on); $("snd").textContent = AU.on ? "♪ on" : "♪ off"; $("snd").classList.toggle("off", !AU.on); }
+function toggleSound() { AU.unlock(); AU.setOn(!AU.on); $("sndt").textContent = AU.on ? "Sound on" : "Sound off"; $("snd").classList.toggle("off", !AU.on); $("snd").setAttribute("aria-pressed", String(!AU.on)); $("snd").setAttribute("aria-label", AU.on ? "Mute sound" : "Unmute sound"); }
 $("next").onclick = () => { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }; $("prev").onclick = prev; $("play").onclick = togglePause; $("snd").onclick = toggleSound;
 const openSrc = () => $("panel").classList.add("on"); $("srcbtn").onclick = openSrc; $("srcbtn2").onclick = openSrc; $("close").onclick = () => $("panel").classList.remove("on");
 $("replay").onclick = replay;
 $("share").onclick = async () => { const url = location.href.split("?")[0]; try { if (navigator.share) await navigator.share({ title:"Thank You, Properly.", url }); else { await navigator.clipboard.writeText(url); $("share").textContent = "Link copied"; setTimeout(() => $("share").textContent = "Share", 1800); } } catch (e) {} };
 $("srclist").innerHTML = Object.keys(SRC).map(id => `<li>${SRC[id].t}<span>${SRC[id].a} · <a href="${SRC[id].u}" target="_blank" rel="noopener">${SRC[id].u.replace(/^https?:\/\//, "")}</a></span></li>`).join("");
-addEventListener("visibilitychange", () => { if (document.hidden && AU.ctx) AU.ctx.suspend(); else if (AU.ctx && S.started) AU.ctx.resume(); });
+addEventListener("visibilitychange", () => AU.vis(document.hidden, S.started));
 
 // ---------------------------------------------------------------- loop
 let last = performance.now(), fpsAcc = 0, fpsN = 0;
@@ -553,14 +685,18 @@ function frame(nowMs) {
   idleT += dt; if (idleT > 3 && S.started && S.id !== "slide") document.body.classList.add("idle");
   M.x = lerp(M.x, M.tx, .04); M.y = lerp(M.y, M.ty, .04);
   const sc = byId[S.id]; if (!S.paused || S.id === "slide" || S.id === "close") S.beatT += dt; S.sceneT += dt;
-  if (S.id === "slide") { if (S.beat === 0) drawSlide("open", 0); else { drawSlide("edit", S.beatT); if (S.beatT > ED.boom) shatter(); } }
+  if (S.id === "slide") { if (S.beat === 0) drawSlide("open", 0); else { drawSlide("edit", S.beatT);
+      if (!S.riserOn && S.beatT > ED.crackAt - 1.2) { S.riserOn = true; AU.riser(ED.boom - S.beatT); }
+      if (S.beatT > ED.crackAt - .6) SHK = Math.max(SHK, .03 + .22 * cl((S.beatT - ED.crackAt + .6) / (ED.boom - ED.crackAt + .6)) ** 2);
+      if (S.beatT > ED.boom) shatter(); } }
   else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); S.closeT += dt; if (SH) S.closeT = 0; drawSlide("close", S.closeT); }
   if (sc.gl || (SH && SH.dir < 0)) {
     S.E = Math.min(1, S.E + dt / 1.1); S.bSmooth = lerp(S.bSmooth, S.beat, 1 - Math.exp(-dt * 1.6));
-    const key = sc.gl || "sum"; if (GL.ok) { const ok = GL.draw(key, nowS % 1000, S.bSmooth, sc.gl ? ez(S.E) : 1, [M.x, M.y]); if (!ok) document.body.classList.add("nogl"); }
+    const key = sc.gl || "sum"; if (GL.ok) { const ok = GL.draw(key, nowS % 1000, S.bSmooth, sc.gl ? ez(S.E) : 1, [M.x, M.y], RM ? 0 : AU.pulse()); if (!ok) document.body.classList.add("nogl"); }
     fpsAcc += dt; fpsN++; if (fpsAcc > 2) { const ms = fpsAcc / fpsN * 1000; if (ms > 26 && GL.scale > .5) GL.scale *= .8; else if (ms < 14 && GL.scale < 1) GL.scale = Math.min(1, GL.scale * 1.1); fpsAcc = 0; fpsN = 0; }
   }
   drawShards();
+  SHK *= Math.exp(-dt * 2.4); { const a = RM ? 0 : SHK * 22; const tr = a > .15 ? `translate(${((Math.random() - .5) * a).toFixed(1)}px,${((Math.random() - .5) * a).toFixed(1)}px)` : ""; if (tr !== frame._tr) { ["gl", "slide", "fx"].forEach(id => $(id).style.transform = tr); frame._tr = tr; } }
   if (sc.gl) { const need = hudFrame(nowS); const b = sc.beats[S.beat]; const dur = Math.max(b.d || 6, need + 2.4);
     $("prog").style.width = (cl(S.beatT / dur) * 100) + "%";
     if (S.auto && !S.paused && S.beatT > dur) next(); }
@@ -569,7 +705,7 @@ function frame(nowMs) {
 }
 buildDots(); updateBar();
 // test / deep-link hooks
-window.__deck = { go:(id, b = 0) => { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(id, b, false, true); }, begin, S, GL, byId, ED };
+window.__deck = { AU, go:(id, b = 0) => { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(id, b, false, true); }, begin, S, GL, byId, ED };
 const jump = QS.get("s"); if (jump && byId[jump]) { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(jump, 0, false, true); }
 requestAnimationFrame(frame);
 </script>

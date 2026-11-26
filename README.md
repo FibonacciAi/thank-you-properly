@@ -10,3 +10,7 @@ A thank-you to Elon Musk shaped like a slide deck. It opens as a default PowerPo
 - Every number has its source and as-of date on the in-piece Sources page.
 
 — sevenfourone
+
+
+## v2 (Nov 26, 2026)
+Deeper cut: six numbered acts (car, sky, signal, mind, record, question), each ending on a "what for" beat; a harder break (riser, screen shake, letterbox, held breath); a closing fly-through of every number; and a live-synthesized WebAudio score (elevator muzak on the boring slide, then drums/bass/arps per act, piano at the close). Sound starts on the first tap; mute button top-right or M.
