@@ -98,10 +98,10 @@ body.light #sig{color:#b0b0b0}
 body.lb #lb::before,body.lb #lb::after{height:10.5vh}
 body.acton #hud,body.acton #big{opacity:0}
 #mont{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
-#mont .m{position:absolute;left:50%;top:50%;text-align:center;opacity:0;white-space:nowrap;animation:fly 1.6s cubic-bezier(.55,0,.85,.55) forwards;text-shadow:0 0 60px rgba(0,0,0,.6)}
+#mont .m{position:absolute;left:50%;top:50%;text-align:center;opacity:0;white-space:nowrap;animation:fly 1.05s cubic-bezier(.45,0,.8,.6) forwards;text-shadow:0 0 60px rgba(0,0,0,.6)}
 #mont .m b{display:block;font:250 clamp(84px,17vw,270px)/.9 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
 #mont .m i{display:block;font:400 italic clamp(20px,2.4vw,32px)/1.2 var(--serif);color:rgba(255,255,255,.82);margin-top:12px}
-@keyframes fly{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}18%{opacity:1}68%{opacity:1}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
+@keyframes fly{0%{opacity:0;transform:translate(-50%,-50%) scale(.55);filter:blur(6px)}20%{opacity:1;filter:blur(0)}55%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(3);filter:blur(10px)}}
 #hud .h.wf{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.012em;font-size:clamp(36px,5.8vw,88px);line-height:1.03}
 body.wf #hud{top:50%;transform:translateY(-50%)}
 body.wf #hud .k{color:rgba(255,255,255,.5)}
@@ -413,7 +413,7 @@ const AU = (() => {
     let c; try { c = new C({ latencyHint:"interactive" }); } catch (e) { c = new C(); } A.ctx = c;
     master = c.createGain(); master.gain.value = A.on ? 1 : 0;
     comp = c.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .3;
-    out = A.out = c.createGain(); out.gain.value = .92; master.connect(comp); comp.connect(out); out.connect(c.destination);
+    out = A.out = c.createGain(); out.gain.value = .85; master.connect(comp); comp.connect(out); out.connect(c.destination);
     an = c.createAnalyser(); an.fftSize = 2048; anBuf = new Float32Array(an.fftSize); out.connect(an);
     const rvb = c.createConvolver(), len = c.sampleRate * 3.4 | 0, ir = c.createBuffer(2, len, c.sampleRate);
     for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.8); }
@@ -652,7 +652,7 @@ function shatter() { makeShards(1); AU.drop(); SHK = 1; const fl = $("flash"); f
 let actTok = 0, SHK = 0; const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
 function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, 2350); AU.sfx("act"); SHK = Math.max(SHK, .35); }
 function hideAct() { actTok++; $("act").classList.remove("on"); document.body.classList.remove("lb", "acton"); }
-function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1700); }, 350 + i * 600)); }
+function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1150); }, 350 + i * 640)); }
 function replay() { S.riserOn = false; S.started = false; S.endShown = false; $("end").classList.remove("on"); S.visited = {}; go("slide", 0); begin(); }
 
 // ---------------------------------------------------------------- input
