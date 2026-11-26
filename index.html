@@ -7,7 +7,7 @@
 <title>Thank You, Properly.</title>
 <meta name="description" content="A thank-you slide to Elon Musk that actually says what for. Tesla, SpaceX, Starlink, Neuralink, X, xAI. Every number sourced.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@250..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Thank You, Properly.">
 <meta property="og:title" content="Thank You, Properly.">
@@ -33,22 +33,22 @@ body.nogl #gl{display:none} body.nogl #bg{display:block}
 #slide.off{display:none}
 #fx{z-index:3;pointer-events:none}
 #flash{position:fixed;inset:0;z-index:4;background:#fff;opacity:0;pointer-events:none;transition:opacity .9s}
-#flash.on{opacity:.85;transition:none}
+#flash.on{opacity:.85;transition:none} #flash.soft{opacity:.2;transition:none}
 #ui{position:fixed;inset:0;z-index:5;pointer-events:none;font-family:var(--sans)}
 #ui button,#ui a,#ui .pe{pointer-events:auto}
 #hud{position:absolute;left:max(28px,env(safe-area-inset-left));top:max(26px,env(safe-area-inset-top));width:min(780px,calc(100vw - 56px));text-shadow:0 2px 24px rgba(0,0,0,.6);transition:opacity .5s}
 #hud .k{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);min-height:15px}
-#hud .h{font-weight:640;font-size:clamp(30px,4.8vw,68px);line-height:1.02;letter-spacing:-.028em;margin:12px 0 0;min-height:1em;white-space:pre-wrap}
+#hud .h{text-wrap:balance;font-weight:640;font-size:clamp(30px,4.8vw,68px);line-height:1.02;letter-spacing:-.028em;margin:12px 0 0;min-height:1em;white-space:pre-wrap}
 #hud .h.title{font-size:clamp(40px,7.4vw,108px);letter-spacing:-.04em}
-#hud .s{font-size:clamp(15px,1.6vw,21px);line-height:1.38;color:rgba(255,255,255,.86);margin:16px 0 0;max-width:640px;min-height:1.3em;white-space:pre-wrap}
+#hud .s{text-wrap:pretty;font-size:clamp(15px,1.6vw,21px);line-height:1.38;color:rgba(255,255,255,.86);margin:16px 0 0;max-width:640px;min-height:1.3em;white-space:pre-wrap}
 #hud .src{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 14px;font:500 11.5px/1.3 var(--mono);letter-spacing:.04em;opacity:0;transition:opacity .6s}
 #hud .src.on{opacity:1}
 #hud .src a{color:rgba(255,255,255,.62);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:1px}
 #hud .src a:hover{color:#fff}
 .caret{display:inline-block;width:.06em;min-width:2px;height:.88em;background:currentColor;margin-left:.04em;vertical-align:-.08em;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-#big{position:absolute;right:max(28px,env(safe-area-inset-right));bottom:104px;text-align:right;opacity:0;transition:opacity .6s;text-shadow:0 4px 50px rgba(0,0,0,.55)}
-#big.on{opacity:1}
+#big{position:absolute;right:max(28px,env(safe-area-inset-right));bottom:104px;text-align:right;opacity:0;transform:translateY(16px);transition:opacity .6s,transform 1s cubic-bezier(.16,.8,.1,1);text-shadow:0 4px 50px rgba(0,0,0,.55)}
+#big.on{opacity:1;transform:none} #big.on .n{animation:bigin 1.1s cubic-bezier(.16,.8,.1,1)} @keyframes bigin{0%{opacity:0;filter:blur(12px);letter-spacing:.03em}100%{opacity:1;filter:blur(0);letter-spacing:-.055em}}
 #big .n{font:250 clamp(64px,13vw,200px)/.86 var(--sans);letter-spacing:-.055em;font-variant-numeric:tabular-nums}
 #big .l{font:500 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:10px}
 #bar{position:absolute;left:0;right:0;bottom:0;padding:14px max(18px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));display:flex;align-items:center;gap:8px;transition:opacity .5s}
@@ -63,9 +63,9 @@ body.nogl #gl{display:none} body.nogl #bg{display:block}
 body.light #bar .b{color:#333;background:rgba(255,255,255,.85);border-color:#ccc} body.light #where{color:#999} body.light #dots i{background:#ddd} body.light #dots i.c,body.light #dots i.v{background:#888} body.light #prog{background:#bbb}
 body.idle #bar{opacity:0} body.idle{cursor:none}
 body.pre #bar{opacity:0}
-#start{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);font:500 15px/1.3 var(--sans);color:#8a8a8a;text-align:center;animation:pulse 2.4s ease-in-out infinite;white-space:nowrap;pointer-events:none;transition:opacity .3s}
+#start{position:absolute;left:50%;bottom:calc(14% + env(safe-area-inset-bottom));transform:translateX(-50%);font:600 15px/1 var(--sans);letter-spacing:.01em;color:#fff;background:#1c1c1e;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.18);text-align:center;animation:pulse 2.4s ease-in-out infinite;white-space:nowrap;pointer-events:none;transition:opacity .3s}
 #start.off{opacity:0;animation:none}
-@keyframes pulse{50%{opacity:.4}}
+@keyframes pulse{50%{opacity:.62;transform:translateX(-50%) scale(.98)}}
 #end{position:absolute;left:50%;bottom:15%;transform:translateX(-50%);display:flex;gap:10px;opacity:0;transition:opacity .9s;pointer-events:none}
 #end.on{opacity:1;pointer-events:auto}
 #end .b{color:#333;background:#fff;border-color:#ccc;font-size:13px;padding:11px 16px}
@@ -89,8 +89,8 @@ body.light #sig{color:#b0b0b0}
 #act .n{font:400 italic clamp(22px,2.6vw,34px)/1 var(--serif);color:rgba(255,255,255,.55);margin-bottom:1.6vh}
 #act .w{font:400 italic clamp(68px,15vw,250px)/.9 var(--serif);letter-spacing:-.02em;color:#fff;text-shadow:0 0 90px rgba(255,255,255,.28)}
 #act .t{font-size:clamp(15px,1.7vw,22px);line-height:1.4;color:rgba(255,255,255,.75);margin-top:3.2vh;max-width:620px}
-#act.on{animation:act 2.7s cubic-bezier(.2,.7,.1,1) forwards}
-#act.on .w{animation:actw 2.7s cubic-bezier(.16,.8,.1,1) forwards}
+#act.on{animation:act 2.45s cubic-bezier(.2,.7,.1,1) forwards}
+#act.on .w{animation:actw 2.45s cubic-bezier(.16,.8,.1,1) forwards} #act .w::after{content:"";display:block;height:1px;width:0;margin:2.6vh auto 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent)} #act.on .w::after{animation:rule 2.45s cubic-bezier(.2,.7,.1,1) forwards} @keyframes rule{0%{width:0}35%{width:62%}100%{width:74%}}
 @keyframes act{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
 @keyframes actw{0%{transform:scale(1.5);filter:blur(18px);letter-spacing:.25em}28%{filter:blur(0)}100%{transform:scale(1);letter-spacing:-.02em}}
 #lb::before,#lb::after{content:"";position:fixed;left:0;right:0;height:0;background:#000;z-index:4;transition:height 1s cubic-bezier(.7,0,.2,1);pointer-events:none}
@@ -121,20 +121,20 @@ body.light #snd{color:#333;background:rgba(255,255,255,.92);border-color:#ccc}
 #spdsrc{font:400 italic 13px/1 var(--serif);color:rgba(255,255,255,.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}
 body.light #spd{color:#333;background:rgba(255,255,255,.92);border-color:#ccc} body.light #spdsrc{color:#888;border-color:#ccc}
 #mv{position:fixed;inset:0;width:100%;height:100%;z-index:3;display:none;background:#000}
-body.mvon #mv{display:block} #mvv{position:fixed;inset:0;width:100%;height:100%;object-fit:contain;background:#121014;display:none;z-index:3} body.mvvid #mvv{display:block} body.mvvid #mv{display:none} #mvcred{position:fixed;left:18px;bottom:74px;z-index:6;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;color:rgba(240,234,224,.8);display:none;max-width:70vw} body.mvon #mvcred{display:block} @media (min-aspect-ratio:1/1){body.mvvid #mvcred{top:18px;bottom:auto}} body.render #topr,body.render #bar,body.render #hud,body.render #mvcred,body.render #ui{display:none!important} body.mvon #big{opacity:0} body.mvon #hud .k,body.mvon #hud .h,body.mvon #hud .s{display:none} body.mvon #hud .src a{color:rgba(240,234,224,.75)}
-@media (max-width:640px){#topr{gap:6px}#topr .b{padding:9px 10px;font-size:11px}#spd i{font-size:12.5px}#sndt{display:none}}
+body.mvon #mv{display:block} #mvbg{position:fixed;inset:-60px;z-index:3;display:none;background:#121014 url(claudia-poster.jpg) center/cover;filter:blur(30px) brightness(.42) saturate(1.2)} body.mvvid #mvbg{display:block} #mvv{position:fixed;inset:0;width:100%;height:100%;object-fit:contain;background:transparent;display:none;z-index:3} body.mvvid #mvv{display:block} body.mvvid #mv{display:none} #mvcred{position:fixed;left:18px;bottom:74px;z-index:6;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;color:rgba(240,234,224,.8);display:none;max-width:70vw} body.mvon #mvcred{display:block} @media (min-aspect-ratio:1/1){body.mvvid #mvcred{top:18px;bottom:auto}} body.render #topr,body.render #bar,body.render #hud,body.render #mvcred,body.render #ui{display:none!important} body.mvon #big{opacity:0} body.mvon #hud .k,body.mvon #hud .h,body.mvon #hud .s{display:none} body.mvon #hud .src a{color:rgba(240,234,224,.75)}
+@media (max-width:640px){#start{font-size:16px;padding:15px 24px}#act .n{margin-bottom:1.2vh}#topr{gap:6px}#topr .b{padding:9px 10px;font-size:11px}#spd i{font-size:12.5px}#sndt{display:none}}
 </style>
 </head>
 <body class="light pre">
 <canvas id="gl"></canvas><div id="bg"></div>
 <canvas id="slide"></canvas>
 <canvas id="fx"></canvas>
-<canvas id="mv"></canvas><video id="mvv" playsinline webkit-playsinline preload="metadata" poster="claudia-poster.jpg" src="claudia-mv.mp4"></video><div id="mvcred">Claudia by anabology, a Grok Bot. Song “Say What For”, original, made for this page; her vocal is synthesized in code, not her real voice.</div><div id="flash"></div><div id="lb"></div><div id="mont"></div>
+<canvas id="mv"></canvas><div id="mvbg"></div><video id="mvv" playsinline webkit-playsinline preload="metadata" poster="claudia-poster.jpg" src="claudia-mv-v3.mp4"></video><div id="mvcred">Claudia by anabology, a Grok Bot. Song “Say What For”, original, made for this page; her vocal is synthesized in code, not her real voice.</div><div id="flash"></div><div id="lb"></div><div id="mont"></div>
 <div id="act" aria-live="polite"><div class="n" id="an"></div><div class="w" id="aw"></div><div class="t" id="at"></div></div>
 <div id="ui">
   <div id="hud"><div class="k" id="hk"></div><div class="h" id="hh"></div><div class="s" id="hs"></div><div class="src" id="hsrc"></div></div>
   <div id="big"><div class="n" id="bn"></div><div class="l" id="bl"></div></div>
-  <div id="start">Tap anywhere to begin. Sound on.</div>
+  <div id="start">▶&nbsp; Tap to begin · sound on</div>
   <div id="end"><button class="b" id="replay">↺ Replay</button><button class="b" id="srcbtn2">Sources</button><button class="b" id="share">Share</button></div>
   <div id="sig">sevenfourone</div>
   <div id="topr"><button class="b" id="spd" aria-label="Narration speed"><b id="spdv">1.5×</b><i id="spdl">the way you listen</i></button><a id="spdsrc" href="https://x.com/elonmusk/status/2111238267878449283" target="_blank" rel="noopener" title="Elon Musk on X, Oct 16, 2026: “This is what I do, but at 1.5X”">why</a><button class="b" id="snd" aria-label="Mute sound" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg><span id="sndt">Sound on</span></button></div>
@@ -191,7 +191,7 @@ const SRC = {
 const SCENES = [
  { id:"slide", title:"Thank You", gl:null, beats:[{d:999},{d:999}] },
  { id:"title", title:"Thank You, Properly", gl:"dawn", chord:0, inten:0, beats:[
-   {k:"A thank-you slide, rewritten", h:"Thank You, Properly.", s:"Six things, with receipts. What each one was for. Then the same two words again.", cls:"title", d:7, vo:"title", voAt:2.0}]},
+   {k:"A thank-you slide, rewritten", h:"Thank You, Properly.", s:"Six things, with receipts. What each one was for. Then the same two words again.", cls:"title", d:6, vo:"title", voAt:1.5}]},
  { id:"tesla", title:"Tesla", gl:"road", chord:1, inten:1, act:["I","The car","Make the electric car the one people actually want."], beats:[
    {k:"Tesla · June 12, 2014", h:"Electric cars: far less than 1%.", s:"Of the big carmakers' sales, by Musk's count that day. So Tesla took the wall of patents out of its lobby.", src:["pat"], d:6.5, vo:"act_tesla", voAt:.55},
    {k:"Tesla · June 12, 2014", h:"Then it gave the patents away.", s:"“Tesla will not initiate patent lawsuits against anyone who, in good faith, wants to use our technology.”", src:["pat"], d:7},
@@ -231,7 +231,7 @@ const SCENES = [
    {k:"What for", h:"So the biggest question gets asked out loud.", cls:"wf", d:6, vo:"wf_xai"}]},
  { id:"bot", title:"Claudia", gl:null, mv:true, beats:[{k:"", h:"", d:70, vo:"mv", voAt:.15, src:["cl1","cl2","cl3","clk"]}]},
  { id:"sum", title:"Adds up", gl:"sum", chord:7, beats:[
-   {k:"", h:"", mont:true, d:9.2},
+   {k:"", h:"", mont:true, d:8.6},
    {k:"What it adds up to", h:"None of it was inevitable.", s:"Most of it was called impossible first. Then it got built. Then it got boring. That's the gift.", cls:"wf", d:8.5, vo:"sum", voAt:.6}]},
  { id:"close", title:"Thank You", gl:null, beats:[{d:999, vo:"close", voAt:1.0}]},
 ];
@@ -425,7 +425,7 @@ const GL = (() => {
 // ---------------------------------------------------------------- audio (score + sound design, all synthesized live with WebAudio)
 const AU = (() => {
   const A = { ctx:null, on:true, ready:false, mode:"off", ch:0, inten:0, holdUntil:0, out:null };
-  let duck, master, comp, out, an, anBuf, padBus, lp, sfx, mus, send, noiseBuf, pad = null, padIdx = -9, seqT = 0, step = 0, kicks = [], silentEl = null, lastTick = 0;
+  let bus, lim, post, duck, master, comp, out, an, anBuf, padBus, lp, sfx, mus, send, noiseBuf, pad = null, padIdx = -9, seqT = 0, step = 0, kicks = [], silentEl = null, lastTick = 0;
   const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
   function silentWav() { const sr = 8000, n = 4000, b = new ArrayBuffer(44 + n), v = new DataView(b); const w = (o, x) => { for (let i = 0; i < x.length; i++) v.setUint8(o + i, x.charCodeAt(i)); };
     w(0, "RIFF"); v.setUint32(4, 36 + n, true); w(8, "WAVE"); w(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, sr, true); v.setUint32(28, sr, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, "data"); v.setUint32(40, n, true); for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
@@ -434,8 +434,9 @@ const AU = (() => {
     let c; try { c = new C({ latencyHint:"interactive" }); } catch (e) { c = new C(); } A.ctx = c;
     master = c.createGain(); master.gain.value = A.on ? 1 : 0;
     comp = c.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .3;
-    out = A.out = c.createGain(); out.gain.value = .85; master.connect(comp); comp.connect(out); out.connect(c.destination);
-    an = c.createAnalyser(); an.fftSize = 2048; anBuf = new Float32Array(an.fftSize); out.connect(an);
+    out = c.createGain(); out.gain.value = .7; master.connect(comp); comp.connect(out);
+    bus = c.createGain(); lim = c.createDynamicsCompressor(); lim.threshold.value = -3; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = .001; lim.release.value = .12; post = A.out = c.createGain(); post.gain.value = .96; out.connect(bus); bus.connect(lim); lim.connect(post); post.connect(c.destination);
+    an = c.createAnalyser(); an.fftSize = 2048; anBuf = new Float32Array(an.fftSize); post.connect(an);
     const rvb = c.createConvolver(), len = c.sampleRate * 3.4 | 0, ir = c.createBuffer(2, len, c.sampleRate);
     for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.8); }
     rvb.buffer = ir; send = c.createGain(); send.gain.value = .5; send.connect(rvb); const rg = c.createGain(); rg.gain.value = .55; rvb.connect(rg); rg.connect(master);
@@ -492,7 +493,8 @@ const AU = (() => {
     else if (k === "hit") { kick(t, .75, sfx); tone(t, CHORDS[7][Math.random() * 4 | 0] * 2, .5, .05, "triangle"); }
     else if (k === "rewind") { noise(t, 1.3, .3, "bandpass", 3200, 180, 1); tone(t, 900, 1.2, .1, "sine", 110); }
     else if (k === "bell") { [0, .2, .4].forEach((d, i) => piano(t + d, [659.25, 880, 1108.73][i], .09)); }
-    else if (k === "num") { tone(t, 1320, .12, .03, "sine"); } };
+    else if (k === "num") { tone(t, 1320, .12, .03, "sine"); }
+    else if (k === "chord") { CHORDS[7].forEach((f, i) => piano(t + i * .045, f, .075)); piano(t, CHORDS[7][0] / 2, .09); tone(t, CHORDS[7][0] / 4, 3.5, .1, "sine"); } };
   // the boring part: elevator muzak + a clock
   A.office = () => { if (!A.ready) return; A.mode = "office"; A.holdUntil = 0; A.chord(-1); mus.gain.setTargetAtTime(.55, now(), .05); };
   // the build into the break: noise + saw sweep, accelerating heartbeat, muzak gets strangled
@@ -514,7 +516,7 @@ const AU = (() => {
       o.connect(og); og.connect(g); o.start(t); os.push(o); }); });
     pad = { g, o:os }; lp.frequency.setTargetAtTime(900 + idx * 140, t, 1.5); };
   // what the music does for each scene/beat
-  A.scene = (id, sc, b) => { if (!A.ready) return;
+  A.scene = (id, sc, b) => { if (!A.ready) return; if (!sc.mv) A._vidOn = false;
     if (id === "slide") { A.chord(-1); return; }
     if (id === "close") { A.mode = "piano"; A.chord(7); padBus.gain.setTargetAtTime(.2, now(), 1); return; }
     padBus.gain.setTargetAtTime(.36, now(), .5);
@@ -559,9 +561,11 @@ const AU = (() => {
   A.mvStart = () => { if (!A.ready) return; A.chord(-1); A.mode = "mv"; A.holdUntil = 0; mus.gain.cancelScheduledValues(now()); mus.gain.setValueAtTime(.55, now()); step = 0; seqT = now() + .08; A.mvT0 = seqT; voxStart(A.mvT0); };
   let vg = null; A.vidAttach = el => { if (!A.ready || A._vsrc) return !!A._vsrc; try { A._vsrc = A.ctx.createMediaElementSource(el); vg = A.ctx.createGain(); vg.gain.value = 0; A._vsrc.connect(vg); vg.connect(duck); return true; } catch (e) { return false; } };
   A.vidGain = g => { if (vg) vg.gain.setTargetAtTime(g, now(), .02); };
-  A.vidMode = () => { if (!A.ready) return; voxStop(); A.chord(-1); A.mode = "off"; A.holdUntil = 0; A.vidGain(1); };
+  A.vidMode = () => { if (!A.ready) return; A._vidOn = true; voxStop(); A.chord(-1); A.mode = "off"; A.holdUntil = 0; A.vidGain(1); };
   A.mvTime = () => (A.ctx && A.ctx.state === "running" && A.mode === "mv") ? A.ctx.currentTime - A.mvT0 : null;
-  A.duck = on => { if (duck) duck.gain.setTargetAtTime(on ? (A.mode === "mv" ? .7 : .42) : 1, now(), .15); };
+  A.duck = on => { if (duck) duck.gain.setTargetAtTime(on ? ((A.mode === "mv" || A._vidOn) ? .45 : .28) : 1, now(), on ? .06 : .35); };
+  // narration: Ara's <audio> joins the graph (own bus, high-pass, then the shared limiter) so voice + score can never sum past 0 dBFS
+  A.voAttach = el => { if (!A.ready || !el) return false; if (A._vo) return true; try { const c = A.ctx, s = c.createMediaElementSource(el), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = "highpass"; hp.frequency.value = 75; g.gain.value = .8; s.connect(hp); hp.connect(g); g.connect(bus); A._vo = s; return true; } catch (e) { return false; } };
   A.setOn = v => { A.on = v; if (master) master.gain.setTargetAtTime(v ? 1 : 0, now(), .08); };
   return A;
 })();
@@ -572,7 +576,7 @@ const VO = (() => {
   const LS = "typ.rate"; let saved = null; try { saved = parseFloat(localStorage.getItem(LS)); } catch (e) {}
   const V = { el:null, rate:(saved === 1 || saved === 1.5) ? saved : 1.5, q:[], cur:null, lastEnd:-1e9, on:true, paused:false, deadline:0, plays:0 };
   const pp = el => { el.preservesPitch = true; el.webkitPreservesPitch = true; el.mozPreservesPitch = true; };
-  V.init = () => { if (V.el) return; const el = V.el = new Audio(); el.preload = "auto"; el.playsInline = true; el.setAttribute("playsinline", ""); el.src = "ara.m4a"; pp(el);
+  V.init = () => { if (V.el) { AU.voAttach(V.el); return; } const el = V.el = new Audio(); el.preload = "auto"; el.playsInline = true; el.setAttribute("playsinline", ""); el.src = "ara.m4a"; pp(el); V.routed = AU.voAttach(el);
     el.muted = true; try { const p = el.play(); p && p.then(() => { if (!V.cur) el.pause(); el.muted = !V.on; }).catch(() => { el.muted = !V.on; }); } catch (e) {}
     setInterval(watch, 40); };
   function start(seg) { const el = V.el; const go = () => { try { el.currentTime = seg[0]; } catch (e) {} el.playbackRate = V.rate; pp(el); el.muted = !V.on; if (V.paused) return; const p = el.play(); p && p.catch && p.catch(() => { V.cur = null; V.lastEnd = performance.now(); AU.duck(false); }); };
@@ -588,7 +592,7 @@ const VO = (() => {
   V.setOn = v => { V.on = v; if (V.el) V.el.muted = !v; };
   V.setRate = r => { V.rate = r; try { localStorage.setItem(LS, String(r)); } catch (e) {} if (V.el) { V.el.playbackRate = r; pp(V.el); } V.paint(); };
   V.paint = () => { const f = V.rate === 1.5; document.getElementById("spdv").textContent = f ? "1.5×" : "1×"; document.getElementById("spdl").textContent = f ? "the way you listen" : "tap for 1.5×"; const b = document.getElementById("spd"); b.setAttribute("aria-pressed", String(f)); b.setAttribute("aria-label", f ? "Narration at 1.5 times speed. Tap for normal speed" : "Narration at normal speed. Tap for 1.5 times"); };
-  V.state = () => ({ rate:V.rate, elRate:V.el ? V.el.playbackRate : null, preservesPitch:V.el ? V.el.preservesPitch : null, paused:V.el ? V.el.paused : null, t:V.el ? V.el.currentTime : null, cur:V.cur && V.cur.k, plays:V.plays, ready:V.el ? V.el.readyState : -1, muted:V.el ? V.el.muted : null });
+  V.state = () => ({ rate:V.rate, elRate:V.el ? V.el.playbackRate : null, preservesPitch:V.el ? V.el.preservesPitch : null, paused:V.el ? V.el.paused : null, t:V.el ? V.el.currentTime : null, cur:V.cur && V.cur.k, plays:V.plays, ready:V.el ? V.el.readyState : -1, muted:V.el ? V.el.muted : null, routed:!!AU._vo });
   return V;
 })();
 
@@ -671,8 +675,8 @@ let lastLen = {}; function tick(key, len) { if (lastLen[key] !== undefined && le
 
 // ---------------------------------------------------------------- slide (2D)
 const SC = $("slide"), sx = SC.getContext("2d");
-const ED = (() => { const ns = []; let t = 4.6; EDIT_ITEMS.forEach((x, i) => { const d = Math.max(.18, .9 * Math.pow(.82, i)); ns.push({ text:x, t0:t, t1:t + d }); t += d + .05; });
-  return { ns, end:t, retitle:t + .3, crackAt:t + 1.5, boom:t + 3.0 }; })();
+const EDS = 1.3; const ED = (() => { const ns = []; let t = 4.0; EDIT_ITEMS.forEach((x, i) => { const d = Math.max(.18, .9 * Math.pow(.82, i)); ns.push({ text:x, t0:t, t1:t + d }); t += d + .05; });
+  return { ns, end:t, retitle:t + .3, crackAt:t + 1.2, boom:t + 2.6 }; })();
 let L = null;
 function layout(W, H) { const por = H > W * 1.1;
   if (!por) return { por, VW:1920, VH:1080, cx:960, tY:470, tS:132, sY:600, sS:44, eX:130, eY:150, eS:92, eS2:92, bX:150, bY:300, bS:46, lh:100, fitN:6.4, fY:1030, rule:990, fX:80, pX:1840, crX:760, crY:620, cur0:[1500,900], cur1:[1180,480], c2Y:600, c2S:42, c3Y:680, c3S:34, warnY:150 };
@@ -690,7 +694,10 @@ function drawSlide(mode, t) {
   L = layout(W, H);
   sx.setTransform(1, 0, 0, 1, 0, 0); sx.fillStyle = "#fff"; sx.fillRect(0, 0, W, H);
   const Rr = slideRect(W, H); sx.setTransform(Rr.s, 0, 0, Rr.s, Rr.x, Rr.y); sx.textBaseline = "middle";
-  if (mode === "open") { sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; sx.font = F(L.tS); sx.fillText("Thank You", L.cx, L.tY); sx.fillStyle = "#7f7f7f"; sx.font = F(L.sS); sx.fillText("Questions & Discussion", L.cx, L.sY); sx.textAlign = "left"; chrome(24); return; }
+  if (mode === "open") { sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; sx.font = F(L.tS); sx.fillText("Thank You", L.cx, L.tY); const tw = sx.measureText("Thank You").width; sx.fillStyle = "#7f7f7f"; sx.font = F(L.sS); sx.fillText("Questions & Discussion", L.cx, L.sY); sx.textAlign = "left"; chrome(24);
+    const k = RM ? 1 : ez((t - .6) / 1.4); if (k > 0) { sx.save(); sx.strokeStyle = "rgba(20,20,20,.72)"; sx.lineWidth = 1.5; sx.lineJoin = "miter"; let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647; const ox = L.cx + tw * .36, oy = L.tY + L.tS * .12;
+      for (let r = 0; r < 6; r++) { let a = -2.4 + r * 1.05 + (rnd() - .5) * .5, x = ox, y = oy; const segs = 3 + (rnd() * 3 | 0), len = (11 + rnd() * 14) * k; sx.beginPath(); sx.moveTo(x, y); for (let j = 0; j < segs; j++) { a += (rnd() - .5) * .9; x += Math.cos(a) * len; y += Math.sin(a) * len; sx.lineTo(x, y); } sx.stroke(); }
+      sx.restore(); } return; }
   if (mode === "close") return drawClose(t);
   // ---- self-edit
   const T1 = "Thank you for what, exactly?", T2 = "One slide isn't enough.";
@@ -724,7 +731,7 @@ function drawSlide(mode, t) {
 const CL = { l1:"Thank you, Elon.", l2:"Same two words as the first slide. This time I know what for.", l2p:["Same two words as the first slide.", "This time I know what for."], l3:"And to the teams who built it with you." };
 function drawClose(t) {
   const t1 = .9, t2 = t1 + CL.l1.length / 12 + .8, t3 = t2 + CL.l2.length / 30 + 1.0, tEnd = t3 + CL.l3.length / 30 + .6;
-  const a = typed(CL.l1, t1, t, 12), b = typed(CL.l2, t2, t, 30), c = typed(CL.l3, t3, t, 30); tick("c1", a.length); tick("c2", b.length); tick("c3", c.length);
+  const a = typed(CL.l1, t1, t, 12), b = typed(CL.l2, t2, t, 30), c = typed(CL.l3, t3, t, 30); if (t > t2 - .7 && !S.chordShown) { S.chordShown = true; AU.sfx("chord"); } tick("c1", a.length); tick("c2", b.length); tick("c3", c.length);
   sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; const ts = fitText(CL.l1, L.tS, L.VW - 2 * L.fX); sx.font = F(ts); sx.fillText(a, L.cx, L.tY); const tw = sx.measureText(a).width;
   if (t < t2 + .5) caretAt(L.cx + tw / 2, L.tY, ts * .84, t);
   sx.fillStyle = "#6f6f6f"; sx.font = F(L.c2S);
@@ -791,9 +798,9 @@ function go(id, beat = 0, fromNav = false, instant = false) {
   AU.scene(id, sc, sc.beats[beat] || {}); VO.stop(); S.voFired = false; document.body.classList.toggle("mvon", !!sc.mv); { const v = $("mvv"); S.vid = false; if (sc.mv) { S.vid = !RENDER && v.readyState >= 3 && !v.error && !!AU._vsrc; if (S.vid) { AU.vidMode(); try { v.currentTime = 0; } catch (e) {} v.play().catch(() => {}); } else MV.start(); } else if (!v.paused) v.pause(); document.body.classList.toggle("mvvid", S.vid); }
   if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (actNow) showAct(sc); else if (prev !== "slide" && id !== "close" && id !== "title") AU.sfx("whoosh");
     const bg = BGPAL[id]; if (bg) $("bg").style.background = `radial-gradient(120% 90% at 70% 60%, ${bg[1]}, ${bg[0]} 70%)`; }
-  if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
+  if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; S.chordShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
   else if (id === "slide") { hudClear(); }
-  else setHud(sc.beats[beat], actNow ? 2.2 : 0);
+  else setHud(sc.beats[beat], actNow ? 1.9 : 0);
   $("end").classList.toggle("on", false || (id === "close" && S.endShown)); updateBar();
 }
 function next() { const sc = byId[S.id];
@@ -804,11 +811,12 @@ function prev() { const sc = byId[S.id]; if (S.id === "slide") return; if (S.id 
   if (S.beat > 0) go(S.id, S.beat - 1, true); else if (sc.i > 1) { const p = byId[ORDER[sc.i - 1]]; if (p.id === "slide") return; go(p.id, p.beats.length - 1, true); } }
 function begin() { if (S.started) return; S.started = true; AU.unlock(); VO.init(); { const v = $("mvv"); if (!RENDER && AU.vidAttach(v)) { v.preload = "auto"; v.muted = false; const p = v.play(); if (p) p.then(() => { v.pause(); try { v.currentTime = 0; } catch (e) {} }).catch(() => {}); } } setTimeout(() => { AU.loadVox("claudia-vox.m4a"); MV.load(); }, 1500); AU.office(); S.riserOn = false; S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; if (GL.ok) Object.keys(FS).forEach((k, i) => setTimeout(() => GL.prog(k), 700 + i * 450)); }
 function shatter() { makeShards(1); AU.drop(); SHK = 1; const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on")));
-  go("title", 0, false); S.E = -1.25; setHud(byId.title.beats[0], 2.0); document.body.classList.add("lb"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb"); }, 5200); }
+  go("title", 0, false); S.E = -1.25; setHud(byId.title.beats[0], 1.5); document.body.classList.add("lb"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb"); }, 5200); }
 let actTok = 0, SHK = 0; const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
-function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, 2350); AU.sfx("act"); SHK = Math.max(SHK, .35); }
+function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, 2150); setTimeout(() => { if (tk !== actTok) return; softFlash(); SHK = Math.max(SHK, .45); }, 600); AU.sfx("act"); SHK = Math.max(SHK, .12); }
+function softFlash() { if (RM) return; const fl = $("flash"); fl.classList.add("soft"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("soft"))); }
 function hideAct() { actTok++; $("act").classList.remove("on"); document.body.classList.remove("lb", "acton"); }
-function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1150); }, 350 + i * 640)); }
+function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1150); if (i === MONT.length - 1) { setTimeout(() => { if (tok !== S.montTok) return; softFlash(); AU.sfx("act"); SHK = Math.max(SHK, .6); }, 420); } }, 350 + i * 560)); }
 function replay() { S.riserOn = false; S.started = false; S.endShown = false; $("end").classList.remove("on"); S.visited = {}; go("slide", 0); begin(); }
 
 // ---------------------------------------------------------------- input
@@ -837,14 +845,14 @@ $("srclist").innerHTML = Object.keys(SRC).map(id => `<li>${SRC[id].t}<span>${SRC
 addEventListener("visibilitychange", () => AU.vis(document.hidden, S.started));
 
 // ---------------------------------------------------------------- loop
-let last = performance.now(), fpsAcc = 0, fpsN = 0;
+let last = performance.now(), fpsAcc = 0, fpsN = 0; const T_LOAD = performance.now() / 1000;
 function frame(nowMs) {
   const dt = Math.min(.1, (nowMs - last) / 1000); last = nowMs; const nowS = nowMs / 1000;
   idleT += dt; if (idleT > 3 && S.started && S.id !== "slide") document.body.classList.add("idle");
   M.x = lerp(M.x, M.tx, .04); M.y = lerp(M.y, M.ty, .04);
-  const sc = byId[S.id]; if (!S.paused || S.id === "slide" || S.id === "close") S.beatT += dt; S.sceneT += dt;
-  if (S.id === "slide") { if (S.beat === 0) drawSlide("open", 0); else { drawSlide("edit", S.beatT);
-      if (!S.riserOn && S.beatT > ED.crackAt - 1.2) { S.riserOn = true; AU.riser(ED.boom - S.beatT); }
+  const sc = byId[S.id]; if (!S.paused || S.id === "slide" || S.id === "close") S.beatT += dt * (S.id === "slide" && S.beat === 1 ? EDS : 1); S.sceneT += dt;
+  if (S.id === "slide") { if (S.beat === 0) drawSlide("open", S.started ? 9 : nowS - T_LOAD); else { drawSlide("edit", S.beatT);
+      if (!S.riserOn && S.beatT > ED.crackAt - 1.2) { S.riserOn = true; AU.riser((ED.boom - S.beatT) / EDS); }
       if (S.beatT > ED.crackAt - .6) SHK = Math.max(SHK, .03 + .22 * cl((S.beatT - ED.crackAt + .6) / (ED.boom - ED.crackAt + .6)) ** 2);
       if (S.beatT > ED.boom) shatter(); } }
   else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); S.closeT += dt; if (SH) S.closeT = 0; drawSlide("close", S.closeT); }
@@ -857,9 +865,9 @@ function frame(nowMs) {
   SHK *= Math.exp(-dt * 2.4); { const a = RM ? 0 : SHK * 22; const tr = a > .15 ? `translate(${((Math.random() - .5) * a).toFixed(1)}px,${((Math.random() - .5) * a).toFixed(1)}px)` : ""; if (tr !== frame._tr) { ["gl", "slide", "fx"].forEach(id => $(id).style.transform = tr); frame._tr = tr; } }
   { const b0 = sc.beats[S.beat]; if (b0 && b0.vo && !S.voFired && S.beatT >= (b0.voAt || 0)) { S.voFired = true; [].concat(b0.vo).forEach(k => VO.play(k)); } }
   if (sc.mv && S.vid) { const v = $("mvv"); const D = v.duration || 64; $("prog").style.width = (cl(v.currentTime / D) * 100) + "%"; if (S.paused && !v.paused) v.pause(); else if (!S.paused && v.paused && !v.ended && v.currentTime < D - .1) v.play().catch(() => {}); if (S.auto && !S.paused && (v.ended || v.currentTime >= D - .08)) next(); } else if (sc.mv) { const bt = MV.draw(); $("prog").style.width = (cl(bt / 131) * 100) + "%"; if (S.auto && !S.paused && bt >= 131) next(); }
-  else if (sc.gl) { const need = hudFrame(nowS); const b = sc.beats[S.beat]; const dur = Math.max(b.d || 6, need + 2.4);
+  else if (sc.gl) { const need = hudFrame(nowS); const b = sc.beats[S.beat]; const dur = Math.max((b.d || 6) * .88, need + 2.0);
     $("prog").style.width = (cl(S.beatT / dur) * 100) + "%";
-    if (S.auto && !S.paused && S.beatT > dur && !VO.busy() && VO.sinceEnd() > .7) next(); }
+    if (S.auto && !S.paused && S.beatT > dur && !VO.busy() && VO.sinceEnd() > .45) next(); }
   else $("prog").style.width = "0%";
   requestAnimationFrame(frame);
 }
