@@ -646,7 +646,7 @@ function next() { const sc = byId[S.id];
   if (S.beat < sc.beats.length - 1) go(S.id, S.beat + 1, true); else go(ORDER[sc.i + 1], 0, true); }
 function prev() { const sc = byId[S.id]; if (S.id === "slide") return; if (S.id === "close") return go("sum", 0, true);
   if (S.beat > 0) go(S.id, S.beat - 1, true); else if (sc.i > 1) { const p = byId[ORDER[sc.i - 1]]; if (p.id === "slide") return; go(p.id, p.beats.length - 1, true); } }
-function begin() { if (S.started) return; S.started = true; AU.unlock(); AU.office(); S.riserOn = false; S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; }
+function begin() { if (S.started) return; S.started = true; AU.unlock(); AU.office(); S.riserOn = false; S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; if (GL.ok) Object.keys(FS).forEach((k, i) => setTimeout(() => GL.prog(k), 700 + i * 450)); }
 function shatter() { makeShards(1); AU.drop(); SHK = 1; const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on")));
   go("title", 0, false); S.E = -1.25; setHud(byId.title.beats[0], 2.0); document.body.classList.add("lb"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb"); }, 5200); }
 let actTok = 0, SHK = 0; const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
