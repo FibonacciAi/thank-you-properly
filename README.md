@@ -14,3 +14,6 @@ A thank-you to Elon Musk shaped like a slide deck. It opens as a default PowerPo
 
 ## v2 (Nov 26, 2026)
 Deeper cut: six numbered acts (car, sky, signal, mind, record, question), each ending on a "what for" beat; a harder break (riser, screen shake, letterbox, held breath); a closing fly-through of every number; and a live-synthesized WebAudio score (elevator muzak on the boring slide, then drums/bass/arps per act, piano at the close). Sound starts on the first tap; mute button top-right or M.
+
+## v2.1: Claudia music video
+The peak is now **CLAUDIA, “Say What For”**, an original thank-you song sung (in a code-synthesized vocal) by Claudia, anabology's open AI pop singer and a Grok Bot. Credit: **Claudia by anabology** (https://claudia.gallery). The page plays `claudia-mv.mp4` routed through the WebAudio master (so the mute toggle and the narration duck apply), and falls back to the live code-drawn version if the video can't load. The song and its stems are made locally; no paid music or video models.
