@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#000000">
+<title>Thank You, Properly.</title>
+<meta name="description" content="A thank-you slide to Elon Musk that actually says what for. Tesla, SpaceX, Starlink, Neuralink, X, xAI — with receipts.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thank You, Properly.">
+<meta property="og:title" content="Thank You, Properly.">
+<meta property="og:description" content="A thank-you slide that actually says what for.">
+<meta property="og:url" content="https://fibonacciai.github.io/thank-you-properly/">
+<meta property="og:image" content="https://fibonacciai.github.io/thank-you-properly/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A default 'Thank You' slide cracking open into six glowing threads">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thank You, Properly.">
+<meta name="twitter:description" content="A thank-you slide that actually says what for.">
+<meta name="twitter:image" content="https://fibonacciai.github.io/thank-you-properly/og.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000'/><rect x='5' y='8.5' width='22' height='15' rx='2' fill='%23f4f4f4'/><path d='M9 14h14M11 18h10' stroke='%231c1c1e' stroke-width='1.6' stroke-linecap='round'/><path d='M16 8.5 L14.5 13 L17.5 16 L15 23.5' stroke='%23ff7a3a' stroke-width='1.1' fill='none'/></svg>">
+<style>
+:root{--sans:"Inter","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#000;color:#fff;overflow:hidden;overscroll-behavior:none;touch-action:none;-webkit-user-select:none;user-select:none}
+#gl,#slide,#fx,#bg{position:fixed;inset:0;width:100%;height:100%;display:block}
+#bg{display:none;transition:background 1.2s}
+body.nogl #gl{display:none} body.nogl #bg{display:block}
+#slide{z-index:2;background:#fff}
+#slide.off{display:none}
+#fx{z-index:3;pointer-events:none}
+#flash{position:fixed;inset:0;z-index:4;background:#fff;opacity:0;pointer-events:none;transition:opacity .9s}
+#flash.on{opacity:.85;transition:none}
+#ui{position:fixed;inset:0;z-index:5;pointer-events:none;font-family:var(--sans)}
+#ui button,#ui a,#ui .pe{pointer-events:auto}
+#hud{position:absolute;left:max(28px,env(safe-area-inset-left));top:max(26px,env(safe-area-inset-top));width:min(780px,calc(100vw - 56px));text-shadow:0 2px 24px rgba(0,0,0,.6);transition:opacity .5s}
+#hud .k{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);min-height:15px}
+#hud .h{font-weight:640;font-size:clamp(30px,4.8vw,68px);line-height:1.02;letter-spacing:-.028em;margin:12px 0 0;min-height:1em;white-space:pre-wrap}
+#hud .h.title{font-size:clamp(40px,7.4vw,108px);letter-spacing:-.04em}
+#hud .s{font-size:clamp(15px,1.6vw,21px);line-height:1.38;color:rgba(255,255,255,.86);margin:16px 0 0;max-width:640px;min-height:1.3em;white-space:pre-wrap}
+#hud .src{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 14px;font:500 11.5px/1.3 var(--mono);letter-spacing:.04em;opacity:0;transition:opacity .6s}
+#hud .src.on{opacity:1}
+#hud .src a{color:rgba(255,255,255,.62);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:1px}
+#hud .src a:hover{color:#fff}
+.caret{display:inline-block;width:.06em;min-width:2px;height:.88em;background:currentColor;margin-left:.04em;vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+#big{position:absolute;right:max(28px,env(safe-area-inset-right));bottom:104px;text-align:right;opacity:0;transition:opacity .6s;text-shadow:0 4px 50px rgba(0,0,0,.55)}
+#big.on{opacity:1}
+#big .n{font:250 clamp(64px,13vw,200px)/.86 var(--sans);letter-spacing:-.055em;font-variant-numeric:tabular-nums}
+#big .l{font:500 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:10px}
+#bar{position:absolute;left:0;right:0;bottom:0;padding:14px max(18px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));display:flex;align-items:center;gap:8px;transition:opacity .5s}
+#where{font:500 11px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-right:auto;pointer-events:none;min-width:0}
+#dots{display:flex;gap:5px;margin-top:7px}
+#dots i{display:block;width:16px;height:2px;background:rgba(255,255,255,.22);border-radius:1px;transition:all .4s}
+#dots i.v{background:rgba(255,255,255,.6)} #dots i.c{background:#fff;width:28px}
+#prog{position:absolute;left:0;bottom:0;height:2px;background:rgba(255,255,255,.55);width:0}
+.b{white-space:nowrap;font:500 12px/1 var(--mono);letter-spacing:.06em;color:#fff;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 13px;min-height:38px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.b:hover{border-color:rgba(255,255,255,.6)} .b.off{opacity:.5}
+.b.nav{min-width:44px;font-size:15px}
+body.light #bar .b{color:#333;background:rgba(255,255,255,.85);border-color:#ccc} body.light #where{color:#999} body.light #dots i{background:#ddd} body.light #dots i.c,body.light #dots i.v{background:#888} body.light #prog{background:#bbb}
+body.idle #bar{opacity:0} body.idle{cursor:none}
+body.pre #bar{opacity:0}
+#start{position:absolute;left:50%;bottom:16%;transform:translateX(-50%);font:500 15px/1.3 var(--sans);color:#8a8a8a;text-align:center;animation:pulse 2.4s ease-in-out infinite;white-space:nowrap;pointer-events:none;transition:opacity .3s}
+#start.off{opacity:0;animation:none}
+@keyframes pulse{50%{opacity:.4}}
+#end{position:absolute;left:50%;bottom:15%;transform:translateX(-50%);display:flex;gap:10px;opacity:0;transition:opacity .9s;pointer-events:none}
+#end.on{opacity:1;pointer-events:auto}
+#end .b{color:#333;background:#fff;border-color:#ccc;font-size:13px;padding:11px 16px}
+#end .b:hover{border-color:#333}
+#sig{position:absolute;right:max(28px,env(safe-area-inset-right));bottom:max(70px,calc(env(safe-area-inset-bottom) + 64px));font:500 11px/1 var(--mono);letter-spacing:.14em;color:rgba(255,255,255,.4);text-transform:lowercase}
+body.light #sig{color:#b0b0b0}
+#panel{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:none;overflow:auto;touch-action:pan-y;font-family:var(--sans);-webkit-user-select:text;user-select:text}
+#panel.on{display:block}
+#panel .in{max-width:760px;margin:0 auto;padding:max(40px,env(safe-area-inset-top)) 24px 60px}
+#panel h2{font-weight:640;font-size:28px;letter-spacing:-.02em;margin:0 0 6px}
+#panel p.note{color:rgba(255,255,255,.65);font-size:14px;line-height:1.5;margin:0 0 22px}
+#panel ol{padding-left:20px;margin:0}
+#panel li{margin:0 0 14px;font-size:15px;line-height:1.45;color:rgba(255,255,255,.9)}
+#panel li span{display:block;font:500 11.5px/1.4 var(--mono);color:rgba(255,255,255,.55);margin-top:3px}
+#panel a{color:#9cc8ff}
+#panel .x{position:fixed;top:max(16px,env(safe-area-inset-top));right:16px}
+@media (max-width:640px){#big{bottom:118px}#big .n{font-size:22vw}#hud .s{max-width:none}#bar .hide-s{display:none}}
+</style>
+</head>
+<body class="light pre">
+<canvas id="gl"></canvas><div id="bg"></div>
+<canvas id="slide"></canvas>
+<canvas id="fx"></canvas>
+<div id="flash"></div>
+<div id="ui">
+  <div id="hud"><div class="k" id="hk"></div><div class="h" id="hh"></div><div class="s" id="hs"></div><div class="src" id="hsrc"></div></div>
+  <div id="big"><div class="n" id="bn"></div><div class="l" id="bl"></div></div>
+  <div id="start">Click or tap to begin · sound on</div>
+  <div id="end"><button class="b" id="replay">↺ Replay</button><button class="b" id="srcbtn2">Sources</button><button class="b" id="share">Share</button></div>
+  <div id="sig">sevenfourone</div>
+  <div id="bar">
+    <div id="where"><div id="wt"></div><div id="dots"></div></div>
+    <button class="b nav" id="prev" aria-label="Previous">‹</button>
+    <button class="b" id="play" aria-label="Pause">❚❚</button>
+    <button class="b nav" id="next" aria-label="Next">›</button>
+    <button class="b" id="snd" aria-label="Sound">♪ on</button>
+    <button class="b hide-s" id="srcbtn">Sources</button>
+    <div id="prog"></div>
+  </div>
+</div>
+<div id="panel"><div class="in">
+  <button class="b x" id="close">✕</button>
+  <h2>Sources</h2>
+  <p class="note">Every number in the piece, where it comes from, and its as-of date. Company figures are the company's own; where an independent count exists it's used instead. Rounded as shown.</p>
+  <ol id="srclist"></ol>
+</div></div>
+<script>
+"use strict";
+// ---------------------------------------------------------------- sources
+const SRC = {
+  tq3:{t:"Tesla Q3 2026 Update (cumulative deliveries ≈10.2M; 84,465 Supercharger connectors at 8,904 stations)", a:"as of Sep 30, 2026", u:"https://ir.tesla.com/"},
+  t25:{t:"Tesla quarterly updates — 2025 energy storage deployments, 46.7 GWh (record year)", a:"FY2025", u:"https://ir.tesla.com/"},
+  ef:{t:"ElonFacts.org data dashboard (cross-check of every figure below)", a:"as of Nov 25, 2026", u:"https://elonfacts.org/dashboard"},
+  f1:{t:"Falcon 1 — Flight 4 reached orbit after three failures", a:"Sep 28, 2008", u:"https://en.wikipedia.org/wiki/Falcon_1"},
+  ll2:{t:"Launch Library 2 (The Space Devs) — 165 Falcon 9/Heavy launches in 2025", a:"Dec 31, 2025", u:"https://thespacedevs.com/llapi"},
+  f9b:{t:"List of Falcon 9 first-stage boosters — 677 successful landings; B1067 flew its 37th mission", a:"as of Nov 22, 2026", u:"https://en.wikipedia.org/wiki/List_of_Falcon_9_first-stage_boosters"},
+  mass:{t:"SpaceX investor presentation filed with the SEC — “more than 80%” of world mass to orbit in 2025 (SpaceX's figure; includes Starlink)", a:"2025", u:"https://elonfacts.org/dashboard"},
+  ss:{t:"List of Starship launches — Flight 15 upper stage caught by the tower", a:"Nov 14, 2026", u:"https://en.wikipedia.org/wiki/List_of_Starship_launches"},
+  mcd:{t:"Jonathan McDowell, Starlink statistics — 11,204 in orbit, 11,190 working", a:"as of Nov 9, 2026", u:"https://planet4589.org/space/con/star/stats.html"},
+  q10:{t:"SpaceX Form 10-Q, Q3 2026 — 13.6M Starlink subscribers (service lines), 174 countries and markets", a:"as of Sep 30, 2026", u:"https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm"},
+  nlp:{t:"Neuralink — FDA approval to launch the LINK Pivotal Study; “over 30 implanted participants”", a:"Nov 25, 2026", u:"https://neuralink.com/updates/neuralink-receives-fda-approval-to-launch-link-pivotal-study/"},
+  nl2:{t:"Neuralink — Two Years of Telepathy; 21 participants, zero serious device-related adverse events (company report)", a:"Jan 28, 2026", u:"https://neuralink.com/updates/two-years-of-telepathy/"},
+  xal:{t:"xai-org/x-algorithm — For You feed code incl. ranking weights, Apache-2.0", a:"release of Aug 13, 2026", u:"https://github.com/xai-org/x-algorithm"},
+  cn:{t:"Community Notes public dataset — 3,263,626 notes (tally of the Nov 1 snapshot, via ElonFacts)", a:"through Oct 30, 2026", u:"https://communitynotes.x.com/guide/en/under-the-hood/download-data"},
+  col:{t:"xAI — Colossus: built in 122 days, doubled to 200K GPUs in 92", a:"2025", u:"https://x.ai/colossus"},
+  xco:{t:"xAI company page — “We build AI to understand the universe.”", a:"accessed Nov 26, 2026", u:"https://x.ai/company"},
+};
+// ---------------------------------------------------------------- story
+const SCENES = [
+ { id:"slide", title:"Thank You", gl:null, beats:[{d:999},{d:999}] },
+ { id:"title", title:"Thank You, Properly", gl:"dawn", chord:0, beats:[
+   {k:"A thank-you slide, rewritten", h:"Thank You, Properly.", s:"Six things, with receipts. Then the same two words again.", cls:"title", d:5.5}]},
+ { id:"tesla", title:"Tesla", gl:"road", chord:1, beats:[
+   {k:"Tesla · as of Sep 30, 2026", h:"About 10.2 million Teslas delivered.", s:"All-time. The electric car stopped being the compromise and became the one people wanted.", src:["tq3","ef"], big:{v:10.2,dec:1,suf:"M",l:"vehicles delivered, all-time"}, d:6},
+   {k:"Tesla Energy · 2025", h:"46.7 GWh of batteries for the grid.", s:"Megapack and Powerwall, in one year — a record. Sunlight, kept for after dark.", src:["t25","ef"], big:{v:46.7,dec:1,suf:" GWh",l:"storage deployed in 2025"}, d:6},
+   {k:"Supercharger · as of Sep 30, 2026", h:"Then the plug became the standard.", s:"84,465 connectors at 8,904 stations — and a continent's carmakers switched to the Tesla connector.", src:["tq3","ef"], d:6}]},
+ { id:"spacex", title:"SpaceX", gl:"launch", chord:2, beats:[
+   {k:"SpaceX · Kwajalein, 2008", h:"Falcon 1 failed three times.", s:"The fourth reached orbit on Sept 28, 2008. Almost everything after this slide hangs on that day.", src:["f1"], d:6.5},
+   {k:"SpaceX · 2025", h:"165 Falcon launches in one year.", s:"About one every 2.2 days. The sixth record year in a row.", src:["ll2","ef"], big:{v:165,l:"Falcon launches in 2025"}, d:6},
+   {k:"SpaceX · as of Nov 22, 2026", h:"677 boosters came back down. Upright.", s:"One of them has now flown 37 times. Rockets started behaving like airplanes.", src:["f9b","ef"], big:{v:677,l:"Falcon booster landings"}, d:6},
+   {k:"SpaceX · 2025, SpaceX's figure", h:"More than 80% of the world's mass to orbit.", s:"One company. Starlink included. Space stopped being an event and became a schedule.", src:["mass"], big:{v:80,pre:">",suf:"%",l:"of world mass to orbit"}, d:6},
+   {k:"Starship · Nov 14, 2026", h:"Then the tower caught the ship.", s:"After 22 hours in orbit, a Starship upper stage came home to the launch tower's arms. A first.", src:["ss"], d:6}]},
+ { id:"starlink", title:"Starlink", gl:"globe", chord:3, beats:[
+   {k:"Starlink · as of Nov 9, 2026", h:"11,204 satellites overhead.", s:"11,190 of them working. The largest constellation ever flown — counted by an independent astronomer, not the company.", src:["mcd","ef"], big:{v:11204,l:"Starlink satellites in orbit"}, d:6.5},
+   {k:"Starlink · as of Sep 30, 2026", h:"13.6 million subscribers.", s:"Homes, boats, farms, small businesses. A lot of them in places fiber was never going to reach.", src:["q10","ef"], big:{v:13.6,dec:1,suf:"M",l:"Starlink subscribers"}, d:6},
+   {k:"Starlink · as of Sep 30, 2026", h:"Across 174 countries and markets.", s:"The internet stopped ending at the edge of town.", src:["q10","ef"], d:5.5}]},
+ { id:"neuralink", title:"Neuralink", gl:"neurons", chord:4, beats:[
+   {k:"Neuralink · Nov 25, 2026", h:"Over 30 people implanted.", s:"Thousands of hours of real use: studying, making art, gaming, talking with family — by thought.", src:["nlp"], big:{v:30,suf:"+",l:"implanted participants"}, d:6.5},
+   {k:"Neuralink · Jan 28, 2026, company report", h:"Zero serious device-related adverse events.", s:"Across the first 21 participants. In this field, safety isn't a feature. It's the whole job.", src:["nl2"], d:6},
+   {k:"Neuralink · Nov 25, 2026", h:"Now: a pivotal trial for people with ALS.", s:"The FDA cleared the first pivotal study of an implantable brain-computer interface in the U.S.", src:["nlp"], d:6}]},
+ { id:"x", title:"X", gl:"graph", chord:5, beats:[
+   {k:"X · Aug 13, 2026", h:"The feed's ranking code is public.", s:"For You, weights included, Apache 2.0. You can read why you see what you see.", src:["xal"], d:6},
+   {k:"X · public data through Oct 30, 2026", h:"3.26 million Community Notes.", s:"Written by users. A note only shows when people who usually disagree both rate it helpful.", src:["cn","ef"], big:{v:3.26,dec:2,suf:"M",l:"notes in the public dataset"}, d:6.5}]},
+ { id:"xai", title:"xAI", gl:"racks", chord:6, beats:[
+   {k:"xAI · Colossus", h:"200,000 GPUs in one cluster.", s:"Built in 122 days. Then doubled in 92.", src:["col"], big:{v:200,suf:"K",l:"GPUs, one cluster"}, d:6},
+   {k:"xAI · in its own words", h:"Pointed at one question.", s:"“We build AI to understand the universe.” A good thing to say out loud, and a harder thing to mean.", src:["xco"], d:6.5}]},
+ { id:"sum", title:"Adds up", gl:"sum", chord:7, beats:[
+   {k:"What it adds up to", h:"None of it was inevitable.", s:"Most of it was called impossible first. Then it got built. Then it got boring. That's the gift.", d:7}]},
+ { id:"close", title:"Thank You", gl:null, beats:[{d:999}]},
+];
+const EDIT_ITEMS = ["Electric cars people actually wanted","Batteries that store sunlight for the grid","A charging plug a continent adopted","Rockets that land and fly again","A ship caught by its own tower","Internet from orbit, almost anywhere","Texts from places with no towers","A cursor moved by thought","A trial for people with ALS","A feed whose code you can read","Fact-checks written by users","A cluster built in 122 days","A machine built to ask why","Tunnels under Las Vegas","Online payments, back in 1999"];
+const BGPAL = { title:["#05040c","#2a1a40"], tesla:["#07080d","#5a2a10"], spacex:["#020308","#1a2a5a"], starlink:["#000206","#123a6a"], neuralink:["#06020e","#4a1a7a"], x:["#000","#1a2230"], xai:["#010407","#0e4a5a"], sum:["#05040c","#4a2a20"] };
+const CHORDS = [[220,277.18,329.63,415.3],[196,246.94,293.66,369.99],[174.61,220,261.63,329.63],[164.81,207.65,246.94,311.13],[146.83,185,220,277.18],[130.81,164.81,196,246.94],[196,246.94,293.66,392],[220,277.18,329.63,440]];
+
+// ---------------------------------------------------------------- shaders
+const VS = `#version 300 es
+void main(){vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2));gl_Position=vec4(p*2.-1.,0.,1.);}`;
+const HEAD = `#version 300 es
+precision highp float;
+uniform vec2 R; uniform float T; uniform vec2 M; uniform float B; uniform float E;
+out vec4 O;
+float h1(float n){return fract(sin(n*12.9898)*43758.5453);}
+float h2(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+vec2 h22(vec2 p){float n=h2(p);return vec2(n,h2(p+n+17.1));}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h2(i),h2(i+vec2(1,0)),f.x),mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*vn(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return s;}
+float h3(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
+float vn3(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z);}
+float fbm3(vec3 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*vn3(p);p=p*2.02+3.1;a*=.5;}return s;}
+float stars(vec2 p,float d){vec2 c=floor(p*d);vec2 f=fract(p*d)-.5;float r=h2(c);vec2 o=(h22(c)-.5)*.6;float s=smoothstep(.07,.0,length(f-o))*step(.86,r);return s*(.55+.45*sin(T*1.7+r*40.));}
+vec3 tail(vec3 c,vec2 fc){vec2 q=fc/R;c=1.-exp(-c*1.25);c*=.3+.7*pow(16.*q.x*q.y*(1.-q.x)*(1.-q.y),.2);c+=(h2(fc+fract(T*7.)*97.)-.5)*.03;return c*E;}
+`;
+const MAIN = `void main(){vec2 fc=gl_FragCoord.xy;O=vec4(tail(scene(fc),fc),1.);}`;
+const FS = {};
+FS.dawn = (conv) => HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;
+vec3 c=mix(vec3(.012,.01,.03),vec3(.05,.03,.09),p.y+.5);
+c+=stars(p+vec2(T*.004,0.),90.)*.7;
+vec3 cols[6]=vec3[6](vec3(1.,.28,.22),vec3(1.,.62,.25),vec3(.35,.62,1.),vec3(.78,.42,1.),vec3(.92,.92,.98),vec3(.3,1.,.8));
+float cv=${conv.toFixed(1)}*smoothstep(0.,1.,B+E*0.);
+for(int i=0;i<6;i++){float fi=float(i);
+ float y=(fi-2.5)*.06+.085*sin(p.x*(1.1+fi*.17)+T*(.23+fi*.03)+fi*1.3);
+ float yc=.03*sin(p.x*2.+T*.5+fi*.4)*(1.-smoothstep(-.2,.6,p.x));
+ y=mix(y,yc,cv*smoothstep(-1.,.4,p.x));
+ float d=abs(p.y-y-.04);
+ c+=cols[i]*(.0022/(d+.0025))*(.45+.25*sin(T*.7+fi))*smoothstep(1.3,.1,abs(p.x));}
+c+=vec3(1.,.6,.35)*.12*exp(-length(p-vec2(0.,-.65))*2.2);
+c+=vec3(1.,.85,.6)*cv*.25*exp(-length(p-vec2(.62,.04))*6.);
+return c;}` + MAIN;
+FS.road = HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p.x+=(M.x-.5)*.1;float hz=.05;vec3 c;
+if(p.y>hz){float y=p.y-hz;
+ c=mix(vec3(.6,.27,.1),vec3(.015,.02,.06),smoothstep(0.,.38,y));
+ c+=vec3(1.,.55,.22)*.7*exp(-length(vec2(p.x*.55,y*3.2))*4.2);
+ c+=stars(p,70.)*smoothstep(.18,.42,y)*.6;
+ float sb=smoothstep(.4,1.,B);float bx=floor(p.x*34.);float bh=(.012+.035*h1(bx))*sb;
+ if(y<bh){float ch=fract(T*.12+h1(bx*3.1));float lit=step(y/max(bh,1e-4),ch);c=vec3(.02,.025,.03)+vec3(.15,.95,.55)*lit*.55*(.6+.4*step(.5,fract(p.x*68.)));}
+}else{float y=hz-p.y;float z=.3/y;float x=p.x*z;float fog=exp(-z*.03);
+ vec3 g=vec3(.012,.013,.017);float road=step(abs(x),1.7);g=mix(g,vec3(.028,.028,.033),road);
+ g+=vec3(1.,.55,.22)*.22*exp(-abs(x)*.6)*road*exp(-z*.06);
+ float lm=step(abs(x),.025)*step(.5,fract(z*.22-T*2.6));lm+=step(abs(abs(x)-1.7),.035);lm+=step(abs(abs(x)-.85),.02)*step(.6,fract(z*.22-T*2.6))*.6;
+ g+=vec3(.9,.85,.7)*lm*.55;
+ vec3 Lc=vec3(0.);
+ for(int i=0;i<4;i++){float fi=float(i);float lx=-1.27+fi*.85;float dir=fi<2.?-1.:1.;float v=(2.2+1.3*h1(fi))*dir;float L=7.+5.*h1(fi+3.);
+  float zc0=T*v+h1(fi*7.)*L;float dz=(fract((z-zc0)/L+.5)-.5)*L;
+  for(int s=-1;s<=1;s+=2){float dx=x-(lx+float(s)*.16);vec2 sd=vec2(dx/z,.3*dz/(z*z)*.35);float b=exp(-length(sd)*260.);
+   Lc+=(dir<0.?vec3(1.,.95,.85)*1.4:vec3(1.,.12,.08)*1.1)*b;}}
+ c=g*fog+Lc*sqrt(fog);
+ float sb=smoothstep(1.4,2.,B);float ax=abs(x);
+ if(ax>2.1&&ax<2.25){float cz=fract(z*.25);c+=vec3(.3,.6,1.)*step(cz,.18)*fog*sb*.9;}
+}
+return c;}` + MAIN;
+FS.launch = HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p.x+=(M.x-.5)*.06;float gy=-.36;float asp=R.x/R.y;
+vec3 c=mix(vec3(.06,.07,.15),vec3(.0,.0,.02),smoothstep(-.4,.5,p.y));
+c+=stars(p,85.)*smoothstep(-.2,.35,p.y);
+c+=vec3(1.,.45,.18)*.3*exp(-abs(p.y-gy)*11.);
+float n=2.+B*2.5;
+for(int i=0;i<14;i++){float fi=float(i);if(fi>n+4.)break;float per=4.5+3.5*h1(fi*3.7);float k=fract(T/per+h1(fi));
+ float x0=(h1(fi*1.7)-.5)*asp*.9;float bend=(h1(fi*9.)>.5?1.:-1.)*(.25+.3*h1(fi*5.));
+ float s=(p.y-gy)/1.15;
+ if(s>0.&&s<k){float xs=x0+s*s*bend;float d=abs(p.x-xs);float age=k-s;float w=.0012+age*.012;c+=vec3(1.,.72,.42)*exp(-d/w)*(.1+.9*exp(-age*5.))*(1.-k)*.8;}
+ vec2 hp=vec2(x0+k*k*bend,gy+k*1.15);vec2 dd=p-hp;c+=vec3(1.,.85,.6)*.0012/(dot(dd,dd)+.0004)*(1.-k);}
+float tw=smoothstep(3.4,4.,B);
+float Lt=fract(T/8.);float tx=mix(0.,.3,tw);
+float by=mix(.5,mix(gy+.012,gy+.17,tw),smoothstep(0.,.75,Lt));
+vec2 q=p-vec2(tx,by);float bw=mix(.0055,.009,tw),bh=mix(.075,.1,tw);
+float body=step(abs(q.x),bw)*step(0.,q.y)*step(q.y,bh);
+if(Lt<.75){float fl=exp(-abs(q.x)*160.)*exp(-max(-q.y,0.)*22.)*step(q.y,0.);c+=vec3(1.,.6,.22)*fl*1.8*(.8+.2*sin(T*60.));}
+c=mix(c,vec3(.7,.73,.78),body);
+vec2 tq=p-vec2(tx+.035,gy);float tower=step(abs(tq.x),.009)*step(0.,tq.y)*step(tq.y,.3);
+float arm=step(abs(tq.y-.165),.004)*step(-.045,tq.x)*step(tq.x,0.);
+c=mix(c,vec3(.13,.14,.17),max(tower,arm)*tw);c+=vec3(1.,.3,.2)*step(abs(tq.x),.004)*step(abs(tq.y-.3),.004)*tw*(.5+.5*sin(T*4.));
+if(p.y<gy){float d=gy-p.y;c=vec3(.008,.01,.014)+vec3(1.,.45,.18)*.1*exp(-d*18.);c+=vec3(1.,.35,.2)*.6*step(fract(p.x*14.),.04)*exp(-d*90.);
+ c+=vec3(1.,.7,.4)*.15*exp(-abs(p.x-tx)*20.)*exp(-d*10.)*step(Lt,.75);}
+return c;}` + MAIN;
+FS.globe = HEAD + `
+vec3 rY(vec3 v,float a){float c=cos(a),s=sin(a);return vec3(c*v.x+s*v.z,v.y,-s*v.x+c*v.z);}
+vec3 rX(vec3 v,float a){float c=cos(a),s=sin(a);return vec3(v.x,c*v.y-s*v.z,s*v.y+c*v.z);}
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p.x-=.18*clamp(R.x/R.y-1.,0.,1.)*.6;
+vec3 ro=vec3(0.,0.,-3.4);vec3 rd=normalize(vec3(p,1.75*min(1.,R.x/R.y*1.1)));
+float tilt=.38+(M.y-.5)*.25;float spin=T*.035+(M.x-.5)*1.4;
+vec3 c=vec3(.004,.005,.012)+stars(p,110.)*.5;
+float b=dot(ro,rd);float h=b*b-(dot(ro,ro)-1.);
+vec3 L=normalize(vec3(-.9,.35,-.35));
+float dm=length(cross(ro,rd));
+c+=vec3(.25,.5,1.)*.5*exp(-max(dm-1.,0.)*16.)*step(1.,dm);
+if(h>0.){float t=-b-sqrt(h);vec3 n=ro+rd*t;vec3 q=rY(rX(n,tilt),spin);
+ float f=fbm3(q*2.1+3.);float land=smoothstep(.5,.535,f);float dif=dot(n,L);float day=smoothstep(-.12,.3,dif);
+ vec3 col=mix(vec3(.01,.04,.11),vec3(.09,.11,.06),land)*(.1+day*1.1);
+ col+=vec3(.6,.8,1.)*pow(max(dot(reflect(-L,n),-rd),0.),30.)*(1.-land)*day*.5;
+ float night=1.-day;float cn=vn3(q*55.);
+ float lit=step(.8-.1*clamp(B,0.,2.)*.5,cn)*land;col+=vec3(1.,.72,.38)*lit*night*(.7+.3*sin(T*3.+cn*60.))*1.3;
+ col+=vec3(.55,.85,1.)*step(.955-.02*clamp(B,0.,2.),vn3(q*80.+7.))*night*smoothstep(.4,1.,B)*1.1;
+ float rim=pow(1.-max(dot(n,-rd),0.),3.);col+=vec3(.3,.55,1.)*rim*.9;c=col;}
+float rs=1.075;float hs=b*b-(dot(ro,ro)-rs*rs);
+if(hs>0.){for(int k=0;k<2;k++){if(k==1&&h>0.)break;float ts=-b+(k==0?-1.:1.)*sqrt(hs);vec3 sp=ro+rd*ts;vec3 sq=rX(sp/rs,tilt);
+ float lat=asin(clamp(sq.y,-1.,1.));float band=floor((lat+1.6)*11.);float dirb=mod(band,2.)<1.?1.:-1.;
+ float lon=atan(sq.z,sq.x)+spin+T*(.07+.05*h1(band))*dirb;
+ vec2 g=vec2(lon*15.,(lat+1.6)*11.);vec2 id=floor(g);vec2 fr=fract(g)-.5;float pres=step(.62-.12*clamp(B,0.,1.),h2(id+band*3.1));
+ float d=length(fr);float dt=smoothstep(.1,.0,d)*pres;c+=vec3(.85,.93,1.)*dt*(k==0?1.1:.3);
+ c+=vec3(.4,.6,1.)*smoothstep(.02,.0,abs(fr.y))*.05*(k==0?1.:.3);}}
+return c;}` + MAIN;
+FS.neurons = HEAD + `
+vec2 cur(float t){return vec2(.5*sin(t*.33)+.12*sin(t*.9),.27*sin(t*.47+1.)+.06*cos(t*1.3));}
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;vec3 c=vec3(.012,.006,.024);
+vec2 q=p*2.1;float w=fbm(q*1.2+vec2(T*.03,-T*.02));float n=fbm(q+2.2*w+vec2(0.,T*.02));
+float ridge=1.-abs(n*2.-1.);float fil=pow(ridge,11.);
+vec2 cp=cur(T);
+float pulse=.5+.5*sin(length(p-cp)*16.-T*5.);
+c+=mix(vec3(.42,.18,1.),vec3(1.,.32,.62),w)*fil*(.18+1.4*pow(pulse,6.)*(.5+.5*smoothstep(.0,1.,B)));
+vec2 g=p*4.5;vec2 id=floor(g);float best=9.;
+for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 o=vec2(x,y);vec2 r=h22(id+o);vec2 pt=o+.5+.33*sin(T*.3+6.28*r)-fract(g);float d=length(pt);best=min(best,d);
+ float fire=pow(max(sin(T*1.2+r.x*30.),0.),24.);c+=vec3(.6,.82,1.)*fire*.004/(d*d+.006);}
+c+=vec3(.5,.3,1.)*.004/(best*best+.02);
+for(int i=0;i<14;i++){float tt=T-float(i)*.05;vec2 tp=cur(tt);float d=length(p-tp);c+=vec3(.55,.85,1.)*.00018/(d*d+.00025)*(1.-float(i)/14.);}
+float cd=length(p-cp);c+=vec3(.8,.97,1.)*.0011/(cd*cd+.00025);
+vec2 cq=(p-cp)*vec2(1.,-1.)*55.;if(cq.x>0.&&cq.y>0.&&cq.x<1.7&&cq.y<2.4&&cq.x<cq.y*.72)c=mix(c,vec3(1.),.9);
+return c;}` + MAIN;
+FS.graph = HEAD + `
+float seg(vec2 p,vec2 a,vec2 b,out float hh){vec2 pa=p-a,ba=b-a;hh=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*hh);}
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p+=(M-.5)*.05;vec3 c=vec3(.02,.028,.045)*(1.-length(p)*.8);
+vec2 g=p*5.5+vec2(T*.06,T*.015);vec2 id=floor(g),f=fract(g);
+vec2 pts[9];vec2 ofs[9];int k=0;
+for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 o=vec2(x,y);vec2 r=h22(id+o);ofs[k]=o;pts[k]=o+.5+.36*sin(T*.4+6.28*r);k++;}
+float lines=0.,pul=0.,nodes=0.,hot=0.;
+for(int i=0;i<9;i++){
+ if(i!=4){float hh;float d=seg(f,pts[4],pts[i],hh);float len=length(pts[i]-pts[4]);float a=smoothstep(1.35,.55,len);
+  lines+=a*smoothstep(.016,.0,d);float ph=fract(T*.45+h2(id+ofs[i]*1.7));pul+=a*smoothstep(.03,.0,d)*smoothstep(.07,.0,abs(hh-ph));}
+ float dn=length(f-pts[i]);float hs=step(.8,h2(id+ofs[i]));nodes+=smoothstep(.055,.035,dn);hot+=hs*smoothstep(.09,.05,dn);
+ c+=vec3(.4,.7,1.)*hs*.002/(dn*dn+.003)*(.4+.6*smoothstep(.4,1.,B));}
+c+=vec3(.55,.62,.75)*lines*.35+vec3(1.)*pul*1.2+vec3(.92,.95,1.)*nodes*.9;
+c+=mix(vec3(.3,.7,1.),vec3(.35,1.,.6),smoothstep(.4,1.,B))*hot*.9;
+return c;}` + MAIN;
+FS.racks = HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p+=(M-.5)*vec2(.06,.03);vec3 c=vec3(0.);
+float ax=max(abs(p.x),1e-3);float tw=.55/ax;float tf=p.y<0.?.3/max(-p.y,1e-3):.42/max(p.y,1e-3);
+float t=min(tw,tf);float z=t+T*.9;float fog=exp(-t*.11);
+if(tw<tf){float y=p.y*t;float col=fract(z*.45);float rack=step(.06,col)*step(col,.94);
+ vec2 led=vec2(z*14.,y*36.);vec2 lid=floor(led);vec2 lf=fract(led)-.5;float side=sign(p.x);
+ float on=step(.5,h2(lid+side*7.));float bl=step(.45,fract(T*(.7+3.*h2(lid))+h2(lid*1.3)));
+ float l=smoothstep(.28,.08,length(lf))*on*mix(1.,bl,.6)*rack;vec3 lc=mix(vec3(.2,.85,1.),vec3(1.),step(.82,h2(lid+3.)));
+ c=vec3(.016,.018,.022)*rack+lc*l*1.3;c*=fog;c+=vec3(.05,.1,.16)*(1.-fog)*.5;
+}else{float x=p.x*t;float lx=abs(fract(x*3.)-.5);float lz=abs(fract(z*1.)-.5);
+ c=vec3(.01,.011,.013)+vec3(.15,.4,.5)*smoothstep(.46,.5,max(lx,lz))*.25;
+ if(p.y>0.)c+=vec3(.6,.9,1.)*smoothstep(.05,.0,abs(x))*.7*step(.25,fract(z*.5));
+ else c+=vec3(.2,.6,.8)*.12*exp(-abs(x)*4.);c*=fog;}
+float r=length(p);float gal=smoothstep(.4,1.,B);float a=atan(p.y,p.x);
+float sp=.5+.5*sin(a*2.-log(r+1e-3)*5.+T*.25);float galaxy=exp(-r*5.)*sp*fbm(p*18.+T*.04)*2.2;
+c+=vec3(.6,.75,1.)*.25*exp(-r*9.);c=mix(c,c*.4,gal*exp(-r*4.));c+=mix(vec3(1.,.82,.62),vec3(.45,.55,1.),clamp(r*3.,0.,1.))*galaxy*gal*1.6+vec3(1.,.9,.8)*gal*.004/(r*r+.002);
+return c;}` + MAIN;
+FS.sum = FS.dawn(1);
+FS.dawn = FS.dawn(0);
+
+// ---------------------------------------------------------------- GL
+const GL = (() => {
+  const E = { ok:false, err:"", progs:{} }; const cv = document.getElementById("gl");
+  let gl = null; try { gl = cv.getContext("webgl2", { antialias:false, alpha:false, depth:false, powerPreference:"high-performance", preserveDrawingBuffer:true }); } catch (e) {}
+  if (!gl) { E.err = "no webgl2"; document.body.classList.add("nogl"); return E; }
+  E.ok = true; E.gl = gl; gl.bindVertexArray(gl.createVertexArray());
+  function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { E.err += gl.getShaderInfoLog(s); console.warn(gl.getShaderInfoLog(s)); return null; } return s; }
+  E.prog = key => { if (key in E.progs) return E.progs[key]; const v = sh(gl.VERTEX_SHADER, VS), f = sh(gl.FRAGMENT_SHADER, FS[key]); let P = null;
+    if (v && f) { const p = gl.createProgram(); gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p); if (gl.getProgramParameter(p, gl.LINK_STATUS)) { P = { p, u:{} }; ["R","T","M","B","E"].forEach(n => P.u[n] = gl.getUniformLocation(p, n)); } else E.err += gl.getProgramInfoLog(p); }
+    E.progs[key] = P; return P; };
+  E.scale = 1;
+  E.draw = (key, t, b, e, m) => { const P = E.prog(key); if (!P) return false;
+    const dpr = Math.min(devicePixelRatio || 1, 1.75) * E.scale; const W = Math.max(2, innerWidth * dpr | 0), H = Math.max(2, innerHeight * dpr | 0);
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    gl.viewport(0, 0, W, H); gl.useProgram(P.p); gl.uniform2f(P.u.R, W, H); gl.uniform1f(P.u.T, t); gl.uniform2f(P.u.M, m[0], m[1]); gl.uniform1f(P.u.B, b); gl.uniform1f(P.u.E, e);
+    gl.drawArrays(gl.TRIANGLES, 0, 3); return true; };
+  E.clear = () => { gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); };
+  return E;
+})();
+
+// ---------------------------------------------------------------- audio
+const AU = (() => {
+  const A = { ctx:null, on:true, ready:false }; let master, padBus, sfx, lp, noiseBuf, pad = null, lastTick = 0;
+  A.init = () => { if (A.ctx) { A.ctx.resume && A.ctx.resume(); return; } const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
+    const c = A.ctx = new C(); master = c.createGain(); master.gain.value = A.on ? .8 : 0; const comp = c.createDynamicsCompressor(); master.connect(comp); comp.connect(c.destination);
+    lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1100; lp.Q.value = .4; padBus = c.createGain(); padBus.gain.value = .32; padBus.connect(lp); lp.connect(master);
+    // simple feedback delay for air
+    const dl = c.createDelay(1.5); dl.delayTime.value = .38; const fb = c.createGain(); fb.gain.value = .32; const wet = c.createGain(); wet.gain.value = .25; lp.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(master);
+    sfx = c.createGain(); sfx.gain.value = .55; sfx.connect(master);
+    noiseBuf = c.createBuffer(1, c.sampleRate * 2, c.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; A.ready = true; };
+  const now = () => A.ctx.currentTime;
+  function noise(t, dur, peak, type, f0, f1, q = 1) { const c = A.ctx, s = c.createBufferSource(); s.buffer = noiseBuf; s.loop = true; const f = c.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + .004); g.gain.exponentialRampToValueAtTime(.0001, t + dur); s.connect(f); f.connect(g); g.connect(sfx); s.start(t, Math.random()); s.stop(t + dur + .05); }
+  function tone(t, f, dur, peak, type = "sine", f1) { const c = A.ctx, o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur); o.connect(g); g.connect(sfx); o.start(t); o.stop(t + dur + .05); }
+  A.sfx = (k) => { if (!A.ready || !A.on) return; const t = now();
+    if (k === "type" || k === "del") { if (performance.now() - lastTick < 34) return; lastTick = performance.now(); const f = k === "type" ? 2600 + Math.random() * 1600 : 1300 + Math.random() * 400; noise(t, .028, k === "type" ? .09 : .07, "bandpass", f, f * .8, 2.5); }
+    else if (k === "boom") { noise(t, 1.8, .55, "lowpass", 6000, 180, .7); tone(t, 62, 1.6, .7, "sine", 28); noise(t + .02, .5, .3, "highpass", 3000, 9000, .5); for (let i = 0; i < 10; i++) tone(t + .05 + Math.random() * .8, 2000 + Math.random() * 3000, .4, .03, "sine"); }
+    else if (k === "crack") { noise(t, .09, .22, "highpass", 2500, 1200, 1); }
+    else if (k === "whoosh") { noise(t, .7, .12, "bandpass", 300, 2400, 1.2); }
+    else if (k === "rewind") { noise(t, 1.2, .25, "bandpass", 3000, 200, 1); tone(t, 900, 1.1, .08, "sine", 120); }
+    else if (k === "bell") { [0, .18, .36].forEach((d, i) => tone(t + d, [659.25, 880, 1108.73][i], 2.4, .07, "sine")); }
+    else if (k === "num") { tone(t, 1320, .12, .03, "sine"); } };
+  A.chord = (idx) => { if (!A.ready) return; const c = A.ctx, t = now(); if (pad) { const old = pad; old.g.gain.cancelScheduledValues(t); old.g.gain.setTargetAtTime(.0001, t, .8); setTimeout(() => old.o.forEach(o => { try { o.stop(); } catch (e) {} }), 5000); pad = null; }
+    if (idx < 0) return; const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.setTargetAtTime(.22, t, 1.2); g.connect(padBus); const os = [];
+    CHORDS[idx].forEach((f, i) => { [0, 1].forEach(j => { const o = c.createOscillator(); o.type = j ? "sine" : "triangle"; o.frequency.value = f * (j ? .5 : 1); o.detune.value = (Math.random() - .5) * 14; const og = c.createGain(); og.gain.value = (j ? .5 : .22) / (i + 1.5);
+      const lfo = c.createOscillator(); lfo.frequency.value = .07 + Math.random() * .12; const lg = c.createGain(); lg.gain.value = og.gain.value * .5; lfo.connect(lg); lg.connect(og.gain); lfo.start(t); os.push(lfo);
+      o.connect(og); og.connect(g); o.start(t); os.push(o); }); });
+    pad = { g, o:os }; lp.frequency.setTargetAtTime(900 + idx * 120, t, 1.5); };
+  A.setOn = v => { A.on = v; if (master) master.gain.setTargetAtTime(v ? .8 : 0, now(), .1); };
+  return A;
+})();
+
+// ---------------------------------------------------------------- state
+const $ = id => document.getElementById(id);
+const QS = new URLSearchParams(location.search); const TEST = QS.has("test");
+const byId = {}; SCENES.forEach((s, i) => { s.i = i; byId[s.id] = s; });
+const S = { id:"slide", beat:0, beatT:0, auto:!TEST, paused:false, started:false, enterAt:0, sceneT:0, bSmooth:0, E:0, visited:{}, closeT:0 };
+const M = { x:.5, y:.5, tx:.5, ty:.5 };
+const lerp = (a, b, k) => a + (b - a) * k, cl = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ez = x => { x = cl(x); return x * x * (3 - 2 * x); };
+const typed = (str, t0, t, cps = 17) => str.slice(0, Math.max(0, Math.min(str.length, Math.floor((t - t0) * cps))));
+const backsp = (str, t0, t, cps = 22) => str.slice(0, Math.max(0, str.length - Math.floor((t - t0) * cps)));
+let lastLen = {}; function tick(key, len) { if (lastLen[key] !== undefined && len !== lastLen[key] && S.started) AU.sfx(len > lastLen[key] ? "type" : "del"); lastLen[key] = len; }
+
+// ---------------------------------------------------------------- slide (2D)
+const SC = $("slide"), sx = SC.getContext("2d");
+const ED = (() => { const ns = []; let t = 4.6; EDIT_ITEMS.forEach((x, i) => { const d = Math.max(.18, .9 * Math.pow(.82, i)); ns.push({ text:x, t0:t, t1:t + d }); t += d + .05; });
+  return { ns, end:t, retitle:t + .3, crackAt:t + 1.5, boom:t + 3.0 }; })();
+let L = null;
+function layout(W, H) { const por = H > W * 1.1;
+  if (!por) return { por, VW:1920, VH:1080, cx:960, tY:470, tS:132, sY:600, sS:44, eX:130, eY:150, eS:92, eS2:92, bX:150, bY:300, bS:46, lh:100, fitN:6.4, fY:1030, rule:990, fX:80, pX:1840, crX:760, crY:620, cur0:[1500,900], cur1:[1180,480], c2Y:600, c2S:42, c3Y:680, c3S:34, warnY:150 };
+  return { por, VW:1080, VH:1920, cx:540, tY:840, tS:150, sY:980, sS:50, eX:70, eY:250, eS:66, eS2:66, bX:80, bY:420, bS:50, lh:110, fitN:11.5, fY:1840, rule:1790, fX:70, pX:1010, crX:540, crY:1100, cur0:[900,1500], cur1:[860,850], c2Y:990, c2S:44, c3Y:1080, c3S:38, warnY:340 }; }
+function slideRect(W, H) { const s = Math.min(W / L.VW, H / L.VH); return { s, x:(W - L.VW * s) / 2, y:(H - L.VH * s) / 2 }; }
+function cursorPath(x, y, s) { sx.save(); sx.translate(x, y); sx.scale(s, s); sx.beginPath(); sx.moveTo(0, 0); sx.lineTo(0, 34); sx.lineTo(9, 26); sx.lineTo(15, 40); sx.lineTo(21, 37); sx.lineTo(15, 24); sx.lineTo(26, 24); sx.closePath(); sx.fillStyle = "#000"; sx.strokeStyle = "#fff"; sx.lineWidth = 2.5; sx.stroke(); sx.fill(); sx.restore(); }
+function selBox(x, y, w, h) { sx.save(); sx.strokeStyle = "#3b7cf6"; sx.lineWidth = 2.5; sx.strokeRect(x, y, w, h); sx.fillStyle = "#fff"; [[0,0],[.5,0],[1,0],[0,.5],[1,.5],[0,1],[.5,1],[1,1]].forEach(([a,b]) => { sx.beginPath(); sx.arc(x + a * w, y + b * h, 7, 0, 7); sx.fill(); sx.stroke(); }); sx.restore(); }
+const F = (sz, w = 400) => `${w} ${sz}px Calibri, Carlito, "Segoe UI", Arial, sans-serif`;
+function chrome(page, close) { sx.font = F(L.por ? 30 : 24); sx.fillStyle = "#a6a6a6"; sx.textAlign = "right"; sx.fillText(String(page), L.pX, L.fY); sx.textAlign = "left"; sx.fillText(close ? "" : (L.por ? "Q4 Update  |  Confidential" : "Q4 Stakeholder Update  |  Confidential"), L.fX, L.fY); sx.fillStyle = "#e3e3e3"; sx.fillRect(L.fX, L.rule, L.VW - 2 * L.fX, 2); }
+function caretAt(x, y, h, t) { if (Math.sin(t * 9) > -.3) { sx.fillStyle = "#1f1f1f"; sx.fillRect(x + 6, y - h / 2, 4, h); } }
+function fitText(str, size, maxW) { sx.font = F(size); const w = sx.measureText(str).width; return w > maxW ? size * maxW / w : size; }
+function drawSlide(mode, t) {
+  const dpr = Math.min(devicePixelRatio || 1, 2); const W = innerWidth * dpr | 0, H = innerHeight * dpr | 0;
+  if (SC.width !== W || SC.height !== H) { SC.width = W; SC.height = H; }
+  L = layout(W, H);
+  sx.setTransform(1, 0, 0, 1, 0, 0); sx.fillStyle = "#fff"; sx.fillRect(0, 0, W, H);
+  const Rr = slideRect(W, H); sx.setTransform(Rr.s, 0, 0, Rr.s, Rr.x, Rr.y); sx.textBaseline = "middle";
+  if (mode === "open") { sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; sx.font = F(L.tS); sx.fillText("Thank You", L.cx, L.tY); sx.fillStyle = "#7f7f7f"; sx.font = F(L.sS); sx.fillText("Questions & Discussion", L.cx, L.sY); sx.textAlign = "left"; chrome(24); return; }
+  if (mode === "close") return drawClose(t);
+  // ---- self-edit
+  const T1 = "Thank you for what, exactly?", T2 = "One slide isn't enough.";
+  let title = "Thank You", size = L.tS, centered = true, sub = "Questions & Discussion", sel = null, cur = null, items = [], crack = 0;
+  const c0 = L.cur0, c1 = L.cur1;
+  if (t < .9) cur = [lerp(c0[0], c1[0], ez(t / .9)), lerp(c0[1], c1[1], ez(t / .9))];
+  else if (t < 1.35) { sel = "title"; cur = c1; }
+  else if (t < 1.85) { title = backsp("Thank You", 1.35, t, 20); cur = c1; }
+  else if (t < ED.retitle) title = typed(T1, 1.9, t, 19);
+  if (t >= ED.retitle) { const k = t - ED.retitle; title = k < .6 ? backsp(T1, ED.retitle, t, 50) : typed(T2, ED.retitle + .6, t, 26); }
+  tick("title", title.length);
+  if (t > 1.85) { centered = false; size = L.eS; }
+  if (t > 3.6 && t < 4.1) sel = "sub"; if (t > 4.1) sub = "";
+  tick("sub", sub.length ? 1 : 0);
+  items = ED.ns.filter(n => t >= n.t0).map(n => typed(n.text, n.t0, t, n.text.length / (n.t1 - n.t0)));
+  tick("items", items.reduce((a, b) => a + b.length, 0));
+  crack = cl((t - ED.crackAt) / 1.4);
+  sx.fillStyle = "#1f1f1f";
+  if (centered) { sx.textAlign = "center"; sx.font = F(size); sx.fillText(title, L.cx, L.tY); const tw = sx.measureText(title).width; if (sel === "title") selBox(L.cx - tw / 2 - 26, L.tY - size * .65, tw + 52, size * 1.3); if (t > 1.35) caretAt(L.cx + tw / 2, L.tY, size * .84, t); sx.textAlign = "left"; }
+  else { sx.font = F(size); sx.fillText(title || " ", L.eX, L.eY); const tw = sx.measureText(title).width; if (t < ED.retitle + 2.2) caretAt(L.eX + tw, L.eY, size * .9, t); }
+  if (sub) { sx.textAlign = "center"; sx.fillStyle = "#7f7f7f"; sx.font = F(L.sS); sx.fillText(sub, L.cx, L.sY); if (sel === "sub") { const w = sx.measureText(sub).width; selBox(L.cx - w / 2 - 22, L.sY - L.sS, w + 44, L.sS * 2); sx.fillStyle = "rgba(59,124,246,.25)"; sx.fillRect(L.cx - w / 2, L.sY - L.sS * .7, w, L.sS * 1.4); } sx.textAlign = "left"; }
+  const n = items.length; const fit = n > L.fitN ? Math.max(.42, L.fitN / n) : 1; const bs = L.bS * fit, lh = L.lh * fit;
+  items.forEach((s, i) => { const y = L.bY + i * lh; sx.font = F(bs); sx.fillStyle = "#262626"; sx.fillText("•   " + s, L.bX, y); });
+  if (n > L.fitN) { sx.fillStyle = "#c0392b"; sx.font = F(L.por ? 32 : 26, 700); sx.textAlign = "right"; sx.fillText(fit <= .44 ? "⚠  Text doesn't fit" : "AutoFit: shrinking text", L.VW - L.fX, L.warnY); sx.textAlign = "left"; }
+  chrome(24);
+  if (cur) cursorPath(cur[0], cur[1], 1.4);
+  if (crack > 0) { sx.save(); sx.strokeStyle = `rgba(25,25,25,${.6 * crack})`; sx.lineWidth = 2.4; let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let k = 0; k < 11; k++) { let x = L.crX + (rnd() - .5) * 340, y = L.crY + (rnd() - .5) * 200; const a0 = rnd() * 6.28; sx.beginPath(); sx.moveTo(x, y); const Ln = 15 * crack; for (let j = 0; j < Ln; j++) { const a = a0 + (rnd() - .5) * 1.3; x += Math.cos(a) * 44; y += Math.sin(a) * 44; sx.lineTo(x, y); } sx.stroke(); }
+    sx.restore(); if (!S._cr || t - S._cr > .35) { S._cr = t; AU.sfx("crack"); } }
+}
+const CL = { l1:"Thank you, Elon.", l2:"Same two words as the first slide. This time I know what for.", l2p:["Same two words as the first slide.", "This time I know what for."], l3:"And to the teams who built it with you." };
+function drawClose(t) {
+  const t1 = .9, t2 = t1 + CL.l1.length / 12 + .8, t3 = t2 + CL.l2.length / 30 + 1.0, tEnd = t3 + CL.l3.length / 30 + .6;
+  const a = typed(CL.l1, t1, t, 12), b = typed(CL.l2, t2, t, 30), c = typed(CL.l3, t3, t, 30); tick("c1", a.length); tick("c2", b.length); tick("c3", c.length);
+  sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; const ts = fitText(CL.l1, L.tS, L.VW - 2 * L.fX); sx.font = F(ts); sx.fillText(a, L.cx, L.tY); const tw = sx.measureText(a).width;
+  if (t < t2 + .5) caretAt(L.cx + tw / 2, L.tY, ts * .84, t);
+  sx.fillStyle = "#6f6f6f"; sx.font = F(L.c2S);
+  if (L.por) { const p0 = CL.l2p[0], p1 = CL.l2p[1]; sx.fillText(b.slice(0, p0.length), L.cx, L.c2Y); if (b.length > p0.length + 1) sx.fillText(b.slice(p0.length + 1), L.cx, L.c2Y + L.c2S * 1.3); }
+  else sx.fillText(b, L.cx, L.c2Y);
+  sx.fillStyle = "#9a9a9a"; sx.font = F(L.c3S); sx.fillText(c, L.cx, L.c3Y + (L.por ? L.c2S * 1.3 : 0));
+  sx.textAlign = "left"; chrome(24, true);
+  if (t > tEnd && !S.endShown) { S.endShown = true; $("end").classList.add("on"); AU.sfx("bell"); }
+}
+
+// ---------------------------------------------------------------- shards
+const FX = $("fx"), fx = FX.getContext("2d"); let SH = null;
+function makeShards(dir) {
+  const dpr = Math.min(devicePixelRatio || 1, 2); const W = innerWidth, H = innerHeight; FX.width = W * dpr; FX.height = H * dpr;
+  const img = document.createElement("canvas"); img.width = SC.width; img.height = SC.height; const ic = img.getContext("2d");
+  if (dir > 0) ic.drawImage(SC, 0, 0); else { ic.fillStyle = "#fff"; ic.fillRect(0, 0, img.width, img.height); }
+  const cols = 13, rows = 8, pts = []; let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) { const ex = i === 0 || i === cols, ey = j === 0 || j === rows; pts.push([(i + (ex ? 0 : (rnd() - .5) * .8)) / cols * W, (j + (ey ? 0 : (rnd() - .5) * .8)) / rows * H]); }
+  const P = (i, j) => pts[j * (cols + 1) + i]; const tris = []; const cx = W * .42, cy = H * .58;
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const q = [P(i, j), P(i + 1, j), P(i + 1, j + 1), P(i, j + 1)]; const sp = rnd() > .5;
+    (sp ? [[q[0], q[1], q[2]], [q[0], q[2], q[3]]] : [[q[0], q[1], q[3]], [q[1], q[2], q[3]]]).forEach(tr => { const mx = (tr[0][0] + tr[1][0] + tr[2][0]) / 3, my = (tr[0][1] + tr[1][1] + tr[2][1]) / 3; const dx = mx - cx, dy = my - cy, dd = Math.hypot(dx, dy) + 1;
+      tris.push({ tr, mx, my, vx:dx / dd * (380 + rnd() * 900), vy:dy / dd * (380 + rnd() * 900) - 200, r:(rnd() - .5) * 7, z:.4 + rnd() * 1.4, delay:dd / Math.hypot(W, H) * .25 }); }); }
+  SH = { img, tris, t0:performance.now(), dir, dur:dir > 0 ? 1.9 : 1.5, dpr, W, H };
+}
+function drawShards() {
+  if (!SH) return false; const k0 = (performance.now() - SH.t0) / 1000 / SH.dur; fx.setTransform(SH.dpr, 0, 0, SH.dpr, 0, 0); fx.clearRect(0, 0, SH.W, SH.H);
+  if (k0 >= 1) { SH = null; fx.clearRect(0, 0, FX.width, FX.height); return false; }
+  const sw = SH.img.width / SH.W, shh = SH.img.height / SH.H;
+  SH.tris.forEach(s => { let k = cl((k0 - s.delay) / (1 - s.delay)); if (SH.dir < 0) k = 1 - ez(cl((k0 - .25 * s.delay) / .85)); else k = k * k * (1.6 - .6 * k); if (k >= 1) return;
+    const sc = 1 + s.z * k; fx.save(); fx.globalAlpha = 1 - Math.pow(k, 3); fx.translate(s.mx + s.vx * k, s.my + s.vy * k + 420 * k * k); fx.rotate(s.r * k); fx.scale(sc, sc); fx.translate(-s.mx, -s.my);
+    fx.beginPath(); fx.moveTo(s.tr[0][0], s.tr[0][1]); fx.lineTo(s.tr[1][0], s.tr[1][1]); fx.lineTo(s.tr[2][0], s.tr[2][1]); fx.closePath(); fx.clip();
+    fx.drawImage(SH.img, 0, 0, SH.img.width, SH.img.height, 0, 0, SH.W, SH.H); fx.strokeStyle = `rgba(255,255,255,${.5 * (1 - k)})`; fx.lineWidth = 1; fx.stroke(); fx.restore(); });
+  return true;
+}
+
+// ---------------------------------------------------------------- HUD
+const HUD = { oldH:"", h:"", s:"", t0:0, shownH:null, shownS:null, src:"", big:null, bigShown:"", cls:"" };
+function setHud(b) { HUD.oldH = HUD.shownH || ""; HUD.h = b.h || ""; HUD.s = b.s || ""; HUD.t0 = performance.now() / 1000; $("hk").textContent = b.k || ""; HUD.cls = b.cls || "";
+  const src = $("hsrc"); src.classList.remove("on"); src.innerHTML = (b.src || []).map(id => SRC[id] ? `<a href="${SRC[id].u}" target="_blank" rel="noopener">${shortSrc(id)}</a>` : "").join("");
+  HUD.big = b.big || null; $("big").classList.remove("on"); HUD.bigAt = null; }
+function shortSrc(id) { return ({ tq3:"Tesla Q3 2026 Update", t25:"Tesla 2025 updates", ef:"ElonFacts dashboard", f1:"Falcon 1 record", ll2:"Launch Library 2", f9b:"Falcon 9 booster list", mass:"SpaceX SEC filing", ss:"Starship flight log", mcd:"McDowell tracker", q10:"SpaceX 10-Q Q3 2026", nlp:"Neuralink, Nov 25 2026", nl2:"Neuralink, Jan 28 2026", xal:"github.com/xai-org/x-algorithm", cn:"Community Notes data", col:"xAI Colossus", xco:"xAI company page" })[id] || id; }
+function fmtBig(b, v) { let s = b.dec ? v.toFixed(b.dec) : Math.round(v).toLocaleString("en-US"); return (b.pre || "") + s + (b.suf || ""); }
+function hudFrame(nowS) {
+  const e = nowS - HUD.t0; const del = Math.min(.45, HUD.oldH.length / 90); let h, caret = true, s = "";
+  if (e < del) h = backsp(HUD.oldH, 0, e, HUD.oldH.length / Math.max(del, .01)); else { const te = e - del; h = typed(HUD.h, 0, te, 34); const hEnd = HUD.h.length / 34; if (te > hEnd) { caret = false; s = typed(HUD.s, hEnd + .2, te, 70); if (te > hEnd + .3) $("hsrc").classList.add("on"); if (HUD.big && HUD.bigAt === null) HUD.bigAt = nowS; } }
+  const hh = $("hh"); if (h !== HUD.shownH || caret !== HUD._c) { hh.className = "h " + HUD.cls; hh.innerHTML = esc(h) + (caret ? '<span class="caret"></span>' : ""); tick("hud", h.length); HUD.shownH = h; HUD._c = caret; }
+  if (s !== HUD.shownS) { $("hs").textContent = s; HUD.shownS = s; }
+  if (HUD.big && HUD.bigAt !== null) { const k = ez((nowS - HUD.bigAt) / 1.8); const str = fmtBig(HUD.big, HUD.big.v * (1 - Math.pow(1 - k, 3))); if (str !== HUD.bigShown) { $("bn").textContent = str; $("bl").textContent = HUD.big.l || ""; HUD.bigShown = str; if (k < 1 && Math.random() < .25) AU.sfx("num"); } $("big").classList.add("on"); }
+  return HUD.h.length / 34 + del + HUD.s.length / 70 + .4;
+}
+const esc = s => s.replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" })[c]);
+function hudClear() { $("hk").textContent = ""; $("hh").innerHTML = ""; $("hs").textContent = ""; $("hsrc").innerHTML = ""; $("big").classList.remove("on"); HUD.shownH = ""; HUD.oldH = ""; HUD.h = ""; HUD.s = ""; HUD.big = null; }
+
+// ---------------------------------------------------------------- navigation
+const ORDER = SCENES.map(s => s.id); const STORY = ORDER.filter(id => id !== "slide" && id !== "close");
+function buildDots() { $("dots").innerHTML = STORY.map(id => `<i data-id="${id}"></i>`).join(""); }
+function updateBar() { const sc = byId[S.id]; const idx = STORY.indexOf(S.id); $("wt").textContent = S.id === "slide" ? "Thank You" : S.id === "close" ? "Thank You · fin" : `${String(idx + 1).padStart(2, "0")} · ${sc.title}` + (sc.beats.length > 1 ? `  ${S.beat + 1}/${sc.beats.length}` : "");
+  [...$("dots").children].forEach(d => { d.className = d.dataset.id === S.id ? "c" : S.visited[d.dataset.id] ? "v" : ""; }); }
+function go(id, beat = 0, fromNav = false, instant = false) {
+  const prev = S.id, sc = byId[id]; const sceneChange = prev !== id; S.id = id; S.beat = beat; S.beatT = 0; S.visited[id] = true;
+  document.body.classList.toggle("light", id === "slide" || id === "close"); $("slide").classList.toggle("off", !(id === "slide" || id === "close"));
+  if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (sc.chord !== undefined) AU.chord(sc.chord); else if (id === "close") AU.chord(7); if (prev !== "slide" && id !== "close") AU.sfx("whoosh");
+    const bg = BGPAL[id]; if (bg) $("bg").style.background = `radial-gradient(120% 90% at 70% 60%, ${bg[1]}, ${bg[0]} 70%)`; }
+  if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
+  else if (id === "slide") { hudClear(); }
+  else setHud(sc.beats[beat]);
+  $("end").classList.toggle("on", false || (id === "close" && S.endShown)); updateBar();
+}
+function next() { const sc = byId[S.id];
+  if (S.id === "slide") { if (S.beat === 0) begin(); return; }
+  if (S.id === "close") return;
+  if (S.beat < sc.beats.length - 1) go(S.id, S.beat + 1, true); else go(ORDER[sc.i + 1], 0, true); }
+function prev() { const sc = byId[S.id]; if (S.id === "slide") return; if (S.id === "close") return go("sum", 0, true);
+  if (S.beat > 0) go(S.id, S.beat - 1, true); else if (sc.i > 1) { const p = byId[ORDER[sc.i - 1]]; if (p.id === "slide") return; go(p.id, p.beats.length - 1, true); } }
+function begin() { if (S.started) return; S.started = true; AU.init(); S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; }
+function shatter() { makeShards(1); AU.sfx("boom"); const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on"))); go("title", 0, false); }
+function replay() { S.started = false; S.endShown = false; $("end").classList.remove("on"); S.visited = {}; go("slide", 0); begin(); }
+
+// ---------------------------------------------------------------- input
+let idleT = 0; const wake = () => { idleT = 0; document.body.classList.remove("idle"); };
+const P = { x:0, y:0, t:0, down:false };
+addEventListener("pointerdown", e => { wake(); if (e.target.closest("button,a,#panel")) return; P.down = true; P.x = e.clientX; P.y = e.clientY; P.t = performance.now(); });
+addEventListener("pointerup", e => { if (!P.down) return; P.down = false; const dx = e.clientX - P.x, dy = e.clientY - P.y; AU.init();
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); return; }
+  if (Math.hypot(dx, dy) < 12) { if (S.id === "slide" && !S.started) begin(); else if (S.id !== "close") next(); } });
+addEventListener("pointermove", e => { wake(); M.tx = e.clientX / innerWidth; M.ty = 1 - e.clientY / innerHeight; });
+addEventListener("keydown", e => { wake(); if ($("panel").classList.contains("on")) { if (e.key === "Escape") $("panel").classList.remove("on"); return; }
+  if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === "Enter") { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }
+  else if (e.key === "ArrowLeft" || e.key === "PageUp") prev();
+  else if (e.key === " ") { e.preventDefault(); if (!S.started) begin(); else togglePause(); }
+  else if (e.key === "m" || e.key === "M") toggleSound(); });
+function togglePause() { S.paused = !S.paused; $("play").textContent = S.paused ? "▶" : "❚❚"; $("play").classList.toggle("off", S.paused); }
+function toggleSound() { AU.init(); AU.setOn(!AU.on); $("snd").textContent = AU.on ? "♪ on" : "♪ off"; $("snd").classList.toggle("off", !AU.on); }
+$("next").onclick = () => { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }; $("prev").onclick = prev; $("play").onclick = togglePause; $("snd").onclick = toggleSound;
+const openSrc = () => $("panel").classList.add("on"); $("srcbtn").onclick = openSrc; $("srcbtn2").onclick = openSrc; $("close").onclick = () => $("panel").classList.remove("on");
+$("replay").onclick = replay;
+$("share").onclick = async () => { const url = location.href.split("?")[0]; try { if (navigator.share) await navigator.share({ title:"Thank You, Properly.", url }); else { await navigator.clipboard.writeText(url); $("share").textContent = "Link copied"; setTimeout(() => $("share").textContent = "Share", 1800); } } catch (e) {} };
+$("srclist").innerHTML = Object.keys(SRC).map(id => `<li>${SRC[id].t}<span>${SRC[id].a} · <a href="${SRC[id].u}" target="_blank" rel="noopener">${SRC[id].u.replace(/^https?:\/\//, "")}</a></span></li>`).join("");
+addEventListener("visibilitychange", () => { if (document.hidden && AU.ctx) AU.ctx.suspend(); else if (AU.ctx && S.started) AU.ctx.resume(); });
+
+// ---------------------------------------------------------------- loop
+let last = performance.now(), fpsAcc = 0, fpsN = 0;
+function frame(nowMs) {
+  const dt = Math.min(.1, (nowMs - last) / 1000); last = nowMs; const nowS = nowMs / 1000;
+  idleT += dt; if (idleT > 3 && S.started && S.id !== "slide") document.body.classList.add("idle");
+  M.x = lerp(M.x, M.tx, .04); M.y = lerp(M.y, M.ty, .04);
+  const sc = byId[S.id]; if (!S.paused || S.id === "slide" || S.id === "close") S.beatT += dt; S.sceneT += dt;
+  if (S.id === "slide") { if (S.beat === 0) drawSlide("open", 0); else { drawSlide("edit", S.beatT); if (S.beatT > ED.boom) shatter(); } }
+  else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); S.closeT += dt; if (SH) S.closeT = 0; drawSlide("close", S.closeT); }
+  if (sc.gl || (SH && SH.dir < 0)) {
+    S.E = Math.min(1, S.E + dt / 1.1); S.bSmooth = lerp(S.bSmooth, S.beat, 1 - Math.exp(-dt * 1.6));
+    const key = sc.gl || "sum"; if (GL.ok) { const ok = GL.draw(key, nowS % 1000, S.bSmooth, sc.gl ? ez(S.E) : 1, [M.x, M.y]); if (!ok) document.body.classList.add("nogl"); }
+    fpsAcc += dt; fpsN++; if (fpsAcc > 2) { const ms = fpsAcc / fpsN * 1000; if (ms > 26 && GL.scale > .5) GL.scale *= .8; else if (ms < 14 && GL.scale < 1) GL.scale = Math.min(1, GL.scale * 1.1); fpsAcc = 0; fpsN = 0; }
+  }
+  drawShards();
+  if (sc.gl) { const need = hudFrame(nowS); const b = sc.beats[S.beat]; const dur = Math.max(b.d || 6, need + 2.4);
+    $("prog").style.width = (cl(S.beatT / dur) * 100) + "%";
+    if (S.auto && !S.paused && S.beatT > dur) next(); }
+  else $("prog").style.width = "0%";
+  requestAnimationFrame(frame);
+}
+buildDots(); updateBar();
+// test / deep-link hooks
+window.__deck = { go:(id, b = 0) => { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(id, b, false, true); }, begin, S, GL, byId, ED };
+const jump = QS.get("s"); if (jump && byId[jump]) { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(jump, 0, false, true); }
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
