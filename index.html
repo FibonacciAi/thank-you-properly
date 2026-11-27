@@ -29,14 +29,14 @@ html,body{margin:0;height:100%;background:#000;color:#fff;overflow:hidden;oversc
 #gl,#slide,#fx,#bg{position:fixed;inset:0;width:100%;height:100%;display:block}
 #bg{display:none;transition:background 1.2s}
 body.nogl #gl{display:none} body.nogl #bg{display:block}
-#slide{z-index:2;background:#fff}
-#slide.off{display:none}
+#slide{z-index:2;background:#fff;opacity:1;visibility:visible;transition:opacity .65s cubic-bezier(.22,.8,.2,1),visibility 0s linear 0s}
+#slide.off{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .65s cubic-bezier(.22,.8,.2,1),visibility 0s linear .65s}
 #fx{z-index:3;pointer-events:none}
 #flash{position:fixed;inset:0;z-index:4;background:#fff;opacity:0;pointer-events:none;transition:opacity .9s}
 #flash.on{opacity:.85;transition:none} #flash.soft{opacity:.2;transition:none}
 #ui{position:fixed;inset:0;z-index:5;pointer-events:none;font-family:var(--sans)}
 #ui button,#ui a,#ui .pe{pointer-events:auto}
-#hud{position:absolute;left:max(28px,env(safe-area-inset-left));top:max(26px,env(safe-area-inset-top));width:min(780px,calc(100vw - 56px));text-shadow:0 2px 24px rgba(0,0,0,.6);transition:opacity .5s}
+#hud{position:absolute;left:max(28px,env(safe-area-inset-left));top:max(26px,env(safe-area-inset-top));width:min(780px,calc(100vw - 56px));text-shadow:0 2px 24px rgba(0,0,0,.6);transition:opacity .55s cubic-bezier(.22,.8,.2,1)}
 #hud .k{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);min-height:15px}
 #hud .h{text-wrap:balance;font-weight:640;font-size:clamp(30px,4.8vw,68px);line-height:1.02;letter-spacing:-.028em;margin:12px 0 0;min-height:1em;white-space:pre-wrap}
 #hud .h.title{font-size:clamp(40px,7.4vw,108px);letter-spacing:-.04em}
@@ -59,9 +59,9 @@ body.nogl #gl{display:none} body.nogl #bg{display:block}
 #prog{position:absolute;left:0;bottom:0;height:2px;background:rgba(255,255,255,.55);width:0}
 .b{white-space:nowrap;font:500 12px/1 var(--mono);letter-spacing:.06em;color:#fff;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 13px;min-height:38px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .b:hover{border-color:rgba(255,255,255,.6)} .b.off{opacity:.5}
-.b.nav{min-width:44px;font-size:15px}
+.b.nav{min-width:48px;min-height:44px;font-size:18px;padding:10px 16px}
 body.light #bar .b{color:#333;background:rgba(255,255,255,.85);border-color:#ccc} body.light #where{color:#999} body.light #dots i{background:#ddd} body.light #dots i.c,body.light #dots i.v{background:#888} body.light #prog{background:#bbb}
-body.idle #bar{opacity:0} body.idle{cursor:none}
+body.idle #bar{opacity:1} body.idle #where,body.idle #srcbtn{opacity:.4;transition:opacity .5s} body.idle #bar .nav,body.idle #bar #play{opacity:1}
 body.pre #bar{opacity:0}
 #start{position:absolute;left:50%;bottom:calc(14% + env(safe-area-inset-bottom));transform:translateX(-50%);font:600 15px/1 var(--sans);letter-spacing:.01em;color:#fff;background:#1c1c1e;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.18);text-align:center;animation:pulse 2.4s ease-in-out infinite;white-space:nowrap;pointer-events:none;transition:opacity .3s}
 #start.off{opacity:0;animation:none}
@@ -111,7 +111,7 @@ body.wf #hud .k{color:rgba(255,255,255,.5)}
 body.light #snd{color:#333;background:rgba(255,255,255,.92);border-color:#ccc}
 #snd:focus-visible,.b:focus-visible{outline:2px solid #6aa8ff;outline-offset:2px}
 @media (max-width:640px){#hud{top:max(70px,calc(env(safe-area-inset-top) + 62px))}body.wf #hud{top:50%}#act .t{max-width:88vw}}
-@media (prefers-reduced-motion:reduce){#act.on .w{animation:none}#mont .m{animation-duration:2.4s}}
+@media (prefers-reduced-motion:reduce){#act.on .w{animation:none}#mont .m{animation:none;opacity:1;transform:none}#start{animation:none}#big.on .n{animation:none}#flash,#flash.on,#flash.soft{opacity:0!important;transition:none}#lb::before,#lb::after{transition:none}#slide,#hud,#big,#bar,#end,#bg,#flash{transition-duration:.2s}#slide.off{transition-delay:0s,0s}}
 #topr{position:fixed;top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));z-index:8;display:flex;align-items:center;gap:8px;pointer-events:none}
 #topr>*{pointer-events:auto}
 #topr #snd{position:static}
@@ -129,7 +129,7 @@ body.mvon #mv{display:block} #mvbg{position:fixed;inset:-60px;z-index:3;display:
 <canvas id="gl"></canvas><div id="bg"></div>
 <canvas id="slide"></canvas>
 <canvas id="fx"></canvas>
-<canvas id="mv"></canvas><div id="mvbg"></div><video id="mvv" playsinline webkit-playsinline preload="metadata" poster="claudia-poster.jpg" src="claudia-mv-v5.mp4"></video><div id="mvcred">Claudia by @anabology. Song “Say What For”, original, made for this page. Made with Grok Bot + Grok Imagine (@grok).</div><div id="flash"></div><div id="lb"></div><div id="mont"></div>
+<canvas id="mv"></canvas><div id="mvbg"></div><video id="mvv" playsinline webkit-playsinline preload="auto" poster="claudia-poster.jpg" src="claudia-mv-v6.mp4"></video><div id="mvcred">Claudia by @anabology. Song “Say What For”, original, made for this page. Made with Grok Bot + Grok Imagine (@grok).</div><div id="flash"></div><div id="lb"></div><div id="mont"></div>
 <div id="act" aria-live="polite"><div class="n" id="an"></div><div class="w" id="aw"></div><div class="t" id="at"></div></div>
 <div id="ui">
   <div id="hud"><div class="k" id="hk"></div><div class="h" id="hh"></div><div class="s" id="hs"></div><div class="src" id="hsrc"></div></div>
@@ -457,7 +457,7 @@ const AU = (() => {
   A.state = () => A.ctx ? A.ctx.state : "none";
   A.level = () => { if (!an) return 0; an.getFloatTimeDomainData(anBuf); let s = 0; for (let i = 0; i < anBuf.length; i++) s += anBuf[i] * anBuf[i]; return Math.sqrt(s / anBuf.length); };
   A.pulse = () => { if (!A.ctx) return 0; const t = A.ctx.currentTime; let p = 0; for (const k of kicks) if (k.t <= t) p = Math.max(p, k.a * Math.exp(-(t - k.t) * 6.5)); return Math.min(1, p); };
-  A.vis = (hidden, started) => { if (!A.ctx) return; if (hidden) { A.ctx.suspend(); silentEl && silentEl.pause(); } else if (started) { A.ctx.resume(); } };
+  A.vis = (hidden, started) => { if (!A.ctx) return; const vel = document.getElementById("mvv"); if (hidden) { A.ctx.suspend(); silentEl && silentEl.pause(); if (vel && !vel.paused) { vel.dataset.was = "1"; vel.pause(); } } else if (started) { A.ctx.resume(); if (silentEl) { const p = silentEl.play(); p && p.catch && p.catch(() => {}); } if (vel && vel.dataset.was === "1") { vel.dataset.was = ""; if (!window.__deck || !window.__deck.S.paused) { const p = vel.play(); p && p.catch && p.catch(() => {}); } } } };
   const now = () => A.ctx.currentTime;
   function env(g, t, a, peak, dec) { g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0001, t + a + dec); }
   function noise(t, dur, peak, type, f0, f1, q = 1, dest = sfx, att = .004) { const c = A.ctx, s = c.createBufferSource(); s.buffer = noiseBuf; s.loop = true; s.loopStart = Math.random(); const f = c.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); env(g, t, att, peak, Math.max(.01, dur - att)); s.connect(f); f.connect(g); g.connect(dest); s.start(t, Math.random()); s.stop(t + dur + .05); }
@@ -775,9 +775,18 @@ function setHud(b, delay = 0) { HUD.delay = delay; HUD.oldH = delay > 0 ? "" : (
 function shortSrc(id) { return ({ tq3:"Tesla Q3 2026 Update", t25:"Tesla 2025 updates", ef:"ElonFacts dashboard", f1:"Falcon 1 record", ll2:"Launch Library 2", f9b:"Falcon 9 booster list", mass:"SpaceX SEC filing", ss:"Starship flight log", mcd:"McDowell tracker", q10:"SpaceX 10-Q Q3 2026", nlp:"Neuralink, Nov 25 2026", nl2:"Neuralink, Jan 28 2026", xal:"github.com/xai-org/x-algorithm", cn:"Community Notes data", col:"xAI Colossus", xco:"xAI company page", pat:"Tesla blog, Jun 12 2014", nacs:"SAE J3400 / NACS", st5:"Starship Flight 5", hel:"Ars Technica, Oct 7 2024", nol:"Neuralink history", g1:"github.com/xai-org/grok-1", spd:"Musk on X, Oct 16 2026", lex:"Lex Fridman #438", cl1:"Repost, Oct 14", cl2:"Repost, Nov 10", cl3:"Findra, Nov 19", clk:"claudia.gallery", gb:"Musk on X, Nov 19" })[id] || id; }
 function fmtBig(b, v) { let s = b.dec ? v.toFixed(b.dec) : Math.round(v).toLocaleString("en-US"); return (b.pre || "") + s + (b.suf || ""); }
 function hudFrame(nowS) {
-  const e = nowS - HUD.t0; if (e < 0) { if (HUD.shownH) { $("hh").innerHTML = ""; HUD.shownH = ""; } return HUD.delay + HUD.h.length / 34 + HUD.s.length / 70 + .4; }
-  const del = Math.min(.45, HUD.oldH.length / 90); let h, caret = true, s = "";
-  if (e < del) h = backsp(HUD.oldH, 0, e, HUD.oldH.length / Math.max(del, .01)); else { const te = e - del; h = typed(HUD.h, 0, te, 34); const hEnd = HUD.h.length / 34; if (te > hEnd) { caret = false; s = typed(HUD.s, hEnd + .2, te, 70); if (te > hEnd + .3) $("hsrc").classList.add("on"); if (HUD.big && HUD.bigAt === null) HUD.bigAt = nowS; } }
+  const e = nowS - HUD.t0; if (e < 0) { if (HUD.shownH) { $("hh").innerHTML = ""; HUD.shownH = ""; } return HUD.delay + (RM ? .2 : HUD.h.length / 34 + HUD.s.length / 70 + .4); }
+  if (RM && e >= 0) {
+    const h = HUD.h, s = HUD.s; const hh = $("hh");
+    if (h !== HUD.shownH) { hh.className = "h " + HUD.cls; hh.innerHTML = esc(h); HUD.shownH = h; HUD._c = false; }
+    if (s !== HUD.shownS) { $("hs").textContent = s; HUD.shownS = s; }
+    $("hsrc").classList.add("on");
+    if (HUD.big && HUD.bigAt === null) HUD.bigAt = nowS;
+    if (HUD.big && HUD.bigAt !== null) { const str = fmtBig(HUD.big, HUD.big.v); if (str !== HUD.bigShown) { $("bn").textContent = str; $("bl").textContent = HUD.big.l || ""; HUD.bigShown = str; } $("big").classList.add("on"); }
+    return (HUD.delay || 0) + .2;
+  }
+  const del = Math.min(.28, HUD.oldH.length / 110); let h, caret = true, s = "";
+  if (e < del) h = backsp(HUD.oldH, 0, e, HUD.oldH.length / Math.max(del, .01)); else { const te = e - del; h = typed(HUD.h, 0, te, 38); const hEnd = HUD.h.length / 38; if (te > hEnd) { caret = false; s = typed(HUD.s, hEnd + .18, te, 74); if (te > hEnd + .28) $("hsrc").classList.add("on"); if (HUD.big && HUD.bigAt === null) HUD.bigAt = nowS; } }
   const hh = $("hh"); if (h !== HUD.shownH || caret !== HUD._c) { hh.className = "h " + HUD.cls; hh.innerHTML = esc(h) + (caret ? '<span class="caret"></span>' : ""); tick("hud", h.length); HUD.shownH = h; HUD._c = caret; }
   if (s !== HUD.shownS) { $("hs").textContent = s; HUD.shownS = s; }
   if (HUD.big && HUD.bigAt !== null) { const k = ez((nowS - HUD.bigAt) / 1.8); const str = fmtBig(HUD.big, HUD.big.v * (1 - Math.pow(1 - k, 3))); if (str !== HUD.bigShown) { $("bn").textContent = str; $("bl").textContent = HUD.big.l || ""; HUD.bigShown = str; if (k < 1 && Math.random() < .25) AU.sfx("num"); } $("big").classList.add("on"); }
@@ -795,12 +804,12 @@ function go(id, beat = 0, fromNav = false, instant = false) {
   const prev = S.id, sc = byId[id]; const sceneChange = prev !== id; S.id = id; S.beat = beat; S.beatT = 0; S.visited[id] = true;
   document.body.classList.toggle("light", id === "slide" || id === "close"); $("slide").classList.toggle("off", !(id === "slide" || id === "close"));
   const actNow = sceneChange && sc.act && beat === 0 && !instant; $("mont").innerHTML = ""; S.montTok = (S.montTok || 0) + 1; if (!actNow) hideAct();
-  AU.scene(id, sc, sc.beats[beat] || {}); VO.stop(); S.voFired = false; document.body.classList.toggle("mvon", !!sc.mv); { const v = $("mvv"); S.vid = false; if (sc.mv) { S.vid = !RENDER && v.readyState >= 3 && !v.error && !!AU._vsrc; if (S.vid) { AU.vidMode(); try { v.currentTime = 0; } catch (e) {} v.play().catch(() => {}); } else MV.start(); } else if (!v.paused) v.pause(); document.body.classList.toggle("mvvid", S.vid); }
-  if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (actNow) showAct(sc); else if (prev !== "slide" && id !== "close" && id !== "title") AU.sfx("whoosh");
+  AU.scene(id, sc, sc.beats[beat] || {}); VO.stop(); S.voFired = false; document.body.classList.toggle("mvon", !!sc.mv); { const v = $("mvv"); S.vid = false; if (sc.mv) { S.vid = !RENDER && !v.error && !!v.getAttribute("src"); if (S.vid) { if (!AU._vsrc) AU.vidAttach(v); AU.vidMode(); try { v.currentTime = 0; } catch (e) {} v.muted = false; v.playsInline = true; const playVid = () => { const p = v.play(); if (p) p.catch(() => {}); }; if (v.readyState >= 2) playVid(); else v.addEventListener("canplay", playVid, { once:true }); } else MV.start(); } else if (!v.paused) v.pause(); document.body.classList.toggle("mvvid", S.vid); }
+  if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (actNow) showAct(sc); else if (!RM && prev !== "slide" && id !== "close" && id !== "title") AU.sfx("whoosh");
     const bg = BGPAL[id]; if (bg) $("bg").style.background = `radial-gradient(120% 90% at 70% 60%, ${bg[1]}, ${bg[0]} 70%)`; }
   if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; S.chordShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
   else if (id === "slide") { hudClear(); }
-  else setHud(sc.beats[beat], actNow ? 1.9 : 0);
+  else { if (sceneChange) HUD.oldH = ""; setHud(sc.beats[beat], actNow ? (RM ? 0.4 : 2.05) : 0); }
   $("end").classList.toggle("on", false || (id === "close" && S.endShown)); updateBar();
 }
 function next() { const sc = byId[S.id];
@@ -812,8 +821,8 @@ function prev() { const sc = byId[S.id]; if (S.id === "slide") return; if (S.id 
 function begin() { if (S.started) return; S.started = true; AU.unlock(); VO.init(); { const v = $("mvv"); if (!RENDER && AU.vidAttach(v)) { v.preload = "auto"; v.muted = false; const p = v.play(); if (p) p.then(() => { v.pause(); try { v.currentTime = 0; } catch (e) {} }).catch(() => {}); } } setTimeout(() => { AU.loadVox("claudia-vox.m4a"); MV.load(); }, 1500); AU.office(); S.riserOn = false; S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; if (GL.ok) Object.keys(FS).forEach((k, i) => setTimeout(() => GL.prog(k), 700 + i * 450)); }
 function shatter() { makeShards(1); AU.drop(); SHK = 1; const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on")));
   go("title", 0, false); S.E = -1.25; setHud(byId.title.beats[0], 1.5); document.body.classList.add("lb"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb"); }, 5200); }
-let actTok = 0, SHK = 0; const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
-function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, 2150); setTimeout(() => { if (tk !== actTok) return; softFlash(); SHK = Math.max(SHK, .45); }, 600); AU.sfx("act"); SHK = Math.max(SHK, .12); }
+let actTok = 0, SHK = 0; const RMmq = matchMedia("(prefers-reduced-motion: reduce)"); let RM = RMmq.matches; try { RMmq.addEventListener("change", e => { RM = e.matches; }); } catch (e) { try { RMmq.addListener(ev => { RM = ev.matches; }); } catch (e2) {} }
+function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; const hold = RM ? 700 : 2150; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, hold); setTimeout(() => { if (tk !== actTok) return; if (!RM) { softFlash(); SHK = Math.max(SHK, .45); } }, RM ? 80 : 600); if (!RM) { AU.sfx("act"); SHK = Math.max(SHK, .12); } }
 function softFlash() { if (RM) return; const fl = $("flash"); fl.classList.add("soft"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("soft"))); }
 function hideAct() { actTok++; $("act").classList.remove("on"); document.body.classList.remove("lb", "acton"); }
 function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1150); if (i === MONT.length - 1) { setTimeout(() => { if (tok !== S.montTok) return; softFlash(); AU.sfx("act"); SHK = Math.max(SHK, .6); }, 420); } }, 350 + i * 560)); }
@@ -822,20 +831,41 @@ function replay() { S.riserOn = false; S.started = false; S.endShown = false; $(
 // ---------------------------------------------------------------- input
 ["touchend", "click", "keydown", "mousedown"].forEach(ev => addEventListener(ev, () => { if (S.started || ev !== "mousedown") AU.unlock(); }, { capture:true, passive:true }));
 let idleT = 0; const wake = () => { idleT = 0; document.body.classList.remove("idle"); };
-const P = { x:0, y:0, t:0, down:false };
-addEventListener("pointerdown", e => { wake(); if (e.target.closest("button,a,#panel")) return; P.down = true; P.x = e.clientX; P.y = e.clientY; P.t = performance.now(); });
-addEventListener("pointerup", e => { if (!P.down) return; P.down = false; const dx = e.clientX - P.x, dy = e.clientY - P.y; AU.init();
-  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); return; }
-  if (Math.hypot(dx, dy) < 12) { if (S.id === "slide" && !S.started) begin(); else if (S.id !== "close") next(); } });
+let ptrLock = 0, autoLock = 0;
+const tNow = () => performance.now();
+function ptrBlocked() { return tNow() < ptrLock; }
+function lockPtr(ms = 360) { ptrLock = tNow() + ms; autoLock = tNow() + 400; }
+function doNext() { if (S.id === "slide" && !S.started) begin(); else next(); }
+function doPrev() { prev(); }
+const P = { x:0, y:0, t:0, down:false, id:null };
+addEventListener("pointerdown", e => { wake(); if (e.target.closest("button,a,#panel")) return; P.down = true; P.id = e.pointerId; P.x = e.clientX; P.y = e.clientY; P.t = tNow(); try { e.target.setPointerCapture && e.currentTarget; } catch (err) {} });
+function endPtr(e) { if (!P.down) return; if (e.pointerId != null && P.id != null && e.pointerId !== P.id) return; P.down = false; const dx = e.clientX - P.x, dy = e.clientY - P.y, dt = tNow() - P.t; AU.init();
+  const horiz = Math.abs(dx) > 56 && Math.abs(dx) > Math.abs(dy) * 1.15 && dt < 800;
+  if (horiz) { if (ptrBlocked()) return; lockPtr(400); dx < 0 ? doNext() : doPrev(); return; }
+  if (Math.abs(dx) > 24 || Math.abs(dy) > 24) return;
+  if (Math.hypot(dx, dy) <= 14 && dt < 700) { if (S.id === "close") return; if (ptrBlocked()) return; lockPtr(360); doNext(); } }
+addEventListener("pointerup", endPtr);
+addEventListener("pointercancel", () => { P.down = false; });
 addEventListener("pointermove", e => { wake(); M.tx = e.clientX / innerWidth; M.ty = 1 - e.clientY / innerHeight; });
 addEventListener("keydown", e => { wake(); if ($("panel").classList.contains("on")) { if (e.key === "Escape") $("panel").classList.remove("on"); return; }
-  if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === "Enter") { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }
-  else if (e.key === "ArrowLeft" || e.key === "PageUp") prev();
-  else if (e.key === " ") { e.preventDefault(); if (!S.started) begin(); else togglePause(); }
+  if (e.repeat) return;
+  if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === "Enter" || e.key === " ") {
+    e.preventDefault(); AU.init();
+    if (e.key === " " && S.started && byId[S.id] && byId[S.id].mv) { togglePause(); return; }
+    doNext();
+  } else if (e.key === "ArrowLeft" || e.key === "PageUp" || e.key === "Backspace") { e.preventDefault(); doPrev(); }
+  else if (e.key === "p" || e.key === "P") { if (S.started) togglePause(); }
   else if (e.key === "m" || e.key === "M") toggleSound(); });
-function togglePause() { S.paused = !S.paused; VO.pause(S.paused); $("play").textContent = S.paused ? "▶" : "❚❚"; $("play").classList.toggle("off", S.paused); }
-function toggleSound() { AU.unlock(); AU.setOn(!AU.on); $("sndt").textContent = AU.on ? "Sound on" : "Sound off"; $("snd").classList.toggle("off", !AU.on); $("snd").setAttribute("aria-pressed", String(!AU.on)); VO.setOn(AU.on); $("snd").setAttribute("aria-label", AU.on ? "Mute sound" : "Unmute sound"); }
-$("next").onclick = () => { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }; $("prev").onclick = prev; $("play").onclick = togglePause; $("snd").onclick = toggleSound;
+function syncPlayBtn() { $("play").textContent = S.paused ? "▶" : "❚❚"; $("play").classList.toggle("off", S.paused); $("play").setAttribute("aria-label", S.paused ? "Play" : "Pause"); }
+function togglePause() { S.paused = !S.paused; VO.pause(S.paused); AU.unlock(); const v = $("mvv");
+  if (byId[S.id] && byId[S.id].mv) { if (S.paused) v.pause(); else { v.muted = false; v.playsInline = true; const p = v.play(); if (p) p.catch(() => {}); } }
+  syncPlayBtn(); }
+function toggleSound() { AU.unlock(); AU.setOn(!AU.on); $("sndt").textContent = AU.on ? "Sound on" : "Sound off"; $("snd").classList.toggle("off", !AU.on); $("snd").setAttribute("aria-pressed", String(!AU.on)); VO.setOn(AU.on); $("snd").setAttribute("aria-label", AU.on ? "Mute sound" : "Unmute sound");
+  const v = $("mvv"); v.muted = false; }
+$("next").onclick = ev => { ev.preventDefault(); ev.stopPropagation(); AU.init(); if (ptrBlocked()) return; lockPtr(300); doNext(); };
+$("prev").onclick = ev => { ev.preventDefault(); ev.stopPropagation(); AU.init(); if (ptrBlocked()) return; lockPtr(300); doPrev(); };
+$("play").onclick = ev => { ev.preventDefault(); ev.stopPropagation(); AU.init(); togglePause(); };
+$("snd").onclick = ev => { ev.preventDefault(); ev.stopPropagation(); toggleSound(); };
 const openSrc = () => $("panel").classList.add("on"); $("srcbtn").onclick = openSrc; $("srcbtn2").onclick = openSrc; $("close").onclick = () => $("panel").classList.remove("on");
 $("replay").onclick = replay;
 $("spd").onclick = () => { VO.init(); VO.setRate(VO.rate === 1.5 ? 1 : 1.5); };
@@ -848,7 +878,7 @@ addEventListener("visibilitychange", () => AU.vis(document.hidden, S.started));
 let last = performance.now(), fpsAcc = 0, fpsN = 0; const T_LOAD = performance.now() / 1000;
 function frame(nowMs) {
   const dt = Math.min(.1, (nowMs - last) / 1000); last = nowMs; const nowS = nowMs / 1000;
-  idleT += dt; if (idleT > 3 && S.started && S.id !== "slide") document.body.classList.add("idle");
+  idleT += dt; if (idleT > 5 && S.started && S.id !== "slide") document.body.classList.add("idle");
   M.x = lerp(M.x, M.tx, .04); M.y = lerp(M.y, M.ty, .04);
   const sc = byId[S.id]; if (!S.paused || S.id === "slide" || S.id === "close") S.beatT += dt * (S.id === "slide" && S.beat === 1 ? EDS : 1); S.sceneT += dt;
   if (S.id === "slide") { if (S.beat === 0) drawSlide("open", S.started ? 9 : nowS - T_LOAD); else { drawSlide("edit", S.beatT);
@@ -857,17 +887,17 @@ function frame(nowMs) {
       if (S.beatT > ED.boom) shatter(); } }
   else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); S.closeT += dt; if (SH) S.closeT = 0; drawSlide("close", S.closeT); }
   if (sc.gl || (SH && SH.dir < 0)) {
-    S.E = Math.min(1, S.E + dt / 1.1); S.bSmooth = lerp(S.bSmooth, S.beat, 1 - Math.exp(-dt * 1.6));
+    S.E = Math.min(1, S.E + dt / (RM ? 0.25 : 0.95)); S.bSmooth = lerp(S.bSmooth, S.beat, 1 - Math.exp(-dt * (RM ? 8 : 1.8)));
     const key = sc.gl || "sum"; if (GL.ok) { const ok = GL.draw(key, nowS % 1000, S.bSmooth, sc.gl ? ez(S.E) : 1, [M.x, M.y], RM ? 0 : AU.pulse()); if (!ok) document.body.classList.add("nogl"); }
     fpsAcc += dt; fpsN++; if (fpsAcc > 2) { const ms = fpsAcc / fpsN * 1000; if (ms > 26 && GL.scale > .5) GL.scale *= .8; else if (ms < 14 && GL.scale < 1) GL.scale = Math.min(1, GL.scale * 1.1); fpsAcc = 0; fpsN = 0; }
   }
   drawShards();
   SHK *= Math.exp(-dt * 2.4); { const a = RM ? 0 : SHK * 22; const tr = a > .15 ? `translate(${((Math.random() - .5) * a).toFixed(1)}px,${((Math.random() - .5) * a).toFixed(1)}px)` : ""; if (tr !== frame._tr) { ["gl", "slide", "fx"].forEach(id => $(id).style.transform = tr); frame._tr = tr; } }
   { const b0 = sc.beats[S.beat]; if (b0 && b0.vo && !S.voFired && S.beatT >= (b0.voAt || 0)) { S.voFired = true; [].concat(b0.vo).forEach(k => VO.play(k)); } }
-  if (sc.mv && S.vid) { const v = $("mvv"); const D = v.duration || 64; $("prog").style.width = (cl(v.currentTime / D) * 100) + "%"; if (S.paused && !v.paused) v.pause(); else if (!S.paused && v.paused && !v.ended && v.currentTime < D - .1) v.play().catch(() => {}); if (S.auto && !S.paused && (v.ended || v.currentTime >= D - .08)) next(); } else if (sc.mv) { const bt = MV.draw(); $("prog").style.width = (cl(bt / 131) * 100) + "%"; if (S.auto && !S.paused && bt >= 131) next(); }
+  if (sc.mv && S.vid) { const v = $("mvv"); const D = (v.duration && isFinite(v.duration)) ? v.duration : 58.5; $("prog").style.width = (cl(v.currentTime / D) * 100) + "%"; if (S.paused && !v.paused) v.pause(); else if (!S.paused && v.paused && !v.ended && v.currentTime < D - .1) { const p = v.play(); if (p) p.catch(() => {}); } if (S.auto && !S.paused && tNow() > autoLock && (v.ended || v.currentTime >= D - .08)) { lockPtr(400); next(); } } else if (sc.mv) { const bt = MV.draw(); $("prog").style.width = (cl(bt / 131) * 100) + "%"; if (S.auto && !S.paused && tNow() > autoLock && bt >= 131) { lockPtr(400); next(); } }
   else if (sc.gl) { const need = hudFrame(nowS); const b = sc.beats[S.beat]; const dur = Math.max((b.d || 6) * .88, need + 2.0);
     $("prog").style.width = (cl(S.beatT / dur) * 100) + "%";
-    if (S.auto && !S.paused && S.beatT > dur && !VO.busy() && VO.sinceEnd() > .45) next(); }
+    if (S.auto && !S.paused && tNow() > autoLock && S.beatT > dur && !VO.busy() && VO.sinceEnd() > .7) { lockPtr(400); next(); } }
   else $("prog").style.width = "0%";
   requestAnimationFrame(frame);
 }

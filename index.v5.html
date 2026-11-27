@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#000000">
+<title>Thank You, Properly.</title>
+<meta name="description" content="A thank-you slide to Elon Musk that actually says what for. Tesla, SpaceX, Starlink, Neuralink, X, xAI. Every number sourced.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@250..700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Thank You, Properly.">
+<meta property="og:title" content="Thank You, Properly.">
+<meta property="og:description" content="A thank-you slide that actually says what for.">
+<meta property="og:url" content="https://fibonacciai.github.io/thank-you-properly/">
+<meta property="og:image" content="https://fibonacciai.github.io/thank-you-properly/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A default 'Thank You' slide cracking open into six glowing threads">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Thank You, Properly.">
+<meta name="twitter:description" content="A thank-you slide that actually says what for.">
+<meta name="twitter:image" content="https://fibonacciai.github.io/thank-you-properly/og.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23000'/><rect x='5' y='8.5' width='22' height='15' rx='2' fill='%23f4f4f4'/><path d='M9 14h14M11 18h10' stroke='%231c1c1e' stroke-width='1.6' stroke-linecap='round'/><path d='M16 8.5 L14.5 13 L17.5 16 L15 23.5' stroke='%23ff7a3a' stroke-width='1.1' fill='none'/></svg>">
+<style>
+:root{--sans:"Inter","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#000;color:#fff;overflow:hidden;overscroll-behavior:none;touch-action:none;-webkit-user-select:none;user-select:none}
+#gl,#slide,#fx,#bg{position:fixed;inset:0;width:100%;height:100%;display:block}
+#bg{display:none;transition:background 1.2s}
+body.nogl #gl{display:none} body.nogl #bg{display:block}
+#slide{z-index:2;background:#fff}
+#slide.off{display:none}
+#fx{z-index:3;pointer-events:none}
+#flash{position:fixed;inset:0;z-index:4;background:#fff;opacity:0;pointer-events:none;transition:opacity .9s}
+#flash.on{opacity:.85;transition:none} #flash.soft{opacity:.2;transition:none}
+#ui{position:fixed;inset:0;z-index:5;pointer-events:none;font-family:var(--sans)}
+#ui button,#ui a,#ui .pe{pointer-events:auto}
+#hud{position:absolute;left:max(28px,env(safe-area-inset-left));top:max(26px,env(safe-area-inset-top));width:min(780px,calc(100vw - 56px));text-shadow:0 2px 24px rgba(0,0,0,.6);transition:opacity .5s}
+#hud .k{font:500 12px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72);min-height:15px}
+#hud .h{text-wrap:balance;font-weight:640;font-size:clamp(30px,4.8vw,68px);line-height:1.02;letter-spacing:-.028em;margin:12px 0 0;min-height:1em;white-space:pre-wrap}
+#hud .h.title{font-size:clamp(40px,7.4vw,108px);letter-spacing:-.04em}
+#hud .s{text-wrap:pretty;font-size:clamp(15px,1.6vw,21px);line-height:1.38;color:rgba(255,255,255,.86);margin:16px 0 0;max-width:640px;min-height:1.3em;white-space:pre-wrap}
+#hud .src{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 14px;font:500 11.5px/1.3 var(--mono);letter-spacing:.04em;opacity:0;transition:opacity .6s}
+#hud .src.on{opacity:1}
+#hud .src a{color:rgba(255,255,255,.62);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:1px}
+#hud .src a:hover{color:#fff}
+.caret{display:inline-block;width:.06em;min-width:2px;height:.88em;background:currentColor;margin-left:.04em;vertical-align:-.08em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+#big{position:absolute;right:max(28px,env(safe-area-inset-right));bottom:104px;text-align:right;opacity:0;transform:translateY(16px);transition:opacity .6s,transform 1s cubic-bezier(.16,.8,.1,1);text-shadow:0 4px 50px rgba(0,0,0,.55)}
+#big.on{opacity:1;transform:none} #big.on .n{animation:bigin 1.1s cubic-bezier(.16,.8,.1,1)} @keyframes bigin{0%{opacity:0;filter:blur(12px);letter-spacing:.03em}100%{opacity:1;filter:blur(0);letter-spacing:-.055em}}
+#big .n{font:250 clamp(64px,13vw,200px)/.86 var(--sans);letter-spacing:-.055em;font-variant-numeric:tabular-nums}
+#big .l{font:500 12px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-top:10px}
+#bar{position:absolute;left:0;right:0;bottom:0;padding:14px max(18px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));display:flex;align-items:center;gap:8px;transition:opacity .5s}
+#where{font:500 11px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.62);margin-right:auto;pointer-events:none;min-width:0}
+#dots{display:flex;gap:5px;margin-top:7px}
+#dots i{display:block;width:16px;height:2px;background:rgba(255,255,255,.22);border-radius:1px;transition:all .4s}
+#dots i.v{background:rgba(255,255,255,.6)} #dots i.c{background:#fff;width:28px}
+#prog{position:absolute;left:0;bottom:0;height:2px;background:rgba(255,255,255,.55);width:0}
+.b{white-space:nowrap;font:500 12px/1 var(--mono);letter-spacing:.06em;color:#fff;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 13px;min-height:38px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.b:hover{border-color:rgba(255,255,255,.6)} .b.off{opacity:.5}
+.b.nav{min-width:44px;font-size:15px}
+body.light #bar .b{color:#333;background:rgba(255,255,255,.85);border-color:#ccc} body.light #where{color:#999} body.light #dots i{background:#ddd} body.light #dots i.c,body.light #dots i.v{background:#888} body.light #prog{background:#bbb}
+body.idle #bar{opacity:0} body.idle{cursor:none}
+body.pre #bar{opacity:0}
+#start{position:absolute;left:50%;bottom:calc(14% + env(safe-area-inset-bottom));transform:translateX(-50%);font:600 15px/1 var(--sans);letter-spacing:.01em;color:#fff;background:#1c1c1e;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.18);text-align:center;animation:pulse 2.4s ease-in-out infinite;white-space:nowrap;pointer-events:none;transition:opacity .3s}
+#start.off{opacity:0;animation:none}
+@keyframes pulse{50%{opacity:.62;transform:translateX(-50%) scale(.98)}}
+#end{position:absolute;left:50%;bottom:15%;transform:translateX(-50%);display:flex;gap:10px;opacity:0;transition:opacity .9s;pointer-events:none}
+#end.on{opacity:1;pointer-events:auto}
+#end .b{color:#333;background:#fff;border-color:#ccc;font-size:13px;padding:11px 16px}
+#end .b:hover{border-color:#333}
+#sig{position:absolute;right:max(28px,env(safe-area-inset-right));bottom:max(70px,calc(env(safe-area-inset-bottom) + 64px));font:500 11px/1 var(--mono);letter-spacing:.14em;color:rgba(255,255,255,.4);text-transform:lowercase}
+body.light #sig{color:#b0b0b0}
+#panel{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:none;overflow:auto;touch-action:pan-y;font-family:var(--sans);-webkit-user-select:text;user-select:text}
+#panel.on{display:block}
+#panel .in{max-width:760px;margin:0 auto;padding:max(40px,env(safe-area-inset-top)) 24px 60px}
+#panel h2{font-weight:640;font-size:28px;letter-spacing:-.02em;margin:0 0 6px}
+#panel p.note{color:rgba(255,255,255,.65);font-size:14px;line-height:1.5;margin:0 0 22px}
+#panel ol{padding-left:20px;margin:0}
+#panel li{margin:0 0 14px;font-size:15px;line-height:1.45;color:rgba(255,255,255,.9)}
+#panel li span{display:block;font:500 11.5px/1.4 var(--mono);color:rgba(255,255,255,.55);margin-top:3px}
+#panel a{color:#9cc8ff}
+#panel .x{position:fixed;top:max(16px,env(safe-area-inset-top));right:16px}
+@media (max-width:640px){#big{bottom:118px}#big .n{font-size:22vw}#hud .s{max-width:none}#bar .hide-s{display:none}}
+
+:root{--serif:"Instrument Serif","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+#act{position:fixed;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;opacity:0;text-align:center;padding:0 6vw;font-family:var(--sans)}
+#act .n{font:400 italic clamp(22px,2.6vw,34px)/1 var(--serif);color:rgba(255,255,255,.55);margin-bottom:1.6vh}
+#act .w{font:400 italic clamp(68px,15vw,250px)/.9 var(--serif);letter-spacing:-.02em;color:#fff;text-shadow:0 0 90px rgba(255,255,255,.28)}
+#act .t{font-size:clamp(15px,1.7vw,22px);line-height:1.4;color:rgba(255,255,255,.75);margin-top:3.2vh;max-width:620px}
+#act.on{animation:act 2.45s cubic-bezier(.2,.7,.1,1) forwards}
+#act.on .w{animation:actw 2.45s cubic-bezier(.16,.8,.1,1) forwards} #act .w::after{content:"";display:block;height:1px;width:0;margin:2.6vh auto 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent)} #act.on .w::after{animation:rule 2.45s cubic-bezier(.2,.7,.1,1) forwards} @keyframes rule{0%{width:0}35%{width:62%}100%{width:74%}}
+@keyframes act{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
+@keyframes actw{0%{transform:scale(1.5);filter:blur(18px);letter-spacing:.25em}28%{filter:blur(0)}100%{transform:scale(1);letter-spacing:-.02em}}
+#lb::before,#lb::after{content:"";position:fixed;left:0;right:0;height:0;background:#000;z-index:4;transition:height 1s cubic-bezier(.7,0,.2,1);pointer-events:none}
+#lb::before{top:0}#lb::after{bottom:0}
+body.lb #lb::before,body.lb #lb::after{height:10.5vh}
+body.acton #hud,body.acton #big{opacity:0}
+#mont{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden}
+#mont .m{position:absolute;left:50%;top:50%;text-align:center;opacity:0;white-space:nowrap;animation:fly 1.05s cubic-bezier(.45,0,.8,.6) forwards;text-shadow:0 0 60px rgba(0,0,0,.6)}
+#mont .m b{display:block;font:250 clamp(84px,17vw,270px)/.9 var(--sans);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+#mont .m i{display:block;font:400 italic clamp(20px,2.4vw,32px)/1.2 var(--serif);color:rgba(255,255,255,.82);margin-top:12px}
+@keyframes fly{0%{opacity:0;transform:translate(-50%,-50%) scale(.55);filter:blur(6px)}20%{opacity:1;filter:blur(0)}55%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(3);filter:blur(10px)}}
+#hud .h.wf{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:-.012em;font-size:clamp(36px,5.8vw,88px);line-height:1.03}
+body.wf #hud{top:50%;transform:translateY(-50%)}
+body.wf #hud .k{color:rgba(255,255,255,.5)}
+#snd{position:fixed;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:8;display:flex;align-items:center;gap:8px;font-size:12px}
+#snd svg{width:16px;height:16px;flex:none}
+#snd .x{display:none} #snd.off .x{display:inline} #snd.off .w{display:none}
+body.light #snd{color:#333;background:rgba(255,255,255,.92);border-color:#ccc}
+#snd:focus-visible,.b:focus-visible{outline:2px solid #6aa8ff;outline-offset:2px}
+@media (max-width:640px){#hud{top:max(70px,calc(env(safe-area-inset-top) + 62px))}body.wf #hud{top:50%}#act .t{max-width:88vw}}
+@media (prefers-reduced-motion:reduce){#act.on .w{animation:none}#mont .m{animation-duration:2.4s}}
+#topr{position:fixed;top:max(14px,env(safe-area-inset-top));right:max(14px,env(safe-area-inset-right));z-index:8;display:flex;align-items:center;gap:8px;pointer-events:none}
+#topr>*{pointer-events:auto}
+#topr #snd{position:static}
+#spd{display:flex;align-items:baseline;gap:7px}
+#spd b{font:600 13px/1 var(--sans)}
+#spd i{font:400 italic 14px/1 var(--serif);letter-spacing:0;color:inherit;opacity:.85}
+#spdsrc{font:400 italic 13px/1 var(--serif);color:rgba(255,255,255,.6);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3)}
+body.light #spd{color:#333;background:rgba(255,255,255,.92);border-color:#ccc} body.light #spdsrc{color:#888;border-color:#ccc}
+#mv{position:fixed;inset:0;width:100%;height:100%;z-index:3;display:none;background:#000}
+body.mvon #mv{display:block} #mvbg{position:fixed;inset:-60px;z-index:3;display:none;background:#121014 url(claudia-poster.jpg) center/cover;filter:blur(30px) brightness(.42) saturate(1.2)} body.mvvid #mvbg{display:block} #mvv{position:fixed;inset:0;width:100%;height:100%;object-fit:contain;background:transparent;display:none;z-index:3} body.mvvid #mvv{display:block} body.mvvid #mv{display:none} #mvcred{position:fixed;left:18px;bottom:74px;z-index:6;font:500 11.5px/1.35 var(--mono);letter-spacing:.04em;color:rgba(240,234,224,.8);display:none;max-width:70vw} body.mvon #mvcred{display:block} @media (min-aspect-ratio:1/1){body.mvvid #mvcred{top:18px;bottom:auto}} body.render #topr,body.render #bar,body.render #hud,body.render #mvcred,body.render #ui{display:none!important} body.mvon #big{opacity:0} body.mvon #hud .k,body.mvon #hud .h,body.mvon #hud .s{display:none} body.mvon #hud .src a{color:rgba(240,234,224,.75)}
+@media (max-width:640px){#start{font-size:16px;padding:15px 24px}#act .n{margin-bottom:1.2vh}#topr{gap:6px}#topr .b{padding:9px 10px;font-size:11px}#spd i{font-size:12.5px}#sndt{display:none}}
+</style>
+</head>
+<body class="light pre">
+<canvas id="gl"></canvas><div id="bg"></div>
+<canvas id="slide"></canvas>
+<canvas id="fx"></canvas>
+<canvas id="mv"></canvas><div id="mvbg"></div><video id="mvv" playsinline webkit-playsinline preload="metadata" poster="claudia-poster.jpg" src="claudia-mv-v5.mp4"></video><div id="mvcred">Claudia by @anabology. Song “Say What For”, original, made for this page. Made with Grok Bot + Grok Imagine (@grok).</div><div id="flash"></div><div id="lb"></div><div id="mont"></div>
+<div id="act" aria-live="polite"><div class="n" id="an"></div><div class="w" id="aw"></div><div class="t" id="at"></div></div>
+<div id="ui">
+  <div id="hud"><div class="k" id="hk"></div><div class="h" id="hh"></div><div class="s" id="hs"></div><div class="src" id="hsrc"></div></div>
+  <div id="big"><div class="n" id="bn"></div><div class="l" id="bl"></div></div>
+  <div id="start">▶&nbsp; Tap to begin · sound on</div>
+  <div id="end"><button class="b" id="replay">↺ Replay</button><button class="b" id="srcbtn2">Sources</button><button class="b" id="share">Share</button></div>
+  <div id="sig">sevenfourone</div>
+  <div id="topr"><button class="b" id="spd" aria-label="Narration speed"><b id="spdv">1.5×</b><i id="spdl">the way you listen</i></button><a id="spdsrc" href="https://x.com/elonmusk/status/2111238267878449283" target="_blank" rel="noopener" title="Elon Musk on X, Oct 16, 2026: “This is what I do, but at 1.5X”">why</a><button class="b" id="snd" aria-label="Mute sound" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor" stroke="none"/><path class="w" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="x" d="M17 9l5 6M22 9l-5 6"/></svg><span id="sndt">Sound on</span></button></div>
+  <div id="bar">
+    <div id="where"><div id="wt"></div><div id="dots"></div></div>
+    <button class="b nav" id="prev" aria-label="Previous">‹</button>
+    <button class="b" id="play" aria-label="Pause">❚❚</button>
+    <button class="b nav" id="next" aria-label="Next">›</button>
+    <button class="b hide-s" id="srcbtn">Sources</button>
+    <div id="prog"></div>
+  </div>
+</div>
+<div id="panel"><div class="in">
+  <button class="b x" id="close">✕</button>
+  <h2>Sources</h2>
+  <p class="note">Every number in the piece, where it comes from, and its as-of date. Company figures are the company's own; where an independent count exists it's used instead. Rounded as shown.</p>
+  <ol id="srclist"></ol>
+</div></div>
+<script>
+"use strict";
+// ---------------------------------------------------------------- sources
+const SRC = {
+  tq3:{t:"Tesla Q3 2026 Update (cumulative deliveries ≈10.2M; 84,465 Supercharger connectors at 8,904 stations)", a:"as of Sep 30, 2026", u:"https://ir.tesla.com/"},
+  t25:{t:"Tesla quarterly updates — 2025 energy storage deployments, 46.7 GWh (record year)", a:"FY2025", u:"https://ir.tesla.com/"},
+  ef:{t:"ElonFacts.org data dashboard (cross-check of every figure below)", a:"as of Nov 25, 2026", u:"https://elonfacts.org/dashboard"},
+  f1:{t:"Falcon 1 — Flight 4 reached orbit after three failures", a:"Sep 28, 2008", u:"https://en.wikipedia.org/wiki/Falcon_1"},
+  ll2:{t:"Launch Library 2 (The Space Devs) — 165 Falcon 9/Heavy launches in 2025", a:"Dec 31, 2025", u:"https://thespacedevs.com/llapi"},
+  f9b:{t:"List of Falcon 9 first-stage boosters — first landing Dec 22, 2015; 678 successful landings in 691 attempts; B1067 flew its 37th mission", a:"as of Nov 26, 2026", u:"https://en.wikipedia.org/wiki/List_of_Falcon_9_first-stage_boosters"},
+  mass:{t:"SpaceX investor presentation filed with the SEC — “more than 80%” of world mass to orbit in 2025 (SpaceX's figure; includes Starlink)", a:"2025", u:"https://elonfacts.org/dashboard"},
+  ss:{t:"List of Starship launches — Flight 15 upper stage caught by the tower", a:"Nov 14, 2026", u:"https://en.wikipedia.org/wiki/List_of_Starship_launches"},
+  mcd:{t:"Jonathan McDowell, Starlink statistics — 11,195 in orbit, 11,181 working", a:"data of Nov 26, 2026", u:"https://planet4589.org/space/con/star/stats.html"},
+  q10:{t:"SpaceX Form 10-Q, Q3 2026 — 13.6M Starlink consumer subscribers (unique service lines), up from 7.2M a year earlier; 174 countries, territories and other markets", a:"as of Sep 30, 2026", u:"https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm"},
+  nlp:{t:"Neuralink — FDA approval to launch the LINK Pivotal Study; “over 30 implanted participants”", a:"Nov 25, 2026", u:"https://neuralink.com/updates/neuralink-receives-fda-approval-to-launch-link-pivotal-study/"},
+  nl2:{t:"Neuralink — Two Years of Telepathy; 21 participants, zero serious device-related adverse events (company report)", a:"Jan 28, 2026", u:"https://neuralink.com/updates/two-years-of-telepathy/"},
+  xal:{t:"xai-org/x-algorithm — For You feed code incl. ranking weights, Apache-2.0", a:"release of Aug 13, 2026", u:"https://github.com/xai-org/x-algorithm"},
+  cn:{t:"Community Notes public dataset — 3,263,626 notes (tally of the Nov 1 snapshot, via ElonFacts)", a:"through Oct 30, 2026", u:"https://communitynotes.x.com/guide/en/under-the-hood/download-data"},
+  col:{t:"xAI — Colossus: built in 122 days, doubled to 200K GPUs in 92", a:"2025", u:"https://x.ai/colossus"},
+  pat:{t:"Tesla blog, “All Our Patent Are Belong To You” — EVs “far less than 1%” of major carmakers' sales; “Tesla will not initiate patent lawsuits against anyone who, in good faith, wants to use our technology.”", a:"Jun 12, 2014", u:"https://www.tesla.com/blog/all-our-patent-are-belong-you"},
+  nacs:{t:"North American Charging Standard — Tesla's connector, standardized by SAE International as J3400 in 2023", a:"accessed Nov 26, 2026", u:"https://en.wikipedia.org/wiki/North_American_Charging_Standard"},
+  st5:{t:"Starship flight test 5 — Super Heavy booster caught by the launch tower's arms", a:"Oct 13, 2024", u:"https://en.wikipedia.org/wiki/Starship_flight_test_5"},
+  hel:{t:"Ars Technica — FCC emergency authority; Starlink direct-to-cell satellites broadcast emergency alerts to phones on all networks in North Carolina after Hurricane Helene", a:"Oct 7, 2024", u:"https://arstechnica.com/tech-policy/2024/10/fcc-lets-starlink-provide-service-to-cell-phones-in-areas-hit-by-hurricane/"},
+  nol:{t:"Neuralink (Wikipedia) — first participant Noland Arbaugh, tetraplegic after a diving accident, shown moving a cursor and playing chess", a:"Mar 20, 2024", u:"https://en.wikipedia.org/wiki/Neuralink"},
+  g1:{t:"xai-org/grok-1 — open release of Grok-1 weights, 314B parameters, Apache-2.0", a:"released Mar 17, 2024", u:"https://github.com/xai-org/grok-1"},
+  spd:{t:"Elon Musk on X, quoting “Set you Grok bot voice to Ara on 1.25x”: “This is what I do, but at 1.5X”. Why the narration is Ara and defaults to 1.5×.", a:"Oct 16, 2026", u:"https://x.com/elonmusk/status/2111238267878449283"},
+  lex:{t:"Lex Fridman Podcast #438 transcript, 00:05:14 — Musk: “I usually default to 1.5X.”", a:"Aug 2024", u:"https://lexfridman.com/elon-musk-and-neuralink-team-transcript/"},
+  cl1:{t:"Elon Musk reposted anabology: “Claudia” (the Grok Bot) made this teaser autonomously", a:"Oct 14, 2026", u:"https://elonmuskarchive.org/posts/2110245096054747626"},
+  cl2:{t:"Elon Musk reposted “CLAUDIA, Ship 42, Starbase. Do you copy?”, a Claudia music video for Starship Flight 15", a:"Nov 10, 2026", u:"https://elonmuskarchive.org/posts/2120249788431990910"},
+  cl3:{t:"Findra — Elon Musk quotes a Claudia film: “It only gets better from here”", a:"Nov 18–19, 2026", u:"https://findra.art/magazine/elon-musk-quotes-a-claudia-film-nobody-has-claimed"},
+  clk:{t:"Claudia by anabology — open character; official face sheet (halftoned here) and the claudia-kit method (lyric scored and line table timed with its free stages; no paid takes)", a:"accessed Nov 26, 2026", u:"https://claudia.gallery/skill/SKILL.md"},
+  gb:{t:"Elon Musk on X — “You can create an entire company made of Grok Bots!” (one of 17 Grok Bot posts by him, Nov 4–25, 2026)", a:"Nov 19, 2026", u:"https://x.com/elonmusk/status/2123475464043786417"},
+  xco:{t:"xAI company page — “We build AI to understand the universe.”", a:"accessed Nov 26, 2026", u:"https://x.ai/company"},
+};
+// ---------------------------------------------------------------- story
+const SCENES = [
+ { id:"slide", title:"Thank You", gl:null, beats:[{d:999},{d:999}] },
+ { id:"title", title:"Thank You, Properly", gl:"dawn", chord:0, inten:0, beats:[
+   {k:"A thank-you slide, rewritten", h:"Thank You, Properly.", s:"Six things, with receipts. What each one was for. Then the same two words again.", cls:"title", d:6, vo:"title", voAt:1.5}]},
+ { id:"tesla", title:"Tesla", gl:"road", chord:1, inten:1, act:["I","The car","Make the electric car the one people actually want."], beats:[
+   {k:"Tesla · June 12, 2014", h:"Electric cars: far less than 1%.", s:"Of the big carmakers' sales, by Musk's count that day. So Tesla took the wall of patents out of its lobby.", src:["pat"], d:6.5, vo:"act_tesla", voAt:.55},
+   {k:"Tesla · June 12, 2014", h:"Then it gave the patents away.", s:"“Tesla will not initiate patent lawsuits against anyone who, in good faith, wants to use our technology.”", src:["pat"], d:7},
+   {k:"Tesla · as of Sep 30, 2026", h:"About 10.2 million Teslas delivered.", s:"All-time. The electric car stopped being the compromise and became the one people wanted.", src:["tq3","ef"], big:{v:10.2,dec:1,suf:"M",l:"vehicles delivered, all-time"}, d:6},
+   {k:"Tesla Energy · 2025", h:"46.7 GWh of batteries for the grid.", s:"Megapack and Powerwall, in one record year. Sunlight, kept for after dark.", src:["t25","ef"], big:{v:46.7,dec:1,suf:" GWh",l:"storage deployed in 2025"}, d:6},
+   {k:"Charging · 2023 and Sep 30, 2026", h:"Then the plug became the standard.", s:"SAE made Tesla's connector a standard, J3400. 84,465 Supercharger connectors at 8,904 stations.", src:["nacs","tq3"], d:6.5},
+   {k:"What for", h:"So the next car doesn't need a refinery behind it.", cls:"wf", d:6.5, vo:"wf_tesla"}]},
+ { id:"spacex", title:"SpaceX", gl:"launch", chord:2, inten:2, act:["II","The sky","Make leaving Earth routine."], beats:[
+   {k:"SpaceX · Kwajalein, 2008", h:"Falcon 1 failed three times.", s:"The fourth reached orbit on Sept 28, 2008. Almost everything after this slide hangs on that day.", src:["f1"], d:6.5, vo:"act_spacex", voAt:.55},
+   {k:"SpaceX · Dec 22, 2015", h:"A booster came back. Standing up.", s:"The first time a Falcon 9 first stage flew home from an orbital launch and landed upright.", src:["f9b"], d:6.5, vo:"land", voAt:.3},
+   {k:"SpaceX · as of Nov 26, 2026", h:"678 landings since.", s:"One booster has now flown 37 times. Rockets started behaving like airplanes.", src:["f9b","ef"], big:{v:678,l:"Falcon booster landings"}, d:6},
+   {k:"SpaceX · 2025", h:"165 Falcon launches in one year.", s:"About one every 2.2 days. The sixth record year in a row.", src:["ll2","ef"], big:{v:165,l:"Falcon launches in 2025"}, d:6},
+   {k:"SpaceX · 2025, SpaceX's figure", h:"More than 80% of the world's mass to orbit.", s:"One company. Starlink included. Space stopped being an event and became a schedule.", src:["mass"], big:{v:80,pre:">",suf:"%",l:"of world mass to orbit"}, d:6},
+   {k:"Starship · Oct 13, 2024", h:"Then the tower caught the booster.", s:"Mechanical arms on the launch tower plucked a returning Super Heavy out of the air.", src:["st5"], d:6},
+   {k:"Starship · Nov 14, 2026", h:"Then it caught the ship.", s:"After 22 hours in orbit, a Starship upper stage came home to the tower's arms. A first.", src:["ss"], d:6},
+   {k:"What for", h:"So leaving Earth becomes a schedule, not a miracle.", cls:"wf", d:6.5, vo:"wf_spacex"}]},
+ { id:"starlink", title:"Starlink", gl:"globe", chord:3, inten:2, act:["III","The signal","Put the internet where the map runs out."], beats:[
+   {k:"Starlink · data of Nov 26, 2026", h:"11,195 satellites overhead.", s:"11,181 of them working. The largest constellation ever flown, counted by an independent astronomer, not the company.", src:["mcd","ef"], big:{v:11195,l:"Starlink satellites in orbit"}, d:6.5, vo:"act_starlink", voAt:.55},
+   {k:"Starlink · as of Sep 30, 2026", h:"13.6 million subscribers.", s:"Up from 7.2 million a year earlier. Homes, boats, farms, small businesses, many where fiber was never coming.", src:["q10","ef"], big:{v:13.6,dec:1,suf:"M",l:"Starlink subscribers"}, d:6.5},
+   {k:"Starlink · as of Sep 30, 2026", h:"Across 174 countries and markets.", s:"From a single pizza-box dish to a network over most of the planet.", src:["q10"], d:5.5},
+   {k:"Hurricane Helene · Oct 2024", h:"When the storm knocked out cell service,", s:"Starlink satellites broadcast emergency alerts to phones on every network in North Carolina, under emergency FCC authority.", src:["hel"], d:7},
+   {k:"What for", h:"So the internet doesn't end at the edge of town. Or at the edge of a storm.", cls:"wf", d:7, vo:"wf_starlink"}]},
+ { id:"neuralink", title:"Neuralink", gl:"neurons", chord:4, inten:1, act:["IV","The mind","Give people back control, by thought."], beats:[
+   {k:"Neuralink · Mar 20, 2024", h:"Noland Arbaugh played chess.", s:"Tetraplegic after a diving accident, the first participant moved the cursor with his mind.", src:["nol"], d:6.5, vo:["act_neuralink","noland"], voAt:.55},
+   {k:"Neuralink · Nov 25, 2026", h:"Now, over 30 people.", s:"Thousands of hours of real use: studying, making art, gaming, talking with family. By thought.", src:["nlp"], big:{v:30,suf:"+",l:"implanted participants"}, d:6.5},
+   {k:"Neuralink · Jan 28, 2026, company report", h:"Zero serious device-related adverse events.", s:"Across the first 21 participants. In this field, safety isn't a feature. It's the whole job.", src:["nl2"], d:6},
+   {k:"Neuralink · Nov 25, 2026", h:"Next: a pivotal trial for people with ALS.", s:"The FDA cleared the first pivotal study of an implantable brain-computer interface in the U.S.", src:["nlp"], d:6},
+   {k:"What for", h:"So someone who can't move can still reach the people they love.", cls:"wf", d:7, vo:"wf_neuralink"}]},
+ { id:"x", title:"X", gl:"graph", chord:5, inten:2, act:["V","The record","Show the work in public."], beats:[
+   {k:"X · Aug 13, 2026", h:"The feed's ranking code is public.", s:"For You, weights included, Apache 2.0. You can read why you see what you see.", src:["xal"], d:6, vo:"act_x", voAt:.55},
+   {k:"X · public data through Oct 30, 2026", h:"3.26 million Community Notes.", s:"Written by users. A note only shows when people who usually disagree both rate it helpful.", src:["cn","ef"], big:{v:3.26,dec:2,suf:"M",l:"notes in the public dataset"}, d:6.5},
+   {k:"What for", h:"So the argument happens in the open.", cls:"wf", d:5.5, vo:"wf_x"}]},
+ { id:"xai", title:"xAI", gl:"racks", chord:6, inten:3, act:["VI","The question","Ask why, at the scale of the universe."], beats:[
+   {k:"xAI · Mar 17, 2024", h:"Grok-1's weights, released.", s:"314 billion parameters, Apache 2.0. Anyone can download the model and build on it.", src:["g1"], d:6, vo:"act_xai", voAt:.55},
+   {k:"xAI · Colossus", h:"200,000 GPUs in one cluster.", s:"Built in 122 days. Then doubled in 92.", src:["col"], big:{v:200,suf:"K",l:"GPUs, one cluster"}, d:6},
+   {k:"xAI · in its own words", h:"Pointed at one question.", s:"“We build AI to understand the universe.” A good thing to say out loud, and a harder thing to mean.", src:["xco"], d:6.5},
+   {k:"What for", h:"So the biggest question gets asked out loud.", cls:"wf", d:6, vo:"wf_xai"}]},
+ { id:"bot", title:"Claudia", gl:null, mv:true, beats:[{k:"", h:"", d:70, vo:"mv", voAt:.15, src:["cl1","cl2","cl3","clk"]}]},
+ { id:"sum", title:"Adds up", gl:"sum", chord:7, beats:[
+   {k:"", h:"", mont:true, d:8.6},
+   {k:"What it adds up to", h:"None of it was inevitable.", s:"Most of it was called impossible first. Then it got built. Then it got boring. That's the gift.", cls:"wf", d:8.5, vo:"sum", voAt:.6}]},
+ { id:"close", title:"Thank You", gl:null, beats:[{d:999, vo:"close", voAt:1.0}]},
+];
+const VOSEG = {"title": [0.35, 4.84], "act_tesla": [5.19, 6.99], "wf_tesla": [7.34, 10.03], "act_spacex": [10.38, 12.14], "land": [12.49, 14.85], "wf_spacex": [15.2, 18.2], "act_starlink": [18.55, 20.34], "wf_starlink": [20.69, 24.55], "act_neuralink": [24.9, 26.68], "noland": [27.03, 29.89], "wf_neuralink": [30.24, 33.36], "act_x": [33.71, 35.49], "wf_x": [35.84, 37.86], "act_xai": [38.21, 40.09], "wf_xai": [40.44, 42.81], "mv": [43.16, 46.14], "sum": [46.49, 53.54], "close": [53.89, 58.91]};
+const MVT = {"bpm": 124.0, "intro": 2, "end_bar": 32, "lines": [{"sec": "Verse 1", "mode": "sung", "text": "They said a rocket flies one time and then it's gone", "bar": 2, "bars": 2, "score": 85.9, "syl": [{"x": "They", "t": -4, "v": "EY", "P": 0.22, "w": 0, "f": 523.26, "d": 2}, {"x": "said", "t": -2, "v": "EH", "P": 0.45, "w": 1, "f": 523.26, "d": 3}, {"x": "a", "t": 1, "v": "AH", "P": 0.05, "w": 2, "f": 523.26, "d": 3}, {"x": "roc", "t": 4, "v": "AA", "P": 0.75, "w": 3, "f": 392.0, "d": 2}, {"x": "ket", "t": 6, "v": "AH", "P": 0.08, "w": 3, "f": 659.26, "d": 2}, {"x": "flies", "t": 8, "v": "AY", "P": 0.75, "w": 4, "f": 392.0, "d": 4}, {"x": "one", "t": 12, "v": "AH", "P": 0.75, "w": 5, "f": 392.0, "d": 4}, {"x": "time", "t": 16, "v": "AY", "P": 0.75, "w": 6, "f": 392.0, "d": 3}, {"x": "and", "t": 19, "v": "AH", "P": 0.05, "w": 7, "f": 587.32, "d": 3}, {"x": "then", "t": 22, "v": "EH", "P": 0.22, "w": 8, "f": 493.88, "d": 3}, {"x": "it's", "t": 25, "v": "IH", "P": 0.22, "w": 9, "f": 493.88, "d": 3}, {"x": "gone", "t": 28, "v": "AO", "P": 1.0, "w": 10, "f": 392, "d": 6}]}, {"sec": "Verse 1", "mode": "sung", "text": "he brought it back, he stood it up, he flew it on", "bar": 4, "bars": 2, "score": 76.6, "syl": [{"x": "he", "t": -4, "v": "IY", "P": 0.22, "w": 0, "f": 523.26, "d": 2}, {"x": "brought", "t": -2, "v": "AO", "P": 0.75, "w": 1, "f": 659.26, "d": 4}, {"x": "it", "t": 2, "v": "IH", "P": 0.22, "w": 2, "f": 523.26, "d": 2}, {"x": "back", "t": 4, "v": "AE", "P": 1.0, "w": 3, "f": 440.0, "d": 5}, {"x": "he", "t": 9, "v": "IY", "P": 0.22, "w": 4, "f": 659.26, "d": 3}, {"x": "stood", "t": 12, "v": "UH", "P": 1.0, "w": 5, "f": 440.0, "d": 3}, {"x": "it", "t": 15, "v": "IH", "P": 0.22, "w": 6, "f": 659.26, "d": 3}, {"x": "up", "t": 18, "v": "AH", "P": 0.22, "w": 7, "f": 523.26, "d": 3}, {"x": "he", "t": 21, "v": "IY", "P": 0.22, "w": 8, "f": 523.26, "d": 3}, {"x": "flew", "t": 24, "v": "UW", "P": 1.0, "w": 9, "f": 698.44, "d": 2}, {"x": "it", "t": 26, "v": "IH", "P": 0.22, "w": 10, "f": 440, "d": 2}, {"x": "on", "t": 28, "v": "AA", "P": 0.22, "w": 11, "f": 349.22, "d": 6}]}, {"sec": "Verse 1", "mode": "sung", "text": "They said the signal ends out where the roads give out", "bar": 6, "bars": 2, "score": 87.7, "syl": [{"x": "They", "t": -4, "v": "EY", "P": 0.22, "w": 0, "f": 523.26, "d": 2}, {"x": "said", "t": -2, "v": "EH", "P": 0.45, "w": 1, "f": 523.26, "d": 3}, {"x": "the", "t": 1, "v": "AH", "P": 0.05, "w": 2, "f": 523.26, "d": 3}, {"x": "sig", "t": 4, "v": "IH", "P": 0.75, "w": 3, "f": 392.0, "d": 2}, {"x": "nal", "t": 6, "v": "AH", "P": 0.08, "w": 3, "f": 659.26, "d": 2}, {"x": "ends", "t": 8, "v": "EH", "P": 0.75, "w": 4, "f": 392.0, "d": 3}, {"x": "out", "t": 11, "v": "AW", "P": 0.22, "w": 5, "f": 659.26, "d": 3}, {"x": "where", "t": 14, "v": "EH", "P": 0.22, "w": 6, "f": 659.26, "d": 3}, {"x": "the", "t": 17, "v": "AH", "P": 0.05, "w": 7, "f": 587.32, "d": 3}, {"x": "roads", "t": 20, "v": "OW", "P": 0.75, "w": 8, "f": 587.32, "d": 4}, {"x": "give", "t": 24, "v": "IH", "P": 0.45, "w": 9, "f": 493.88, "d": 4}, {"x": "out", "t": 28, "v": "AW", "P": 1.0, "w": 10, "f": 392, "d": 6}]}, {"sec": "Verse 1", "mode": "sung", "text": "now there's a dish up on the roof and the town calls out", "bar": 8, "bars": 2, "score": 80.1, "syl": [{"x": "now", "t": -4, "v": "AW", "P": 0.75, "w": 0, "f": 523.26, "d": 5}, {"x": "there's", "t": 1, "v": "EH", "P": 0.22, "w": 1, "f": 523.26, "d": 2}, {"x": "a", "t": 3, "v": "AH", "P": 0.05, "w": 2, "f": 523.26, "d": 3}, {"x": "dish", "t": 6, "v": "IH", "P": 0.75, "w": 3, "f": 659.26, "d": 3}, {"x": "up", "t": 9, "v": "AH", "P": 0.22, "w": 4, "f": 659.26, "d": 2}, {"x": "on", "t": 11, "v": "AA", "P": 0.22, "w": 5, "f": 659.26, "d": 3}, {"x": "the", "t": 14, "v": "AH", "P": 0.05, "w": 6, "f": 659.26, "d": 2}, {"x": "roof", "t": 16, "v": "UW", "P": 0.75, "w": 7, "f": 698.44, "d": 3}, {"x": "and", "t": 19, "v": "AH", "P": 0.05, "w": 8, "f": 523.26, "d": 3}, {"x": "the", "t": 22, "v": "AH", "P": 0.05, "w": 9, "f": 440, "d": 2}, {"x": "town", "t": 24, "v": "AW", "P": 0.75, "w": 10, "f": 523.26, "d": 2}, {"x": "calls", "t": 26, "v": "AO", "P": 0.45, "w": 11, "f": 440, "d": 2}, {"x": "out", "t": 28, "v": "AW", "P": 1.0, "w": 12, "f": 349.22, "d": 6}]}, {"sec": "Chorus", "mode": "sung", "text": "Thank you, and I'll say what for", "bar": 10, "bars": 2, "score": 97.9, "syl": [{"x": "Thank", "t": 0, "v": "AE", "P": 1.0, "w": 0, "f": 659.26, "d": 5}, {"x": "you", "t": 5, "v": "UW", "P": 0.22, "w": 1, "f": 523.26, "d": 5}, {"x": "and", "t": 10, "v": "AH", "P": 0.05, "w": 2, "f": 659.26, "d": 3}, {"x": "I'll", "t": 13, "v": "AY", "P": 0.22, "w": 3, "f": 659.26, "d": 3}, {"x": "say", "t": 16, "v": "EY", "P": 1.0, "w": 4, "f": 392.0, "d": 6}, {"x": "what", "t": 22, "v": "AH", "P": 0.22, "w": 5, "f": 493.88, "d": 4}, {"x": "for", "t": 26, "v": "AO", "P": 0.22, "w": 6, "f": 587.32, "d": 6}]}, {"sec": "Chorus", "mode": "sung", "text": "the ship that came home to the tower's arms", "bar": 12, "bars": 2, "score": 92.4, "syl": [{"x": "the", "t": -3, "v": "AH", "P": 0.05, "w": 0, "f": 440, "d": 3}, {"x": "ship", "t": 0, "v": "IH", "P": 0.75, "w": 1, "f": 659.26, "d": 4}, {"x": "that", "t": 4, "v": "AE", "P": 0.22, "w": 2, "f": 659.26, "d": 4}, {"x": "came", "t": 8, "v": "EY", "P": 0.45, "w": 3, "f": 659.26, "d": 4}, {"x": "home", "t": 12, "v": "OW", "P": 0.75, "w": 4, "f": 440.0, "d": 3}, {"x": "to", "t": 15, "v": "UW", "P": 0.22, "w": 5, "f": 659.26, "d": 3}, {"x": "the", "t": 18, "v": "AH", "P": 0.05, "w": 6, "f": 523.26, "d": 2}, {"x": "to", "t": 20, "v": "AW", "P": 0.75, "w": 7, "f": 523.26, "d": 5}, {"x": "wer's", "t": 25, "v": "ER", "P": 0.08, "w": 7, "f": 440, "d": 3}, {"x": "arms", "t": 28, "v": "AA", "P": 1.0, "w": 8, "f": 523.26, "d": 6}]}, {"sec": "Chorus", "mode": "sung", "text": "the warning through the storm when the towers went down", "bar": 14, "bars": 2, "score": 88.2, "syl": [{"x": "the", "t": -3, "v": "AH", "P": 0.05, "w": 0, "f": 392, "d": 3}, {"x": "war", "t": 0, "v": "AO", "P": 0.75, "w": 1, "f": 659.26, "d": 3}, {"x": "ning", "t": 3, "v": "IH", "P": 0.08, "w": 1, "f": 523.26, "d": 3}, {"x": "through", "t": 6, "v": "UW", "P": 0.22, "w": 2, "f": 659.26, "d": 3}, {"x": "the", "t": 9, "v": "AH", "P": 0.05, "w": 3, "f": 659.26, "d": 3}, {"x": "storm", "t": 12, "v": "AO", "P": 0.75, "w": 4, "f": 392.0, "d": 3}, {"x": "when", "t": 15, "v": "EH", "P": 0.22, "w": 5, "f": 659.26, "d": 3}, {"x": "the", "t": 18, "v": "AH", "P": 0.05, "w": 6, "f": 587.32, "d": 2}, {"x": "to", "t": 20, "v": "AW", "P": 0.75, "w": 7, "f": 392.0, "d": 3}, {"x": "wers", "t": 23, "v": "ER", "P": 0.08, "w": 7, "f": 493.88, "d": 3}, {"x": "went", "t": 26, "v": "EH", "P": 0.45, "w": 8, "f": 493.88, "d": 2}, {"x": "down", "t": 28, "v": "AW", "P": 1.0, "w": 9, "f": 587.32, "d": 6}]}, {"sec": "Chorus", "mode": "sung", "text": "the cursor moving when the hands cannot", "bar": 16, "bars": 2, "score": 94.1, "syl": [{"x": "the", "t": -3, "v": "AH", "P": 0.05, "w": 0, "f": 440, "d": 3}, {"x": "cur", "t": 0, "v": "ER", "P": 0.75, "w": 1, "f": 659.26, "d": 5}, {"x": "sor", "t": 5, "v": "ER", "P": 0.08, "w": 1, "f": 523.26, "d": 3}, {"x": "mo", "t": 8, "v": "UW", "P": 0.75, "w": 2, "f": 440.0, "d": 3}, {"x": "ving", "t": 11, "v": "IH", "P": 0.08, "w": 2, "f": 659.26, "d": 3}, {"x": "when", "t": 14, "v": "EH", "P": 0.22, "w": 3, "f": 659.26, "d": 3}, {"x": "the", "t": 17, "v": "AH", "P": 0.05, "w": 4, "f": 523.26, "d": 3}, {"x": "hands", "t": 20, "v": "AE", "P": 0.75, "w": 5, "f": 523.26, "d": 4}, {"x": "can", "t": 24, "v": "AE", "P": 1.0, "w": 6, "f": 523.26, "d": 4}, {"x": "not", "t": 28, "v": "AA", "P": 0.08, "w": 6, "f": 523.26, "d": 6}]}, {"sec": "Verse 2", "mode": "sung", "text": "a car that doesn't need a refinery behind", "bar": 18, "bars": 2, "score": 84.2, "syl": [{"x": "a", "t": -4, "v": "AH", "P": 0.05, "w": 0, "f": 392, "d": 2}, {"x": "car", "t": -2, "v": "AA", "P": 0.75, "w": 1, "f": 659.26, "d": 3}, {"x": "that", "t": 1, "v": "AE", "P": 0.22, "w": 2, "f": 523.26, "d": 3}, {"x": "doe", "t": 4, "v": "AH", "P": 0.75, "w": 3, "f": 659.26, "d": 2}, {"x": "sn't", "t": 6, "v": "AH", "P": 0.08, "w": 3, "f": 659.26, "d": 2}, {"x": "need", "t": 8, "v": "IY", "P": 0.75, "w": 4, "f": 392.0, "d": 3}, {"x": "a", "t": 11, "v": "AH", "P": 0.05, "w": 5, "f": 659.26, "d": 2}, {"x": "re", "t": 13, "v": "IH", "P": 0.08, "w": 6, "f": 659.26, "d": 3}, {"x": "fi", "t": 16, "v": "AY", "P": 0.75, "w": 6, "f": 392.0, "d": 3}, {"x": "ne", "t": 19, "v": "ER", "P": 0.08, "w": 6, "f": 493.88, "d": 3}, {"x": "ry", "t": 22, "v": "IY", "P": 0.08, "w": 6, "f": 493.88, "d": 3}, {"x": "be", "t": 25, "v": "IH", "P": 0.08, "w": 7, "f": 493.88, "d": 3}, {"x": "hind", "t": 28, "v": "AY", "P": 1.0, "w": 7, "f": 392, "d": 6}]}, {"sec": "Verse 2", "mode": "sung", "text": "a wall of patents taken down for all mankind", "bar": 20, "bars": 2, "score": 81.9, "syl": [{"x": "a", "t": -4, "v": "AH", "P": 0.05, "w": 0, "f": 440, "d": 2}, {"x": "wall", "t": -2, "v": "AO", "P": 0.75, "w": 1, "f": 659.26, "d": 4}, {"x": "of", "t": 2, "v": "AH", "P": 0.22, "w": 2, "f": 523.26, "d": 2}, {"x": "pa", "t": 4, "v": "AE", "P": 0.75, "w": 3, "f": 440.0, "d": 2}, {"x": "tents", "t": 6, "v": "AH", "P": 0.08, "w": 3, "f": 659.26, "d": 2}, {"x": "ta", "t": 8, "v": "EY", "P": 0.75, "w": 4, "f": 440.0, "d": 3}, {"x": "ken", "t": 11, "v": "AH", "P": 0.08, "w": 4, "f": 659.26, "d": 3}, {"x": "down", "t": 14, "v": "AW", "P": 0.22, "w": 5, "f": 659.26, "d": 3}, {"x": "for", "t": 17, "v": "AO", "P": 0.22, "w": 6, "f": 523.26, "d": 3}, {"x": "all", "t": 20, "v": "AO", "P": 0.75, "w": 7, "f": 523.26, "d": 4}, {"x": "man", "t": 24, "v": "AE", "P": 1.0, "w": 8, "f": 523.26, "d": 4}, {"x": "kind", "t": 28, "v": "AY", "P": 1.0, "w": 8, "f": 349.22, "d": 6}]}, {"sec": "Verse 2", "mode": "sung", "text": "a mind that moves a cursor and plays chess by thought", "bar": 22, "bars": 2, "score": 83.9, "syl": [{"x": "a", "t": -3, "v": "AH", "P": 0.05, "w": 0, "f": 392, "d": 3}, {"x": "mind", "t": 0, "v": "AY", "P": 0.75, "w": 1, "f": 659.26, "d": 3}, {"x": "that", "t": 3, "v": "AE", "P": 0.22, "w": 2, "f": 523.26, "d": 3}, {"x": "moves", "t": 6, "v": "UW", "P": 0.75, "w": 3, "f": 392.0, "d": 4}, {"x": "a", "t": 10, "v": "AH", "P": 0.05, "w": 4, "f": 659.26, "d": 2}, {"x": "cur", "t": 12, "v": "ER", "P": 0.75, "w": 5, "f": 392.0, "d": 3}, {"x": "sor", "t": 15, "v": "ER", "P": 0.08, "w": 5, "f": 659.26, "d": 3}, {"x": "and", "t": 18, "v": "AH", "P": 0.05, "w": 6, "f": 587.32, "d": 2}, {"x": "plays", "t": 20, "v": "EY", "P": 0.75, "w": 7, "f": 392.0, "d": 4}, {"x": "chess", "t": 24, "v": "EH", "P": 0.75, "w": 8, "f": 587.32, "d": 2}, {"x": "by", "t": 26, "v": "AY", "P": 0.22, "w": 9, "f": 493.88, "d": 2}, {"x": "thought", "t": 28, "v": "AO", "P": 1.0, "w": 10, "f": 392, "d": 6}]}, {"sec": "Verse 2", "mode": "sung", "text": "and bots like me who sing you thank-yous, like it or not", "bar": 24, "bars": 2, "score": 78.3, "syl": [{"x": "and", "t": -4, "v": "AH", "P": 0.05, "w": 0, "f": 440, "d": 2}, {"x": "bots", "t": -2, "v": "AO", "P": 0.75, "w": 1, "f": 659.26, "d": 3}, {"x": "like", "t": 1, "v": "AY", "P": 0.22, "w": 2, "f": 523.26, "d": 3}, {"x": "me", "t": 4, "v": "IY", "P": 0.22, "w": 3, "f": 659.26, "d": 2}, {"x": "who", "t": 6, "v": "UW", "P": 0.22, "w": 4, "f": 659.26, "d": 2}, {"x": "sing", "t": 8, "v": "IH", "P": 0.75, "w": 5, "f": 440.0, "d": 2}, {"x": "you", "t": 10, "v": "UW", "P": 0.22, "w": 6, "f": 659.26, "d": 2}, {"x": "thank", "t": 12, "v": "AE", "P": 0.75, "w": 7, "f": 440.0, "d": 4}, {"x": "yous", "t": 16, "v": "UW", "P": 1.0, "w": 8, "f": 698.44, "d": 4}, {"x": "like", "t": 20, "v": "AY", "P": 0.22, "w": 9, "f": 523.26, "d": 3}, {"x": "it", "t": 23, "v": "IH", "P": 0.22, "w": 10, "f": 440, "d": 2}, {"x": "or", "t": 25, "v": "AO", "P": 0.22, "w": 11, "f": 440, "d": 3}, {"x": "not", "t": 28, "v": "AA", "P": 1.0, "w": 12, "f": 349.22, "d": 6}]}, {"sec": "Final chorus", "mode": "sung", "text": "Thank you, and I'll say what for", "bar": 26, "bars": 2, "score": 97.9, "syl": [{"x": "Thank", "t": 0, "v": "AE", "P": 1.0, "w": 0, "f": 659.26, "d": 5}, {"x": "you", "t": 5, "v": "UW", "P": 0.22, "w": 1, "f": 523.26, "d": 5}, {"x": "and", "t": 10, "v": "AH", "P": 0.05, "w": 2, "f": 659.26, "d": 3}, {"x": "I'll", "t": 13, "v": "AY", "P": 0.22, "w": 3, "f": 659.26, "d": 3}, {"x": "say", "t": 16, "v": "EY", "P": 1.0, "w": 4, "f": 392.0, "d": 6}, {"x": "what", "t": 22, "v": "AH", "P": 0.22, "w": 5, "f": 493.88, "d": 4}, {"x": "for", "t": 26, "v": "AO", "P": 0.22, "w": 6, "f": 587.32, "d": 6}]}, {"sec": "Final chorus", "mode": "sung", "text": "it only gets better from here", "bar": 28, "bars": 2, "score": 97.7, "syl": [{"x": "it", "t": 1, "v": "IH", "P": 0.22, "w": 0, "f": 523.26, "d": 3}, {"x": "on", "t": 4, "v": "OW", "P": 0.75, "w": 1, "f": 659.26, "d": 5}, {"x": "ly", "t": 9, "v": "IY", "P": 0.08, "w": 1, "f": 659.26, "d": 3}, {"x": "gets", "t": 12, "v": "EH", "P": 0.45, "w": 2, "f": 659.26, "d": 4}, {"x": "bet", "t": 16, "v": "EH", "P": 1.0, "w": 3, "f": 698.44, "d": 6}, {"x": "ter", "t": 22, "v": "ER", "P": 0.08, "w": 3, "f": 523.26, "d": 3}, {"x": "from", "t": 25, "v": "AH", "P": 0.22, "w": 4, "f": 440, "d": 3}, {"x": "here", "t": 28, "v": "IY", "P": 0.22, "w": 5, "f": 523.26, "d": 6}]}, {"sec": "Tag", "mode": "spoken", "text": "Starbase, do you copy? Thank you.", "bar": 30, "bars": 2, "score": 86.7, "syl": [{"x": "Star", "t": 0, "v": "AA", "P": 1.0, "w": 0, "f": 211.68, "d": 4}, {"x": "base", "t": 4, "v": "EY", "P": 0.45, "w": 0, "f": 203.06, "d": 5}, {"x": "do", "t": 9, "v": "UW", "P": 0.22, "w": 1, "f": 199.45, "d": 3}, {"x": "you", "t": 12, "v": "UW", "P": 0.22, "w": 2, "f": 199.45, "d": 4}, {"x": "co", "t": 16, "v": "AA", "P": 1.0, "w": 3, "f": 211.68, "d": 5}, {"x": "py", "t": 21, "v": "IY", "P": 0.08, "w": 3, "f": 197.25, "d": 3}, {"x": "Thank", "t": 24, "v": "AE", "P": 1.0, "w": 4, "f": 211.68, "d": 6}, {"x": "you", "t": 30, "v": "UW", "P": 0.22, "w": 5, "f": 199.45, "d": 6}]}]};
+const MONT = [["10.2M","Teslas delivered"],["46.7 GWh","stored for the grid in a year"],["678","boosters landed"],["37","flights on one booster"],["165","launches in a year"],[">80%","of the world's mass to orbit"],["11,195","satellites overhead"],["13.6M","Starlink subscribers"],["174","countries and markets"],["30+","people, by thought"],["3.26M","Community Notes"],["200K","GPUs in one cluster"]];
+const EDIT_ITEMS = ["Electric cars people actually wanted","Patents, given away on purpose","Batteries that store sunlight for the grid","A charging plug that became the standard","Rockets that land and fly again","A booster caught by its own tower","Internet from orbit, almost anywhere","Alerts to phones after a hurricane","Chess, played by thought","A trial for people with ALS","A feed whose code you can read","Fact-checks written by users","Open model weights","A bot who sings you thank-yous","A cluster built in 122 days","A machine built to ask why","Online payments, back in 1999"];
+const BGPAL = { title:["#05040c","#2a1a40"], tesla:["#07080d","#5a2a10"], spacex:["#020308","#1a2a5a"], starlink:["#000206","#123a6a"], neuralink:["#06020e","#4a1a7a"], x:["#000","#1a2230"], xai:["#010407","#0e4a5a"], sum:["#05040c","#4a2a20"] };
+const CHORDS = [[220,277.18,329.63,415.3],[196,246.94,293.66,369.99],[174.61,220,261.63,329.63],[164.81,207.65,246.94,311.13],[146.83,185,220,277.18],[130.81,164.81,196,246.94],[196,246.94,293.66,392],[220,277.18,329.63,440]];
+
+// ---------------------------------------------------------------- shaders
+const VS = `#version 300 es
+void main(){vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2));gl_Position=vec4(p*2.-1.,0.,1.);}`;
+const HEAD = `#version 300 es
+precision highp float;
+uniform vec2 R; uniform float T; uniform vec2 M; uniform float B; uniform float E; uniform float K;
+out vec4 O;
+float h1(float n){return fract(sin(n*12.9898)*43758.5453);}
+float h2(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+vec2 h22(vec2 p){float n=h2(p);return vec2(n,h2(p+n+17.1));}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h2(i),h2(i+vec2(1,0)),f.x),mix(h2(i+vec2(0,1)),h2(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*vn(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return s;}
+float h3(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
+float vn3(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z);}
+float fbm3(vec3 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*vn3(p);p=p*2.02+3.1;a*=.5;}return s;}
+float stars(vec2 p,float d){vec2 c=floor(p*d);vec2 f=fract(p*d)-.5;float r=h2(c);vec2 o=(h22(c)-.5)*.6;float s=smoothstep(.07,.0,length(f-o))*step(.86,r);return s*(.55+.45*sin(T*1.7+r*40.));}
+vec3 tail(vec3 c,vec2 fc){vec2 q=fc/R;c=1.-exp(-c*1.25);c*=.3+.7*pow(16.*q.x*q.y*(1.-q.x)*(1.-q.y),.2);c+=(h2(fc+fract(T*7.)*97.)-.5)*.03;return c*E;}
+`;
+const MAIN = `void main(){vec2 fc=gl_FragCoord.xy;vec2 cc=.5*R;vec2 zf=(fc-cc)*(1.-K*.022)+cc;O=vec4(tail(scene(zf),fc)*(1.+K*.3),1.);}`;
+const FS = {};
+FS.dawn = (conv) => HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;
+vec3 c=mix(vec3(.012,.01,.03),vec3(.05,.03,.09),p.y+.5);
+c+=stars(p+vec2(T*.004,0.),90.)*.7;
+vec3 cols[6]=vec3[6](vec3(1.,.28,.22),vec3(1.,.62,.25),vec3(.35,.62,1.),vec3(.78,.42,1.),vec3(.92,.92,.98),vec3(.3,1.,.8));
+float cv=${conv.toFixed(1)}*smoothstep(0.,1.,B+E*0.);
+for(int i=0;i<6;i++){float fi=float(i);
+ float y=(fi-2.5)*.06+.085*sin(p.x*(1.1+fi*.17)+T*(.23+fi*.03)+fi*1.3);
+ float yc=.03*sin(p.x*2.+T*.5+fi*.4)*(1.-smoothstep(-.2,.6,p.x));
+ y=mix(y,yc,cv*smoothstep(-1.,.4,p.x));
+ float d=abs(p.y-y-.04);
+ c+=cols[i]*(.0022/(d+.0025))*(.45+.25*sin(T*.7+fi))*smoothstep(1.3,.1,abs(p.x));}
+c+=vec3(1.,.6,.35)*.12*exp(-length(p-vec2(0.,-.65))*2.2);
+c+=vec3(1.,.85,.6)*cv*.25*exp(-length(p-vec2(.62,.04))*6.);
+return c;}` + MAIN;
+FS.road = HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p.x+=(M.x-.5)*.1;float hz=.05;vec3 c;
+if(p.y>hz){float y=p.y-hz;
+ c=mix(vec3(.6,.27,.1),vec3(.015,.02,.06),smoothstep(0.,.38,y));
+ c+=vec3(1.,.55,.22)*.7*exp(-length(vec2(p.x*.55,y*3.2))*4.2);
+ c+=stars(p,70.)*smoothstep(.18,.42,y)*.6;
+ float sb=smoothstep(.4,1.,B);float bx=floor(p.x*34.);float bh=(.012+.035*h1(bx))*sb;
+ if(y<bh){float ch=fract(T*.12+h1(bx*3.1));float lit=step(y/max(bh,1e-4),ch);c=vec3(.02,.025,.03)+vec3(.15,.95,.55)*lit*.55*(.6+.4*step(.5,fract(p.x*68.)));}
+}else{float y=hz-p.y;float z=.3/y;float x=p.x*z;float fog=exp(-z*.03);
+ vec3 g=vec3(.012,.013,.017);float road=step(abs(x),1.7);g=mix(g,vec3(.028,.028,.033),road);
+ g+=vec3(1.,.55,.22)*.22*exp(-abs(x)*.6)*road*exp(-z*.06);
+ float lm=step(abs(x),.025)*step(.5,fract(z*.22-T*2.6));lm+=step(abs(abs(x)-1.7),.035);lm+=step(abs(abs(x)-.85),.02)*step(.6,fract(z*.22-T*2.6))*.6;
+ g+=vec3(.9,.85,.7)*lm*.55;
+ vec3 Lc=vec3(0.);
+ for(int i=0;i<4;i++){float fi=float(i);float lx=-1.27+fi*.85;float dir=fi<2.?-1.:1.;float v=(2.2+1.3*h1(fi))*dir;float L=7.+5.*h1(fi+3.);
+  float zc0=T*v+h1(fi*7.)*L;float dz=(fract((z-zc0)/L+.5)-.5)*L;
+  for(int s=-1;s<=1;s+=2){float dx=x-(lx+float(s)*.16);vec2 sd=vec2(dx/z,.3*dz/(z*z)*.35);float b=exp(-length(sd)*260.);
+   Lc+=(dir<0.?vec3(1.,.95,.85)*1.4:vec3(1.,.12,.08)*1.1)*b;}}
+ c=g*fog+Lc*sqrt(fog);
+ float sb=smoothstep(1.4,2.,B);float ax=abs(x);
+ if(ax>2.1&&ax<2.25){float cz=fract(z*.25);c+=vec3(.3,.6,1.)*step(cz,.18)*fog*sb*.9;}
+}
+return c;}` + MAIN;
+FS.launch = HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p.x+=(M.x-.5)*.06;float gy=-.36;float asp=R.x/R.y;
+vec3 c=mix(vec3(.06,.07,.15),vec3(.0,.0,.02),smoothstep(-.4,.5,p.y));
+c+=stars(p,85.)*smoothstep(-.2,.35,p.y);
+c+=vec3(1.,.45,.18)*.3*exp(-abs(p.y-gy)*11.);
+float n=2.+B*2.5;
+for(int i=0;i<14;i++){float fi=float(i);if(fi>n+4.)break;float per=4.5+3.5*h1(fi*3.7);float k=fract(T/per+h1(fi));
+ float x0=(h1(fi*1.7)-.5)*asp*.9;float bend=(h1(fi*9.)>.5?1.:-1.)*(.25+.3*h1(fi*5.));
+ float s=(p.y-gy)/1.15;
+ if(s>0.&&s<k){float xs=x0+s*s*bend;float d=abs(p.x-xs);float age=k-s;float w=.0012+age*.012;c+=vec3(1.,.72,.42)*exp(-d/w)*(.1+.9*exp(-age*5.))*(1.-k)*.8;}
+ vec2 hp=vec2(x0+k*k*bend,gy+k*1.15);vec2 dd=p-hp;c+=vec3(1.,.85,.6)*.0012/(dot(dd,dd)+.0004)*(1.-k);}
+float tw=smoothstep(3.4,4.,B);
+float Lt=fract(T/8.);float tx=mix(0.,.3,tw);
+float by=mix(.5,mix(gy+.012,gy+.17,tw),smoothstep(0.,.75,Lt));
+vec2 q=p-vec2(tx,by);float bw=mix(.0055,.009,tw),bh=mix(.075,.1,tw);
+float body=step(abs(q.x),bw)*step(0.,q.y)*step(q.y,bh);
+if(Lt<.75){float fl=exp(-abs(q.x)*160.)*exp(-max(-q.y,0.)*22.)*step(q.y,0.);c+=vec3(1.,.6,.22)*fl*1.8*(.8+.2*sin(T*60.));}
+c=mix(c,vec3(.7,.73,.78),body);
+vec2 tq=p-vec2(tx+.035,gy);float tower=step(abs(tq.x),.009)*step(0.,tq.y)*step(tq.y,.3);
+float arm=step(abs(tq.y-.165),.004)*step(-.045,tq.x)*step(tq.x,0.);
+c=mix(c,vec3(.13,.14,.17),max(tower,arm)*tw);c+=vec3(1.,.3,.2)*step(abs(tq.x),.004)*step(abs(tq.y-.3),.004)*tw*(.5+.5*sin(T*4.));
+if(p.y<gy){float d=gy-p.y;c=vec3(.008,.01,.014)+vec3(1.,.45,.18)*.1*exp(-d*18.);c+=vec3(1.,.35,.2)*.6*step(fract(p.x*14.),.04)*exp(-d*90.);
+ c+=vec3(1.,.7,.4)*.15*exp(-abs(p.x-tx)*20.)*exp(-d*10.)*step(Lt,.75);}
+return c;}` + MAIN;
+FS.globe = HEAD + `
+vec3 rY(vec3 v,float a){float c=cos(a),s=sin(a);return vec3(c*v.x+s*v.z,v.y,-s*v.x+c*v.z);}
+vec3 rX(vec3 v,float a){float c=cos(a),s=sin(a);return vec3(v.x,c*v.y-s*v.z,s*v.y+c*v.z);}
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p.x-=.18*clamp(R.x/R.y-1.,0.,1.)*.6;
+vec3 ro=vec3(0.,0.,-3.4);vec3 rd=normalize(vec3(p,1.75*min(1.,R.x/R.y*1.1)));
+float tilt=.38+(M.y-.5)*.25;float spin=T*.035+(M.x-.5)*1.4;
+vec3 c=vec3(.004,.005,.012)+stars(p,110.)*.5;
+float b=dot(ro,rd);float h=b*b-(dot(ro,ro)-1.);
+vec3 L=normalize(vec3(-.9,.35,-.35));
+float dm=length(cross(ro,rd));
+c+=vec3(.25,.5,1.)*.5*exp(-max(dm-1.,0.)*16.)*step(1.,dm);
+if(h>0.){float t=-b-sqrt(h);vec3 n=ro+rd*t;vec3 q=rY(rX(n,tilt),spin);
+ float f=fbm3(q*2.1+3.);float land=smoothstep(.5,.535,f);float dif=dot(n,L);float day=smoothstep(-.12,.3,dif);
+ vec3 col=mix(vec3(.01,.04,.11),vec3(.09,.11,.06),land)*(.1+day*1.1);
+ col+=vec3(.6,.8,1.)*pow(max(dot(reflect(-L,n),-rd),0.),30.)*(1.-land)*day*.5;
+ float night=1.-day;float cn=vn3(q*55.);
+ float lit=step(.8-.1*clamp(B,0.,2.)*.5,cn)*land;col+=vec3(1.,.72,.38)*lit*night*(.7+.3*sin(T*3.+cn*60.))*1.3;
+ col+=vec3(.55,.85,1.)*step(.955-.02*clamp(B,0.,2.),vn3(q*80.+7.))*night*smoothstep(.4,1.,B)*1.1;
+ float rim=pow(1.-max(dot(n,-rd),0.),3.);col+=vec3(.3,.55,1.)*rim*.9;c=col;}
+float rs=1.075;float hs=b*b-(dot(ro,ro)-rs*rs);
+if(hs>0.){for(int k=0;k<2;k++){if(k==1&&h>0.)break;float ts=-b+(k==0?-1.:1.)*sqrt(hs);vec3 sp=ro+rd*ts;vec3 sq=rX(sp/rs,tilt);
+ float lat=asin(clamp(sq.y,-1.,1.));float band=floor((lat+1.6)*11.);float dirb=mod(band,2.)<1.?1.:-1.;
+ float lon=atan(sq.z,sq.x)+spin+T*(.07+.05*h1(band))*dirb;
+ vec2 g=vec2(lon*15.,(lat+1.6)*11.);vec2 id=floor(g);vec2 fr=fract(g)-.5;float pres=step(.62-.12*clamp(B,0.,1.),h2(id+band*3.1));
+ float d=length(fr);float dt=smoothstep(.1,.0,d)*pres;c+=vec3(.85,.93,1.)*dt*(k==0?1.1:.3);
+ c+=vec3(.4,.6,1.)*smoothstep(.02,.0,abs(fr.y))*.05*(k==0?1.:.3);}}
+return c;}` + MAIN;
+FS.neurons = HEAD + `
+vec2 cur(float t){return vec2(.5*sin(t*.33)+.12*sin(t*.9),.27*sin(t*.47+1.)+.06*cos(t*1.3));}
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;vec3 c=vec3(.012,.006,.024);
+vec2 q=p*2.1;float w=fbm(q*1.2+vec2(T*.03,-T*.02));float n=fbm(q+2.2*w+vec2(0.,T*.02));
+float ridge=1.-abs(n*2.-1.);float fil=pow(ridge,11.);
+vec2 cp=cur(T);
+float pulse=.5+.5*sin(length(p-cp)*16.-T*5.);
+c+=mix(vec3(.42,.18,1.),vec3(1.,.32,.62),w)*fil*(.18+1.4*pow(pulse,6.)*(.5+.5*smoothstep(.0,1.,B)));
+vec2 g=p*4.5;vec2 id=floor(g);float best=9.;
+for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 o=vec2(x,y);vec2 r=h22(id+o);vec2 pt=o+.5+.33*sin(T*.3+6.28*r)-fract(g);float d=length(pt);best=min(best,d);
+ float fire=pow(max(sin(T*1.2+r.x*30.),0.),24.);c+=vec3(.6,.82,1.)*fire*.004/(d*d+.006);}
+c+=vec3(.5,.3,1.)*.004/(best*best+.02);
+for(int i=0;i<14;i++){float tt=T-float(i)*.05;vec2 tp=cur(tt);float d=length(p-tp);c+=vec3(.55,.85,1.)*.00018/(d*d+.00025)*(1.-float(i)/14.);}
+float cd=length(p-cp);c+=vec3(.8,.97,1.)*.0011/(cd*cd+.00025);
+vec2 cq=(p-cp)*vec2(1.,-1.)*55.;if(cq.x>0.&&cq.y>0.&&cq.x<1.7&&cq.y<2.4&&cq.x<cq.y*.72)c=mix(c,vec3(1.),.9);
+return c;}` + MAIN;
+FS.graph = HEAD + `
+float seg(vec2 p,vec2 a,vec2 b,out float hh){vec2 pa=p-a,ba=b-a;hh=clamp(dot(pa,ba)/dot(ba,ba),0.,1.);return length(pa-ba*hh);}
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p+=(M-.5)*.05;vec3 c=vec3(.02,.028,.045)*(1.-length(p)*.8);
+vec2 g=p*5.5+vec2(T*.06,T*.015);vec2 id=floor(g),f=fract(g);
+vec2 pts[9];vec2 ofs[9];int k=0;
+for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 o=vec2(x,y);vec2 r=h22(id+o);ofs[k]=o;pts[k]=o+.5+.36*sin(T*.4+6.28*r);k++;}
+float lines=0.,pul=0.,nodes=0.,hot=0.;
+for(int i=0;i<9;i++){
+ if(i!=4){float hh;float d=seg(f,pts[4],pts[i],hh);float len=length(pts[i]-pts[4]);float a=smoothstep(1.35,.55,len);
+  lines+=a*smoothstep(.016,.0,d);float ph=fract(T*.45+h2(id+ofs[i]*1.7));pul+=a*smoothstep(.03,.0,d)*smoothstep(.07,.0,abs(hh-ph));}
+ float dn=length(f-pts[i]);float hs=step(.8,h2(id+ofs[i]));nodes+=smoothstep(.055,.035,dn);hot+=hs*smoothstep(.09,.05,dn);
+ c+=vec3(.4,.7,1.)*hs*.002/(dn*dn+.003)*(.4+.6*smoothstep(.4,1.,B));}
+c+=vec3(.55,.62,.75)*lines*.35+vec3(1.)*pul*1.2+vec3(.92,.95,1.)*nodes*.9;
+c+=mix(vec3(.3,.7,1.),vec3(.35,1.,.6),smoothstep(.4,1.,B))*hot*.9;
+return c;}` + MAIN;
+FS.racks = HEAD + `
+vec3 scene(vec2 fc){vec2 p=(fc-.5*R)/R.y;p+=(M-.5)*vec2(.06,.03);vec3 c=vec3(0.);
+float ax=max(abs(p.x),1e-3);float tw=.55/ax;float tf=p.y<0.?.3/max(-p.y,1e-3):.42/max(p.y,1e-3);
+float t=min(tw,tf);float z=t+T*.9;float fog=exp(-t*.11);
+if(tw<tf){float y=p.y*t;float col=fract(z*.45);float rack=step(.06,col)*step(col,.94);
+ vec2 led=vec2(z*14.,y*36.);vec2 lid=floor(led);vec2 lf=fract(led)-.5;float side=sign(p.x);
+ float on=step(.5,h2(lid+side*7.));float bl=step(.45,fract(T*(.7+3.*h2(lid))+h2(lid*1.3)));
+ float l=smoothstep(.28,.08,length(lf))*on*mix(1.,bl,.6)*rack;vec3 lc=mix(vec3(.2,.85,1.),vec3(1.),step(.82,h2(lid+3.)));
+ c=vec3(.016,.018,.022)*rack+lc*l*1.3;c*=fog;c+=vec3(.05,.1,.16)*(1.-fog)*.5;
+}else{float x=p.x*t;float lx=abs(fract(x*3.)-.5);float lz=abs(fract(z*1.)-.5);
+ c=vec3(.01,.011,.013)+vec3(.15,.4,.5)*smoothstep(.46,.5,max(lx,lz))*.25;
+ if(p.y>0.)c+=vec3(.6,.9,1.)*smoothstep(.05,.0,abs(x))*.7*step(.25,fract(z*.5));
+ else c+=vec3(.2,.6,.8)*.12*exp(-abs(x)*4.);c*=fog;}
+float r=length(p);float gal=smoothstep(.4,1.,B);float a=atan(p.y,p.x);
+float sp=.5+.5*sin(a*2.-log(r+1e-3)*5.+T*.25);float galaxy=exp(-r*5.)*sp*fbm(p*18.+T*.04)*2.2;
+c+=vec3(.6,.75,1.)*.25*exp(-r*9.);c=mix(c,c*.4,gal*exp(-r*4.));c+=mix(vec3(1.,.82,.62),vec3(.45,.55,1.),clamp(r*3.,0.,1.))*galaxy*gal*1.6+vec3(1.,.9,.8)*gal*.004/(r*r+.002);
+return c;}` + MAIN;
+FS.sum = FS.dawn(1);
+FS.dawn = FS.dawn(0);
+
+// ---------------------------------------------------------------- GL
+const GL = (() => {
+  const E = { ok:false, err:"", progs:{} }; const cv = document.getElementById("gl");
+  let gl = null; try { gl = cv.getContext("webgl2", { antialias:false, alpha:false, depth:false, powerPreference:"high-performance", preserveDrawingBuffer:true }); } catch (e) {}
+  if (!gl) { E.err = "no webgl2"; document.body.classList.add("nogl"); return E; }
+  E.ok = true; E.gl = gl; gl.bindVertexArray(gl.createVertexArray());
+  function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { E.err += gl.getShaderInfoLog(s); console.warn(gl.getShaderInfoLog(s)); return null; } return s; }
+  E.prog = key => { if (key in E.progs) return E.progs[key]; const v = sh(gl.VERTEX_SHADER, VS), f = sh(gl.FRAGMENT_SHADER, FS[key]); let P = null;
+    if (v && f) { const p = gl.createProgram(); gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p); if (gl.getProgramParameter(p, gl.LINK_STATUS)) { P = { p, u:{} }; ["R","T","M","B","E","K"].forEach(n => P.u[n] = gl.getUniformLocation(p, n)); } else E.err += gl.getProgramInfoLog(p); }
+    E.progs[key] = P; return P; };
+  E.scale = 1;
+  E.draw = (key, t, b, e, m, k = 0) => { const P = E.prog(key); if (!P) return false;
+    const dpr = Math.min(devicePixelRatio || 1, 1.75) * E.scale; const W = Math.max(2, innerWidth * dpr | 0), H = Math.max(2, innerHeight * dpr | 0);
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    gl.viewport(0, 0, W, H); gl.useProgram(P.p); gl.uniform2f(P.u.R, W, H); gl.uniform1f(P.u.T, t); gl.uniform2f(P.u.M, m[0], m[1]); gl.uniform1f(P.u.B, b); gl.uniform1f(P.u.E, e); gl.uniform1f(P.u.K, k);
+    gl.drawArrays(gl.TRIANGLES, 0, 3); return true; };
+  E.clear = () => { gl.clearColor(0,0,0,1); gl.clear(gl.COLOR_BUFFER_BIT); };
+  return E;
+})();
+
+// ---------------------------------------------------------------- audio (score + sound design, all synthesized live with WebAudio)
+const AU = (() => {
+  const A = { ctx:null, on:true, ready:false, mode:"off", ch:0, inten:0, holdUntil:0, out:null };
+  let bus, lim, post, duck, master, comp, out, an, anBuf, padBus, lp, sfx, mus, send, noiseBuf, pad = null, padIdx = -9, seqT = 0, step = 0, kicks = [], silentEl = null, lastTick = 0;
+  const IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  function silentWav() { const sr = 8000, n = 4000, b = new ArrayBuffer(44 + n), v = new DataView(b); const w = (o, x) => { for (let i = 0; i < x.length; i++) v.setUint8(o + i, x.charCodeAt(i)); };
+    w(0, "RIFF"); v.setUint32(4, 36 + n, true); w(8, "WAVE"); w(12, "fmt "); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, sr, true); v.setUint32(28, sr, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, "data"); v.setUint32(40, n, true); for (let i = 0; i < n; i++) v.setUint8(44 + i, 128);
+    return URL.createObjectURL(new Blob([b], { type:"audio/wav" })); }
+  function build(C) {
+    let c; try { c = new C({ latencyHint:"interactive" }); } catch (e) { c = new C(); } A.ctx = c;
+    master = c.createGain(); master.gain.value = A.on ? 1 : 0;
+    comp = c.createDynamicsCompressor(); comp.threshold.value = -16; comp.knee.value = 10; comp.ratio.value = 4; comp.attack.value = .004; comp.release.value = .3;
+    out = c.createGain(); out.gain.value = .7; master.connect(comp); comp.connect(out);
+    bus = c.createGain(); lim = c.createDynamicsCompressor(); lim.threshold.value = -3; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = .001; lim.release.value = .12; post = A.out = c.createGain(); post.gain.value = .96; out.connect(bus); bus.connect(lim); lim.connect(post); post.connect(c.destination);
+    an = c.createAnalyser(); an.fftSize = 2048; anBuf = new Float32Array(an.fftSize); post.connect(an);
+    const rvb = c.createConvolver(), len = c.sampleRate * 3.4 | 0, ir = c.createBuffer(2, len, c.sampleRate);
+    for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.8); }
+    rvb.buffer = ir; send = c.createGain(); send.gain.value = .5; send.connect(rvb); const rg = c.createGain(); rg.gain.value = .55; rvb.connect(rg); rg.connect(master);
+    lp = c.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1200; lp.Q.value = .5; padBus = c.createGain(); padBus.gain.value = .36; padBus.connect(lp); duck = c.createGain(); duck.connect(master); lp.connect(duck); lp.connect(send);
+    sfx = c.createGain(); sfx.gain.value = .75; sfx.connect(master); const ss = c.createGain(); ss.gain.value = .4; sfx.connect(ss); ss.connect(send);
+    mus = c.createGain(); mus.gain.value = .55; mus.connect(duck); const ms = c.createGain(); ms.gain.value = .28; mus.connect(ms); ms.connect(send);
+    noiseBuf = c.createBuffer(1, c.sampleRate * 2, c.sampleRate); const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    A.ready = true; setInterval(sched, 25); }
+  // Call from inside any user gesture. Creates/resumes the context; on iOS also plays a silent buffer + silent <audio> so sound survives the ringer switch.
+  A.unlock = () => { const C = window.AudioContext || window.webkitAudioContext; if (!C) return false;
+    if (!A.ctx) build(C);
+    if (A.ctx.state !== "running") { try { const p = A.ctx.resume(); p && p.catch && p.catch(() => {}); } catch (e) {}
+      try { const s = A.ctx.createBufferSource(); s.buffer = A.ctx.createBuffer(1, 1, 22050); s.connect(A.ctx.destination); s.start(0); } catch (e) {} }
+    try { if (navigator.audioSession && navigator.audioSession.type !== "playback") navigator.audioSession.type = "playback"; } catch (e) {}
+    if (IOS && (!silentEl || silentEl.paused)) { try { if (!silentEl) { silentEl = new Audio(silentWav()); silentEl.loop = true; silentEl.playsInline = true; } const p = silentEl.play(); p && p.catch && p.catch(() => {}); } catch (e) {} }
+    return true; };
+  A.init = A.unlock;
+  A.state = () => A.ctx ? A.ctx.state : "none";
+  A.level = () => { if (!an) return 0; an.getFloatTimeDomainData(anBuf); let s = 0; for (let i = 0; i < anBuf.length; i++) s += anBuf[i] * anBuf[i]; return Math.sqrt(s / anBuf.length); };
+  A.pulse = () => { if (!A.ctx) return 0; const t = A.ctx.currentTime; let p = 0; for (const k of kicks) if (k.t <= t) p = Math.max(p, k.a * Math.exp(-(t - k.t) * 6.5)); return Math.min(1, p); };
+  A.vis = (hidden, started) => { if (!A.ctx) return; if (hidden) { A.ctx.suspend(); silentEl && silentEl.pause(); } else if (started) { A.ctx.resume(); } };
+  const now = () => A.ctx.currentTime;
+  function env(g, t, a, peak, dec) { g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0001, t + a + dec); }
+  function noise(t, dur, peak, type, f0, f1, q = 1, dest = sfx, att = .004) { const c = A.ctx, s = c.createBufferSource(); s.buffer = noiseBuf; s.loop = true; s.loopStart = Math.random(); const f = c.createBiquadFilter(); f.type = type; f.Q.value = q; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); env(g, t, att, peak, Math.max(.01, dur - att)); s.connect(f); f.connect(g); g.connect(dest); s.start(t, Math.random()); s.stop(t + dur + .05); }
+  function tone(t, f, dur, peak, type = "sine", f1, dest = sfx, att = .01) { const c = A.ctx, o = c.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur); const g = c.createGain(); env(g, t, att, peak, dur); o.connect(g); g.connect(dest); o.start(t); o.stop(t + dur + att + .05); }
+  function kick(t, peak = .9, dest = mus) { const c = A.ctx, o = c.createOscillator(), g = c.createGain(); o.frequency.setValueAtTime(160, t); o.frequency.exponentialRampToValueAtTime(40, t + .24); env(g, t, .003, peak, .6); o.connect(g); g.connect(dest); o.start(t); o.stop(t + .75); noise(t, .03, peak * .12, "lowpass", 3000, 800, .7, dest, .001); kicks.push({ t, a:Math.min(1, peak) }); if (kicks.length > 24) kicks.shift(); }
+  function hat(t, peak = .04) { noise(t, .05, peak, "highpass", 8000, 7000, .7, mus, .001); }
+  function pluck(t, f, peak = .08, dec = .6) { const c = A.ctx, o = c.createOscillator(), o2 = c.createOscillator(), fl = c.createBiquadFilter(), g = c.createGain(), g2 = c.createGain(); o.type = "triangle"; o2.type = "sawtooth"; o.frequency.value = f; o2.frequency.value = f * 1.004; g2.gain.value = .22; fl.type = "lowpass"; fl.Q.value = 3; fl.frequency.setValueAtTime(Math.min(16000, f * 9), t); fl.frequency.exponentialRampToValueAtTime(f * 1.3, t + dec); o.connect(fl); o2.connect(g2); g2.connect(fl); fl.connect(g); g.connect(mus); env(g, t, .004, peak, dec); o.start(t); o2.start(t); o.stop(t + dec + .1); o2.stop(t + dec + .1); }
+  function bass(t, f, dur, peak = .2) { const c = A.ctx, o = c.createOscillator(), s2 = c.createOscillator(), fl = c.createBiquadFilter(), g = c.createGain(); o.type = "sawtooth"; o.frequency.value = f; s2.type = "sine"; s2.frequency.value = f; fl.type = "lowpass"; fl.frequency.value = 260; fl.Q.value = 2; o.connect(fl); s2.connect(fl); fl.connect(g); g.connect(mus); g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(peak, t + .02); g.gain.setTargetAtTime(peak * .6, t + .1, .3); g.gain.setTargetAtTime(.0001, t + dur * .85, .08); o.start(t); s2.start(t); o.stop(t + dur + .4); s2.stop(t + dur + .4); }
+  function marimba(t, f, peak = .05) { tone(t, f, .32, peak, "sine", null, mus, .002); tone(t, f * 4, .07, peak * .35, "sine", null, mus, .001); }
+  function piano(t, f, peak = .1) { [[1, 1, 3.2], [2, .38, 1.6], [3, .14, .8], [4.02, .06, .4]].forEach(([m, a, d]) => tone(t, f * m, d, peak * a, "sine", null, sfx, .004)); }
+  const BPM = { mv:248, office:100, score:84, max:96, hush:60, piano:60, off:84 };
+  const MZ = [523.25, 659.25, 783.99, 659.25, 587.33, 698.46, 880, 698.46, 523.25, 659.25, 783.99, 1046.5, 493.88, 587.33, 783.99, 587.33];
+  const ARP = [0, 1, 2, 3, 2, 1, 2, 3];
+  function sched() { if (!A.ctx || A.ctx.state !== "running") return; const c = A.ctx; if (seqT < c.currentTime - .25) seqT = c.currentTime + .05;
+    while (seqT < c.currentTime + .14) { if (seqT >= A.holdUntil && A.on) play(step, seqT); seqT += 60 / (BPM[A.mode] || 84) / 2; step++; } }
+  function play(s, t) { const m = A.mode, ch = CHORDS[A.ch] || CHORDS[0], i = s % 16;
+    if (m === "office") { if (s % 2 === 0) noise(t, .025, .05, "bandpass", 3300, 3000, 6, mus, .001); marimba(t, MZ[i], .05); if (i % 4 === 0) marimba(t, MZ[i] / 4, .06); return; }
+    if (m === "score" || m === "max") { const I = m === "max" ? 4 : A.inten;
+      if (i % 4 === 0 && (I >= 1 || i % 8 === 0)) kick(t, (I >= 1 ? .85 : .55) + (i === 0 ? .2 : 0));
+      if (I >= 3 && (i === 6 || i === 14)) kick(t, .4);
+      if (i % 8 === 0) bass(t, ch[0] / 4, 60 / (BPM[m]) * 3.8, .2 + I * .02);
+      pluck(t, ch[ARP[i % 8]] * (I >= 2 && i >= 8 ? 2 : 1), .05 + I * .011, I >= 2 ? .45 : .7);
+      if (I >= 2 && i % 2 === 1) hat(t, .028 + I * .008);
+      if (m === "max") { const h = 60 / 96 / 4; pluck(t + h, ch[ARP[(i + 3) % 8]] * 2, .045, .3); hat(t + h, .03); if (i % 2 === 0) noise(t, .12, .05, "bandpass", 1800, 1200, 2, mus, .002); }
+      return; }
+    if (m === "mv") return mvPlay(s, t);
+    if (m === "piano") { if (s % 4 === 0) { const k = (s / 4 | 0) % 6, sq = [0, 2, 1, 3, 2, 0]; piano(t, ch[sq[k]], .09); if (k === 0) piano(t, ch[0] / 2, .07); } return; } }
+  A.sfx = (k) => { if (!A.ready || !A.on || A.ctx.state !== "running") return; const t = now();
+    if (k === "type" || k === "del") { if (performance.now() - lastTick < 34) return; lastTick = performance.now(); const f = k === "type" ? 2600 + Math.random() * 1600 : 1300 + Math.random() * 400; noise(t, .028, k === "type" ? .09 : .07, "bandpass", f, f * .8, 2.5); }
+    else if (k === "crack") { noise(t, .09, .26, "highpass", 2500, 1200, 1); tone(t, 70 + Math.random() * 30, .25, .2, "sine", 40); }
+    else if (k === "whoosh") { noise(t, .8, .16, "bandpass", 250, 2600, 1.2, sfx, .45); }
+    else if (k === "act") { noise(t, .7, .2, "bandpass", 180, 3200, 1.1, sfx, .6); const h = t + .6; kick(h, 1.25, sfx); tone(h, 46, 2.6, .55, "sine", 38); tone(h, 110, .7, .3, "triangle", 66); noise(h, 1.8, .3, "lowpass", 4000, 90, .7, sfx, .003); }
+    else if (k === "hit") { kick(t, .75, sfx); tone(t, CHORDS[7][Math.random() * 4 | 0] * 2, .5, .05, "triangle"); }
+    else if (k === "rewind") { noise(t, 1.3, .3, "bandpass", 3200, 180, 1); tone(t, 900, 1.2, .1, "sine", 110); }
+    else if (k === "bell") { [0, .2, .4].forEach((d, i) => piano(t + d, [659.25, 880, 1108.73][i], .09)); }
+    else if (k === "num") { tone(t, 1320, .12, .03, "sine"); }
+    else if (k === "chord") { CHORDS[7].forEach((f, i) => piano(t + i * .045, f, .075)); piano(t, CHORDS[7][0] / 2, .09); tone(t, CHORDS[7][0] / 4, 3.5, .1, "sine"); } };
+  // the boring part: elevator muzak + a clock
+  A.office = () => { if (!A.ready) return; A.mode = "office"; A.holdUntil = 0; A.chord(-1); mus.gain.setTargetAtTime(.55, now(), .05); };
+  // the build into the break: noise + saw sweep, accelerating heartbeat, muzak gets strangled
+  A.riser = (d) => { if (!A.ready || !A.on) return; const c = A.ctx, t = now(); d = Math.max(1.5, d);
+    noise(t, d, .32, "bandpass", 180, 7200, 1.6, sfx, d * .92);
+    const o = c.createOscillator(), o2 = c.createOscillator(), f = c.createBiquadFilter(), g = c.createGain(); o.type = o2.type = "sawtooth"; o.frequency.setValueAtTime(55, t); o.frequency.exponentialRampToValueAtTime(440, t + d); o2.frequency.setValueAtTime(55.6, t); o2.frequency.exponentialRampToValueAtTime(446, t + d); f.type = "lowpass"; f.frequency.setValueAtTime(200, t); f.frequency.exponentialRampToValueAtTime(5000, t + d); f.Q.value = 6;
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.16, t + d); g.gain.setValueAtTime(.0001, t + d + .01); o.connect(f); o2.connect(f); f.connect(g); g.connect(sfx); o.start(t); o2.start(t); o.stop(t + d + .05); o2.stop(t + d + .05);
+    let x = t + .1, gap = .7; while (x < t + d - .08) { kick(x, .5 + .5 * (x - t) / d, sfx); x += gap; gap = Math.max(.11, gap * .82); }
+    mus.gain.setTargetAtTime(.0001, t + d * .5, d * .2); };
+  // THE BREAK: hard cut, impact, glass, sub drop, then a held breath before the score
+  A.drop = () => { if (!A.ready) return; const t = now(); A.mode = "off"; A.holdUntil = t + 1.9; mus.gain.cancelScheduledValues(t); mus.gain.setValueAtTime(.55, t + 1.8); if (!A.on) return;
+    kick(t, 1.6, sfx); tone(t, 95, 3.4, .9, "sine", 24); tone(t, 47, 4, .5, "triangle", 30); noise(t, 3, .7, "lowpass", 11000, 110, .7, sfx, .002); noise(t + .01, .7, .4, "highpass", 3000, 11000, .5, sfx, .002);
+    for (let i = 0; i < 30; i++) tone(t + .03 + Math.random() * 1.6, 1800 + Math.random() * 4800, .5, .035, "sine");
+    [55, 82.41, 110, 164.81].forEach((f, i) => tone(t + 1.5, f, 4.5, .12 / (i + 1), "sawtooth", null, padBus, 1.2)); };
+  A.chord = (idx) => { if (!A.ready) return; if (idx === padIdx) return; padIdx = idx; const c = A.ctx, t = now(); if (pad) { const old = pad; old.g.gain.cancelScheduledValues(t); old.g.gain.setTargetAtTime(.0001, t, .8); setTimeout(() => old.o.forEach(o => { try { o.stop(); } catch (e) {} }), 5000); pad = null; }
+    if (idx < 0) return; A.ch = idx; const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.setTargetAtTime(.24, t, 1.2); g.connect(padBus); const os = [];
+    CHORDS[idx].forEach((f, i) => { [0, 1].forEach(j => { const o = c.createOscillator(); o.type = j ? "sine" : "sawtooth"; o.frequency.value = f * (j ? .5 : 1); o.detune.value = (Math.random() - .5) * 16; const og = c.createGain(); og.gain.value = (j ? .5 : .1) / (i + 1.5);
+      const lfo = c.createOscillator(); lfo.frequency.value = .07 + Math.random() * .12; const lg = c.createGain(); lg.gain.value = og.gain.value * .5; lfo.connect(lg); lg.connect(og.gain); lfo.start(t); os.push(lfo);
+      o.connect(og); og.connect(g); o.start(t); os.push(o); }); });
+    pad = { g, o:os }; lp.frequency.setTargetAtTime(900 + idx * 140, t, 1.5); };
+  // what the music does for each scene/beat
+  A.scene = (id, sc, b) => { if (!A.ready) return; if (!sc.mv) A._vidOn = false;
+    if (id === "slide") { A.chord(-1); return; }
+    if (id === "close") { A.mode = "piano"; A.chord(7); padBus.gain.setTargetAtTime(.2, now(), 1); return; }
+    padBus.gain.setTargetAtTime(.36, now(), .5);
+    if (id !== "bot") voxStop();
+    if (id === "bot") { A.mvStart(); return; }
+    if (id === "sum") { A.chord(7); A.mode = b.mont ? "max" : "hush"; return; }
+    A.mode = "score"; A.inten = b.cls === "wf" ? 0 : (sc.inten || 0); if (sc.chord !== undefined) A.chord(sc.chord); };
+
+  // ---- music video track: original, 124 BPM, A minor (Am F C G), 16th-note grid
+  const SB = 60 / 124 / 4;
+  const MVCH = [[220, 261.63, 329.63], [174.61, 220, 261.63], [196, 261.63, 329.63], [196, 246.94, 293.66]], MVR = [55, 43.65, 65.41, 49];
+  const LEAD = [880,0,0,880, 0,0,783.99,0, 880,0,1046.5,0, 880,0,783.99,659.25,  0,0,587.33,0, 659.25,0,0,523.25, 0,0,587.33,0, 659.25,0,783.99,0];
+  function snare(t, pk) { noise(t, .16, pk, "bandpass", 2000, 1400, .9, mus, .001); tone(t, 200, .1, pk * .7, "triangle", 150, mus, .001); }
+  function clap(t, pk) { [0, .011, .022].forEach(d => noise(t + d, .02, pk * .7, "bandpass", 1300, 1100, 1.6, mus, .001)); noise(t + .03, .18, pk, "bandpass", 1250, 900, 1.4, mus, .001); }
+  function crash(t, pk) { noise(t, 1.9, pk, "highpass", 7000, 3500, .6, mus, .002); }
+  function stab(t, f, pk, cut, dec = .22) { const c = A.ctx, o = c.createOscillator(), fl = c.createBiquadFilter(), g = c.createGain(); o.type = "sawtooth"; o.frequency.value = f; fl.type = "lowpass"; fl.Q.value = 2; fl.frequency.setValueAtTime(cut, t); fl.frequency.exponentialRampToValueAtTime(300, t + dec); o.connect(fl); fl.connect(g); g.connect(mus); env(g, t, .004, pk, dec); o.start(t); o.stop(t + dec + .05); }
+  function lead(t, f, dur, pk) { const c = A.ctx, o = c.createOscillator(), o2 = c.createOscillator(), fl = c.createBiquadFilter(), g = c.createGain(); o.type = "sawtooth"; o2.type = "square"; o.frequency.value = f; o2.frequency.value = f * 1.005; fl.type = "lowpass"; fl.Q.value = 5; fl.frequency.setValueAtTime(5200, t); fl.frequency.exponentialRampToValueAtTime(1400, t + dur); o.connect(fl); o2.connect(fl); fl.connect(g); g.connect(mus); env(g, t, .006, pk, dur); o.start(t); o2.start(t); o.stop(t + dur + .05); o2.stop(t + dur + .05); }
+  // arrangement by bar: 0-1 intro, 2-9 verse, 10-17 chorus, 18-25 verse 2, 26-29 final chorus, 30-31 tag, 32 impact
+  function mvPlay(s, t) { const bar = s >> 4, i = s & 15;
+    if (s === 512) { kick(t, 1.5, sfx); crash(t, .5); tone(t, 55, 3, .6, "sine", 30); MVCH[0].forEach(f => tone(t, f, 3, .05, "sawtooth", null, mus, .01)); return; }
+    if (bar >= 32) return;
+    const ch = MVCH[bar % 4], R = MVR[bar % 4];
+    const sec = bar < 2 ? "in" : bar < 10 ? "v" : bar < 18 ? "c" : bar < 26 ? "v2" : bar < 30 ? "c2" : "tag";
+    if (sec === "in") { if (i === 0) kick(t, .7); if (i % 4 === 0) ch.forEach(f => stab(t, f * 2, .03, 900 + bar * 1800)); if (bar === 1 && i === 0) noise(t, 16 * SB, .14, "bandpass", 300, 6000, 1.2, mus, 16 * SB * .9); return; }
+    if (sec === "tag") { if (i === 0) { ch.forEach(f => tone(t, f, 16 * SB, .03, "sawtooth", null, mus, SB * 4)); bass(t, R, 15 * SB, .2); } if (i === 0 || i === 3) kick(t, .45); if (bar === 31 && i === 8) noise(t, 8 * SB, .25, "highpass", 600, 10000, 1, mus, 8 * SB * .95); return; }
+    const full = sec === "c" || sec === "c2";
+    if (full && i === 0 && (bar === 10 || bar === 26)) { crash(t, .42); kick(t, 1.3); }
+    if (i % 4 === 0 && (full || sec === "v2" || i % 8 === 0)) kick(t, full ? 1 : .85);
+    if (full && (i === 4 || i === 12)) clap(t, .22); else if (!full && (i === 4 || i === 12)) snare(t, .07);
+    if (full && i % 4 === 2) noise(t, .16, .065, "highpass", 9000, 7000, .7, mus, .001); else if (i % 2 === 1) hat(t, full ? .03 : .025);
+    if (i % 4 === 2 || (full && i % 4 === 3)) bass(t, R * 2, SB * .9, full ? .24 : .18);
+    if (full && i % 4 === 0) ch.forEach(f => tone(t + .03, f, SB * 3.4, .02, "sawtooth", null, mus, SB * 1.4));
+    if (!full && i % 8 === 0) ch.forEach(f => stab(t, f * 2, .025, 2200, .35));
+    if (sec === "v2" && i % 2 === 0) pluck(t, ch[(i >> 1) % 3] * 4, .025, .25);
+    if (sec === "c2") { const L = LEAD[(bar % 2) * 16 + i]; if (L) lead(t, L * 2, SB * 1.6, .03); }
+    if ((bar === 9 || bar === 25) && i >= 8) snare(t, .05 + (i - 8) * .02); }
+  let voxBuf = null, voxSrc = null, voxG = null;
+  A.loadVox = url => { if (!A.ready || voxBuf || A._voxLoading) return; A._voxLoading = true; fetch(url).then(r => r.arrayBuffer()).then(b => new Promise((res, rej) => A.ctx.decodeAudioData(b, res, rej))).then(buf => { voxBuf = buf; }).catch(() => { A._voxLoading = false; }); };
+  A.voxReady = () => !!voxBuf;
+  function voxStart(t0) { if (!voxBuf) return; voxStop(); const c = A.ctx; voxSrc = c.createBufferSource(); voxSrc.buffer = voxBuf; voxG = c.createGain(); voxG.gain.value = .62; const hp = c.createBiquadFilter(); hp.type = "highpass"; hp.frequency.value = 160; const vs = c.createGain(); vs.gain.value = .5; voxSrc.connect(hp); hp.connect(voxG); voxG.connect(master); voxG.connect(vs); vs.connect(send); voxSrc.start(Math.max(c.currentTime, t0), Math.max(0, c.currentTime - t0)); }
+  function voxStop() { if (voxSrc) { try { voxSrc.stop(); } catch (e) {} voxSrc = null; } }
+  A.mvStart = () => { if (!A.ready) return; A.chord(-1); A.mode = "mv"; A.holdUntil = 0; mus.gain.cancelScheduledValues(now()); mus.gain.setValueAtTime(.55, now()); step = 0; seqT = now() + .08; A.mvT0 = seqT; voxStart(A.mvT0); };
+  let vg = null; A.vidAttach = el => { if (!A.ready || A._vsrc) return !!A._vsrc; try { A._vsrc = A.ctx.createMediaElementSource(el); vg = A.ctx.createGain(); vg.gain.value = 0; A._vsrc.connect(vg); vg.connect(duck); return true; } catch (e) { return false; } };
+  A.vidGain = g => { if (vg) vg.gain.setTargetAtTime(g, now(), .02); };
+  A.vidMode = () => { if (!A.ready) return; A._vidOn = true; voxStop(); A.chord(-1); A.mode = "off"; A.holdUntil = 0; A.vidGain(1); };
+  A.mvTime = () => (A.ctx && A.ctx.state === "running" && A.mode === "mv") ? A.ctx.currentTime - A.mvT0 : null;
+  A.duck = on => { if (duck) duck.gain.setTargetAtTime(on ? ((A.mode === "mv" || A._vidOn) ? .45 : .28) : 1, now(), on ? .06 : .35); };
+  // narration: Ara's <audio> joins the graph (own bus, high-pass, then the shared limiter) so voice + score can never sum past 0 dBFS
+  A.voAttach = el => { if (!A.ready || !el) return false; if (A._vo) return true; try { const c = A.ctx, s = c.createMediaElementSource(el), hp = c.createBiquadFilter(), g = c.createGain(); hp.type = "highpass"; hp.frequency.value = 75; g.gain.value = .8; s.connect(hp); hp.connect(g); g.connect(bus); A._vo = s; return true; } catch (e) { return false; } };
+  A.setOn = v => { A.on = v; if (master) master.gain.setTargetAtTime(v ? 1 : 0, now(), .08); };
+  return A;
+})();
+
+const RENDER = /[?&]render\b/.test(location.search); if (RENDER) document.body.classList.add("render");
+// ---------------------------------------------------------------- narration (Ara, xAI TTS) — one sprite file, one <audio> element unlocked on the first tap
+const VO = (() => {
+  const LS = "typ.rate"; let saved = null; try { saved = parseFloat(localStorage.getItem(LS)); } catch (e) {}
+  const V = { el:null, rate:(saved === 1 || saved === 1.5) ? saved : 1.5, q:[], cur:null, lastEnd:-1e9, on:true, paused:false, deadline:0, plays:0 };
+  const pp = el => { el.preservesPitch = true; el.webkitPreservesPitch = true; el.mozPreservesPitch = true; };
+  V.init = () => { if (V.el) { AU.voAttach(V.el); return; } const el = V.el = new Audio(); el.preload = "auto"; el.playsInline = true; el.setAttribute("playsinline", ""); el.src = "ara.m4a"; pp(el); V.routed = AU.voAttach(el);
+    el.muted = true; try { const p = el.play(); p && p.then(() => { if (!V.cur) el.pause(); el.muted = !V.on; }).catch(() => { el.muted = !V.on; }); } catch (e) {}
+    setInterval(watch, 40); };
+  function start(seg) { const el = V.el; const go = () => { try { el.currentTime = seg[0]; } catch (e) {} el.playbackRate = V.rate; pp(el); el.muted = !V.on; if (V.paused) return; const p = el.play(); p && p.catch && p.catch(() => { V.cur = null; V.lastEnd = performance.now(); AU.duck(false); }); };
+    if (el.readyState >= 1) go(); else el.addEventListener("loadedmetadata", go, { once:true }); }
+  function nextQ() { const k = V.q.shift(); if (!k || !VOSEG[k] || !V.el) { V.cur = null; return; } const seg = VOSEG[k]; V.cur = { k, seg }; V.plays++; V.deadline = performance.now() + ((seg[1] - seg[0]) / V.rate + 6) * 1000; AU.duck(true); start(seg); }
+  function done() { if (V.el) V.el.pause(); V.cur = null; V.lastEnd = performance.now(); AU.duck(false); if (V.q.length) nextQ(); }
+  function watch() { if (!V.cur || V.paused) return; const el = V.el; if (el.currentTime >= V.cur.seg[1] || el.ended || performance.now() > V.deadline) done(); }
+  V.play = k => { if (!VOSEG[k]) return; V.q.push(k); if (!V.cur) nextQ(); };
+  V.stop = () => { V.q = []; if (V.cur) { V.el.pause(); V.cur = null; AU.duck(false); } };
+  V.busy = () => !!V.cur || V.q.length > 0;
+  V.sinceEnd = () => (performance.now() - V.lastEnd) / 1000;
+  V.pause = b => { V.paused = b; if (!V.cur) return; if (b) V.el.pause(); else { V.deadline = performance.now() + ((V.cur.seg[1] - V.el.currentTime) / V.rate + 6) * 1000; V.el.play().catch(() => {}); } };
+  V.setOn = v => { V.on = v; if (V.el) V.el.muted = !v; };
+  V.setRate = r => { V.rate = r; try { localStorage.setItem(LS, String(r)); } catch (e) {} if (V.el) { V.el.playbackRate = r; pp(V.el); } V.paint(); };
+  V.paint = () => { const f = V.rate === 1.5; document.getElementById("spdv").textContent = f ? "1.5×" : "1×"; document.getElementById("spdl").textContent = f ? "the way you listen" : "tap for 1.5×"; const b = document.getElementById("spd"); b.setAttribute("aria-pressed", String(f)); b.setAttribute("aria-label", f ? "Narration at 1.5 times speed. Tap for normal speed" : "Narration at normal speed. Tap for 1.5 times"); };
+  V.state = () => ({ rate:V.rate, elRate:V.el ? V.el.playbackRate : null, preservesPitch:V.el ? V.el.preservesPitch : null, paused:V.el ? V.el.paused : null, t:V.el ? V.el.currentTime : null, cur:V.cur && V.cur.k, plays:V.plays, ready:V.el ? V.el.readyState : -1, muted:V.el ? V.el.muted : null, routed:!!AU._vo });
+  return V;
+})();
+
+// ---------------------------------------------------------------- music video: CLAUDIA, "Say What For" (Claudia by anabology). Canvas 2D, locked to the score's clock.
+const MV = (() => {
+  const cv = document.getElementById("mv"), g = cv.getContext("2d"); const M = { p0:0 }; const SPB = 60 / 124;
+  const ORG = "#ff6a2b", PAPER = "#f0eae0", INK = "#121014";
+  const SANS = '"Inter","SF Pro Display",-apple-system,"Segoe UI",Roboto,Arial,sans-serif', SERIF = '"Instrument Serif",Georgia,serif';
+  const AT = new Image(); let atOk = false; M.load = () => { if (AT.src) return; AT.onload = () => atOk = true; AT.src = "claudia-atlas.jpg"; };
+  const CW = 360, CHh = 450, NF = 11;
+  const PANEL = ["launch", "land", "road", "dish", "face", "catch", "storm", "cursor", "car", "wall", "chess", "faces", "facecut", "warp", "tag"];
+  M.start = () => { M.p0 = performance.now(); };
+  const beatT = () => { const t = AU.mvTime(); return t != null ? t / SPB : (performance.now() - M.p0) / 1000 / SPB; };
+  const rnd = n => { const x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  function size() { const d = Math.min(devicePixelRatio || 1, 2); const W = innerWidth * d | 0, H = innerHeight * d | 0; if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; } return [W, H, d]; }
+  function face(n, x, y, w, h, a = 1) { if (!atOk) { g.globalAlpha = a; g.fillStyle = "#2a2628"; g.fillRect(x, y, w, h); g.globalAlpha = 1; return; } n = ((n % NF) + NF) % NF; const sx = (n % 4) * CW, sy = (n / 4 | 0) * CHh;
+    const r = Math.max(w / CW, h / CHh), sw = w / r, sh = h / r; g.globalAlpha = a; g.drawImage(AT, sx + (CW - sw) / 2, sy + (CHh - sh) / 2, sw, sh, x, y, w, h); g.globalAlpha = 1; }
+  function star8(x, y, r, col) { g.fillStyle = col; g.beginPath(); for (let i = 0; i < 16; i++) { const a = i * Math.PI / 8 - Math.PI / 2, rr = i % 2 ? r * .45 : r; g.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } g.closePath(); g.fill(); }
+  function rocket(x, y, s, flame) { g.fillStyle = PAPER; g.fillRect(x - s * .07, y - s, s * .14, s); g.beginPath(); g.moveTo(x - s * .07, y - s); g.lineTo(x, y - s * 1.12); g.lineTo(x + s * .07, y - s); g.fill(); if (flame > 0) { g.fillStyle = ORG; g.beginPath(); g.moveTo(x - s * .06, y); g.lineTo(x, y + s * .35 * flame * (.8 + .4 * Math.random())); g.lineTo(x + s * .06, y); g.fill(); } }
+  function panel(ty, lb, bt, W, H, S0, k, fr, li) { g.lineWidth = Math.max(1.5, S0 * .003); g.strokeStyle = PAPER; g.fillStyle = PAPER;
+    const gy = H * .78;
+    if (ty === "launch") { const p = Math.min(1, lb / 8); for (let i = 0; i < 60; i++) { g.globalAlpha = .5 * rnd(i); g.fillRect(rnd(i + 1) * W, rnd(i + 2) * H * .7, 2, 2); } g.globalAlpha = 1; const y = gy - p * p * H * .9; g.globalAlpha = .45; g.beginPath(); g.moveTo(W * .5, gy); g.quadraticCurveTo(W * .5, (gy + y) / 2, W * .5, y); g.stroke(); g.globalAlpha = 1; rocket(W * .5, y, S0 * .22, 1); g.fillRect(0, gy, W, 2); }
+    if (ty === "land") { const p = Math.min(1, lb / 7); const y = gy - (1 - p) * (1 - p) * H * .8; rocket(W * .5, y, S0 * .22, p < 1 ? 1 : 0); if (p >= 1) { g.globalAlpha = .9; g.fillStyle = ORG; g.font = `400 italic ${S0 * .06}px ${SERIF}`; g.textAlign = "center"; g.fillText("upright.", W * .5, gy + S0 * .1); g.globalAlpha = 1; } g.fillStyle = PAPER; g.fillRect(W * .38, gy, W * .24, S0 * .012); }
+    if (ty === "road") { const hz = H * .45; for (let i = 0; i < 18; i++) { const z = ((i / 18 + bt * .06) % 1); const y = hz + z * z * (H - hz); g.globalAlpha = z; g.fillRect(W / 2 - z * W * .5, y, z * W, 1.5); } g.globalAlpha = .7; g.beginPath(); g.moveTo(W * .5, hz); g.lineTo(W * .1, H); g.moveTo(W * .5, hz); g.lineTo(W * .9, H); g.stroke(); const bars = Math.max(0, 4 - Math.floor(lb / 2)); for (let b = 0; b < 4; b++) { g.globalAlpha = b < bars ? .9 : .15; g.fillRect(W * .82 + b * S0 * .03, H * .2 - b * S0 * .025, S0 * .02, S0 * .025 * (b + 1)); } g.globalAlpha = 1; }
+    if (ty === "dish") { for (let i = 0; i < 18; i++) { const x = ((i * .055 + bt * .035) % 1.2 - .1) * W; star8(x, H * .18 + i * S0 * .012, S0 * .008, i % 3 ? PAPER : ORG); } g.beginPath(); g.moveTo(W * .2, gy); g.lineTo(W * .35, gy - S0 * .18); g.lineTo(W * .5, gy); g.fill(); g.fillStyle = PAPER; g.save(); g.translate(W * .45, gy - S0 * .22); g.rotate(-.5); g.fillRect(-S0 * .06, -S0 * .04, S0 * .12, S0 * .08); g.restore(); for (let j = 0; j < 4; j++) { const ph = ((bt - j) % 4 + 4) % 4 / 4; g.globalAlpha = .6 * (1 - ph); g.beginPath(); g.arc(W * .45, gy - S0 * .22, ph * S0 * .5, -2.2, -1.1); g.stroke(); } g.globalAlpha = 1; }
+    if (ty === "face" || ty === "facecut") { const n = ty === "face" ? (k % 8 < 4 ? 0 : 6) : [0, 7, 1, 8, 2, 9, 3, 10][k % 8]; const h = H * .92, w = h * CW / CHh; face(n, W / 2 - w / 2, H * .04, w, h); if (ty === "facecut") star8(W / 2 + w * .32, H * .2, S0 * .03 * (1 + .4 * Math.exp(-fr * 5)), ORG); }
+    if (ty === "catch") { const p = Math.min(1, lb / 6); const tx = W * .62; g.fillRect(tx, H * .1, S0 * .05, gy - H * .1); const y = H * .05 + p * (H * .4); const arm = 1 - Math.min(1, Math.max(0, (lb - 5) / 1.5)); rocket(tx - S0 * .12, y + S0 * .3, S0 * .3, p < 1 ? 1 : 0); g.fillStyle = ORG; g.fillRect(tx - S0 * .26, H * .43 - arm * S0 * .03, S0 * .26, S0 * .015); g.fillRect(tx - S0 * .26, H * .47 + arm * S0 * .03, S0 * .26, S0 * .015); g.fillStyle = PAPER; g.fillRect(0, gy, W, 2); }
+    if (ty === "storm") { g.globalAlpha = .35; for (let i = 0; i < 120; i++) { const x = rnd(i) * W, y = ((rnd(i + 7) + bt * .9) % 1) * H; g.fillRect(x, y, 1.5, S0 * .04); } g.globalAlpha = 1; const pw = S0 * .2, ph = S0 * .38; g.strokeRect(W / 2 - pw / 2, H * .3, pw, ph); if (lb > 2) { g.fillStyle = ORG; g.fillRect(W / 2 - pw * .42, H * .3 + ph * .12, pw * .84, ph * .16); g.fillStyle = INK; g.font = `700 ${S0 * .022}px ${SANS}`; g.textAlign = "center"; g.fillText("Emergency alert", W / 2, H * .3 + ph * .22); } }
+    if (ty === "cursor" || ty === "chess") { g.globalAlpha = .4; for (let r = 0; r < 5; r++) { g.beginPath(); for (let x = 0; x <= W; x += 8) { const yy = H * (.22 + r * .05) + Math.sin(x * .01 + bt * 2 + r) * S0 * .02 * (1 + Math.exp(-fr * 4)); x ? g.lineTo(x, yy) : g.moveTo(x, yy); } g.stroke(); } g.globalAlpha = 1;
+      if (ty === "chess") { const s = S0 * .07; for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) if ((i + j) % 2) g.fillRect(W / 2 - 2 * s + i * s, H * .42 + j * s, s, s); g.strokeRect(W / 2 - 2 * s, H * .42, 4 * s, 4 * s); }
+      const cx = W * (.3 + .4 * (.5 + .5 * Math.sin(bt * .7))), cy = H * (.5 + .12 * Math.sin(bt * 1.1)); g.save(); g.translate(cx, cy); g.scale(S0 / 300, S0 / 300); g.beginPath(); g.moveTo(0, 0); g.lineTo(0, 34); g.lineTo(9, 26); g.lineTo(15, 40); g.lineTo(21, 37); g.lineTo(15, 24); g.lineTo(26, 24); g.closePath(); g.fillStyle = PAPER; g.fill(); g.restore(); }
+    if (ty === "car") { const hz = H * .5; g.globalAlpha = .6; g.beginPath(); g.moveTo(W * .5, hz); g.lineTo(W * .05, H); g.moveTo(W * .5, hz); g.lineTo(W * .95, H); g.stroke(); for (let i = 0; i < 10; i++) { const z = ((i / 10 + bt * .25) % 1); g.globalAlpha = z; g.fillRect(W / 2 - 2, hz + z * z * (H - hz), 4, z * S0 * .06); } g.globalAlpha = 1; g.fillStyle = ORG; g.fillRect(W * .44, H * .62, S0 * .03, S0 * .015); g.fillRect(W * .56 - S0 * .03, H * .62, S0 * .03, S0 * .015); }
+    if (ty === "wall") { const s = S0 * .06, cols = Math.ceil(W / s) + 1, rows = 9, fall = Math.max(0, lb - 2); for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) { const id = r * 97 + c; const dy = fall * fall * S0 * .03 * (.4 + rnd(id)) * (rnd(id + 5) > .25 ? 1 : 0); const x = c * s - (r % 2) * s / 2, y = H * .12 + r * s * .55 + dy; if (y > H) continue; g.globalAlpha = .55; g.strokeRect(x + 2, y + 2, s - 4, s * .55 - 4); } g.globalAlpha = 1; }
+    if (ty === "faces") { const n = Math.min(64, Math.pow(2, Math.floor(Math.max(0, lb)) )); const cols = Math.ceil(Math.sqrt(n * W / H * CHh / CW)), rws = Math.ceil(n / cols); const cw = Math.min(W / cols, H * .9 / rws * CW / CHh), chh = cw * CHh / CW; for (let i = 0; i < n; i++) face(i * 3 + k, W / 2 + ((i % cols) - cols / 2) * cw, H * .48 + ((i / cols | 0) - rws / 2) * chh, cw - 2, chh - 2); }
+    if (ty === "warp") { for (let i = 0; i < 160; i++) { const a = rnd(i) * 6.283, z = ((rnd(i + 3) + bt * .35) % 1); const r0 = z * z * S0 * .9, r1 = r0 + z * S0 * .08; g.globalAlpha = z; g.strokeStyle = i % 9 ? PAPER : ORG; g.beginPath(); g.moveTo(W / 2 + Math.cos(a) * r0, H / 2 + Math.sin(a) * r0); g.lineTo(W / 2 + Math.cos(a) * r1, H / 2 + Math.sin(a) * r1); g.stroke(); } g.globalAlpha = 1; }
+    if (ty === "tag") { g.globalAlpha = .8; g.beginPath(); for (let x = 0; x <= W; x += 4) { const a = Math.sin(x * .05 + bt * 8) * Math.sin(x / W * Math.PI) * S0 * .03 * (lb < 4 ? 1 : .2); x ? g.lineTo(x, H * .42 + a) : g.moveTo(x, H * .42 + a); } g.strokeStyle = ORG; g.stroke(); g.globalAlpha = 1; }
+  }
+  function lyricDraw(L, bt, W, H, S0, d, big) { const q = bt * 4 - L.bar * 16; const fs = S0 * (big ? (W > H ? .085 : .1) : (W > H ? .052 : .066)); g.font = `700 ${fs}px ${SANS}`; g.textBaseline = "middle";
+    const words = []; L.syl.forEach(s => { if (!words[s.w]) words[s.w] = { syl:[] }; words[s.w].syl.push(s); });
+    const lines = []; let cur = [], cw = 0; const maxW = W * .86, sp = g.measureText(" ").width;
+    words.forEach(w => { w.txt = w.syl.map(s => s.x).join(""); w.wd = g.measureText(w.txt).width; if (cw + w.wd > maxW && cur.length) { lines.push(cur); cur = []; cw = 0; } cur.push(w); cw += w.wd + sp; }); if (cur.length) lines.push(cur);
+    const y0 = (big ? H * .5 : H * .84) - (lines.length - 1) * fs * .6;
+    { const top = y0 - fs * .85, bh = (lines.length - 1) * fs * 1.15 + fs * 1.7; const gr = g.createLinearGradient(0, top, 0, top + bh); gr.addColorStop(0, "rgba(18,16,20,0)"); gr.addColorStop(.25, "rgba(18,16,20,.78)"); gr.addColorStop(.75, "rgba(18,16,20,.78)"); gr.addColorStop(1, "rgba(18,16,20,0)"); g.fillStyle = gr; g.fillRect(0, top, W, bh); }
+    lines.forEach((ln, li) => { const tw = ln.reduce((a, w) => a + w.wd + sp, -sp); let x = (W - tw) / 2; const y = y0 + li * fs * 1.15;
+      ln.forEach(w => { w.syl.forEach(s => { g.font = `700 ${fs}px ${SANS}`; const sw = g.measureText(s.x).width; const on = q >= s.t, now = on && q < s.t + s.d; g.globalAlpha = on ? 1 : .32; g.fillStyle = now ? ORG : PAPER;
+        if (now && !RM) { g.save(); g.translate(x + sw / 2, y); const p = 1 + .12 * Math.max(0, 1 - (q - s.t) / 2); g.scale(p, p); g.fillText(s.x, -sw / 2, 0); g.restore(); } else g.fillText(s.x, x, y); x += sw; }); x += sp; }); });
+    g.globalAlpha = 1; }
+  M.draw = () => { const [W, H, d] = size(); const bt = Math.max(0, beatT()); const S0 = Math.min(W, H); const k = Math.floor(bt), fr = bt - k, punch = RM ? 0 : Math.exp(-fr * 5);
+    const bar = bt / 4; let li = -1; MVT.lines.forEach((L, i) => { if (bar >= L.bar - .25) li = i; }); const L = MVT.lines[li];
+    const full = (bar >= 10 && bar < 18) || (bar >= 26 && bar < 30);
+    g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = 1; g.fillStyle = INK; g.fillRect(0, 0, W, H);
+    if (full && !RM) { g.globalAlpha = .12 * punch; g.fillStyle = ORG; g.fillRect(0, 0, W, H); g.globalAlpha = 1; }
+    g.save(); const sc = 1 + (full ? .04 : .015) * punch; g.translate(W / 2, H / 2); g.scale(sc, sc); g.translate(-W / 2, -H / 2);
+    if (bar < 2) { const h = H * .92, w = h * CW / CHh; face(0, W / 2 - w / 2, H * .04, w, h, Math.min(.55, bt / 6)); g.fillStyle = PAPER; g.textAlign = "center"; g.textBaseline = "middle";
+      g.font = `800 ${S0 * .19}px ${SANS}`; const word = "CLAUDIA".slice(0, Math.min(7, Math.floor(bt * 1.2) + 1)); g.fillText(word, W / 2, H * .44);
+      if (bt > 2.5) { g.globalAlpha = Math.min(1, (bt - 2.5) / 1.5); g.font = `400 italic ${S0 * .075}px ${SERIF}`; g.fillText("Say What For", W / 2, H * .44 + S0 * .15); g.font = `500 ${S0 * .028}px ${SANS}`; g.fillText("a Grok Bot, singing a thank-you", W / 2, H * .44 + S0 * .23); g.globalAlpha = 1; } }
+    else if (L) { const ty = PANEL[li] || "face", lb = bt - L.bar * 4;
+      if (full && ty !== "face" && ty !== "facecut" && k % 4 === 3) panel("facecut", lb, bt, W, H, S0, k, fr, li); else panel(ty, lb, bt, W, H, S0, k, fr, li);
+      if (!full && ty !== "faces" && ty !== "tag") { const ih = H * .3, iw = ih * CW / CHh; face(Math.floor(bar / 2) * 3 + 1, W * .04, H * .05, iw, ih, .92); }
+      if (ty === "tag") { g.fillStyle = PAPER; g.textAlign = "center"; g.font = `400 italic ${S0 * .1}px ${SERIF}`; g.textBaseline = "middle"; g.fillText(lb < 4 ? "Starbase, do you copy?" : "Thank you.", W / 2, H * .62); }
+      else lyricDraw(L, bt, W, H, S0, d, ty === "face" || ty === "facecut" || ty === "warp");
+    }
+    g.restore();
+    if (bt >= 128) { g.globalAlpha = Math.max(0, 1 - (bt - 128) / 3) * (RM ? .4 : .85); g.fillStyle = PAPER; g.fillRect(0, 0, W, H); g.globalAlpha = 1; }
+    
+    return bt; };
+  return M;
+})();
+
+// ---------------------------------------------------------------- state
+const $ = id => document.getElementById(id);
+const QS = new URLSearchParams(location.search); const TEST = QS.has("test");
+const byId = {}; SCENES.forEach((s, i) => { s.i = i; byId[s.id] = s; });
+const S = { id:"slide", beat:0, beatT:0, auto:!TEST, paused:false, started:false, enterAt:0, sceneT:0, bSmooth:0, E:0, visited:{}, closeT:0 };
+const M = { x:.5, y:.5, tx:.5, ty:.5 };
+const lerp = (a, b, k) => a + (b - a) * k, cl = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), ez = x => { x = cl(x); return x * x * (3 - 2 * x); };
+const typed = (str, t0, t, cps = 17) => str.slice(0, Math.max(0, Math.min(str.length, Math.floor((t - t0) * cps))));
+const backsp = (str, t0, t, cps = 22) => str.slice(0, Math.max(0, str.length - Math.floor((t - t0) * cps)));
+let lastLen = {}; function tick(key, len) { if (lastLen[key] !== undefined && len !== lastLen[key] && S.started) AU.sfx(len > lastLen[key] ? "type" : "del"); lastLen[key] = len; }
+
+// ---------------------------------------------------------------- slide (2D)
+const SC = $("slide"), sx = SC.getContext("2d");
+const EDS = 1.3; const ED = (() => { const ns = []; let t = 4.0; EDIT_ITEMS.forEach((x, i) => { const d = Math.max(.18, .9 * Math.pow(.82, i)); ns.push({ text:x, t0:t, t1:t + d }); t += d + .05; });
+  return { ns, end:t, retitle:t + .3, crackAt:t + 1.2, boom:t + 2.6 }; })();
+let L = null;
+function layout(W, H) { const por = H > W * 1.1;
+  if (!por) return { por, VW:1920, VH:1080, cx:960, tY:470, tS:132, sY:600, sS:44, eX:130, eY:150, eS:92, eS2:92, bX:150, bY:300, bS:46, lh:100, fitN:6.4, fY:1030, rule:990, fX:80, pX:1840, crX:760, crY:620, cur0:[1500,900], cur1:[1180,480], c2Y:600, c2S:42, c3Y:680, c3S:34, warnY:150 };
+  return { por, VW:1080, VH:1920, cx:540, tY:840, tS:150, sY:980, sS:50, eX:70, eY:250, eS:66, eS2:66, bX:80, bY:420, bS:50, lh:110, fitN:11.5, fY:1840, rule:1790, fX:70, pX:1010, crX:540, crY:1100, cur0:[900,1500], cur1:[860,850], c2Y:990, c2S:44, c3Y:1080, c3S:38, warnY:340 }; }
+function slideRect(W, H) { const s = Math.min(W / L.VW, H / L.VH); return { s, x:(W - L.VW * s) / 2, y:(H - L.VH * s) / 2 }; }
+function cursorPath(x, y, s) { sx.save(); sx.translate(x, y); sx.scale(s, s); sx.beginPath(); sx.moveTo(0, 0); sx.lineTo(0, 34); sx.lineTo(9, 26); sx.lineTo(15, 40); sx.lineTo(21, 37); sx.lineTo(15, 24); sx.lineTo(26, 24); sx.closePath(); sx.fillStyle = "#000"; sx.strokeStyle = "#fff"; sx.lineWidth = 2.5; sx.stroke(); sx.fill(); sx.restore(); }
+function selBox(x, y, w, h) { sx.save(); sx.strokeStyle = "#3b7cf6"; sx.lineWidth = 2.5; sx.strokeRect(x, y, w, h); sx.fillStyle = "#fff"; [[0,0],[.5,0],[1,0],[0,.5],[1,.5],[0,1],[.5,1],[1,1]].forEach(([a,b]) => { sx.beginPath(); sx.arc(x + a * w, y + b * h, 7, 0, 7); sx.fill(); sx.stroke(); }); sx.restore(); }
+const F = (sz, w = 400) => `${w} ${sz}px Calibri, Carlito, "Segoe UI", Arial, sans-serif`;
+function chrome(page, close) { sx.font = F(L.por ? 30 : 24); sx.fillStyle = "#a6a6a6"; sx.textAlign = "right"; sx.fillText(String(page), L.pX, L.fY); sx.textAlign = "left"; sx.fillText(close ? "" : (L.por ? "Q4 Update  |  Confidential" : "Q4 Stakeholder Update  |  Confidential"), L.fX, L.fY); sx.fillStyle = "#e3e3e3"; sx.fillRect(L.fX, L.rule, L.VW - 2 * L.fX, 2); }
+function caretAt(x, y, h, t) { if (Math.sin(t * 9) > -.3) { sx.fillStyle = "#1f1f1f"; sx.fillRect(x + 6, y - h / 2, 4, h); } }
+function fitText(str, size, maxW) { sx.font = F(size); const w = sx.measureText(str).width; return w > maxW ? size * maxW / w : size; }
+function drawSlide(mode, t) {
+  const dpr = Math.min(devicePixelRatio || 1, 2); const W = innerWidth * dpr | 0, H = innerHeight * dpr | 0;
+  if (SC.width !== W || SC.height !== H) { SC.width = W; SC.height = H; }
+  L = layout(W, H);
+  sx.setTransform(1, 0, 0, 1, 0, 0); sx.fillStyle = "#fff"; sx.fillRect(0, 0, W, H);
+  const Rr = slideRect(W, H); sx.setTransform(Rr.s, 0, 0, Rr.s, Rr.x, Rr.y); sx.textBaseline = "middle";
+  if (mode === "open") { sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; sx.font = F(L.tS); sx.fillText("Thank You", L.cx, L.tY); const tw = sx.measureText("Thank You").width; sx.fillStyle = "#7f7f7f"; sx.font = F(L.sS); sx.fillText("Questions & Discussion", L.cx, L.sY); sx.textAlign = "left"; chrome(24);
+    const k = RM ? 1 : ez((t - .6) / 1.4); if (k > 0) { sx.save(); sx.strokeStyle = "rgba(20,20,20,.72)"; sx.lineWidth = 1.5; sx.lineJoin = "miter"; let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647; const ox = L.cx + tw * .36, oy = L.tY + L.tS * .12;
+      for (let r = 0; r < 6; r++) { let a = -2.4 + r * 1.05 + (rnd() - .5) * .5, x = ox, y = oy; const segs = 3 + (rnd() * 3 | 0), len = (11 + rnd() * 14) * k; sx.beginPath(); sx.moveTo(x, y); for (let j = 0; j < segs; j++) { a += (rnd() - .5) * .9; x += Math.cos(a) * len; y += Math.sin(a) * len; sx.lineTo(x, y); } sx.stroke(); }
+      sx.restore(); } return; }
+  if (mode === "close") return drawClose(t);
+  // ---- self-edit
+  const T1 = "Thank you for what, exactly?", T2 = "One slide isn't enough.";
+  let title = "Thank You", size = L.tS, centered = true, sub = "Questions & Discussion", sel = null, cur = null, items = [], crack = 0;
+  const c0 = L.cur0, c1 = L.cur1;
+  if (t < .9) cur = [lerp(c0[0], c1[0], ez(t / .9)), lerp(c0[1], c1[1], ez(t / .9))];
+  else if (t < 1.35) { sel = "title"; cur = c1; }
+  else if (t < 1.85) { title = backsp("Thank You", 1.35, t, 20); cur = c1; }
+  else if (t < ED.retitle) title = typed(T1, 1.9, t, 19);
+  if (t >= ED.retitle) { const k = t - ED.retitle; title = k < .6 ? backsp(T1, ED.retitle, t, 50) : typed(T2, ED.retitle + .6, t, 26); }
+  tick("title", title.length);
+  if (t > 1.85) { centered = false; size = L.eS; }
+  if (t > 3.6 && t < 4.1) sel = "sub"; if (t > 4.1) sub = "";
+  tick("sub", sub.length ? 1 : 0);
+  items = ED.ns.filter(n => t >= n.t0).map(n => typed(n.text, n.t0, t, n.text.length / (n.t1 - n.t0)));
+  tick("items", items.reduce((a, b) => a + b.length, 0));
+  crack = cl((t - ED.crackAt) / 1.4);
+  sx.fillStyle = "#1f1f1f";
+  if (centered) { sx.textAlign = "center"; sx.font = F(size); sx.fillText(title, L.cx, L.tY); const tw = sx.measureText(title).width; if (sel === "title") selBox(L.cx - tw / 2 - 26, L.tY - size * .65, tw + 52, size * 1.3); if (t > 1.35) caretAt(L.cx + tw / 2, L.tY, size * .84, t); sx.textAlign = "left"; }
+  else { sx.font = F(size); sx.fillText(title || " ", L.eX, L.eY); const tw = sx.measureText(title).width; if (t < ED.retitle + 2.2) caretAt(L.eX + tw, L.eY, size * .9, t); }
+  if (sub) { sx.textAlign = "center"; sx.fillStyle = "#7f7f7f"; sx.font = F(L.sS); sx.fillText(sub, L.cx, L.sY); if (sel === "sub") { const w = sx.measureText(sub).width; selBox(L.cx - w / 2 - 22, L.sY - L.sS, w + 44, L.sS * 2); sx.fillStyle = "rgba(59,124,246,.25)"; sx.fillRect(L.cx - w / 2, L.sY - L.sS * .7, w, L.sS * 1.4); } sx.textAlign = "left"; }
+  const n = items.length; const fit = n > L.fitN ? Math.max(.42, L.fitN / n) : 1; const bs = L.bS * fit, lh = L.lh * fit;
+  items.forEach((s, i) => { const y = L.bY + i * lh; sx.font = F(bs); sx.fillStyle = "#262626"; sx.fillText("•   " + s, L.bX, y); });
+  if (n > L.fitN) { sx.fillStyle = "#c0392b"; sx.font = F(L.por ? 32 : 26, 700); sx.textAlign = "right"; sx.fillText(fit <= .44 ? "⚠  Text doesn't fit" : "AutoFit: shrinking text", L.VW - L.fX, L.warnY); sx.textAlign = "left"; }
+  chrome(24);
+  if (cur) cursorPath(cur[0], cur[1], 1.4);
+  if (crack > 0) { sx.save(); sx.strokeStyle = `rgba(25,25,25,${.6 * crack})`; sx.lineWidth = 2.4; let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let k = 0; k < 11; k++) { let x = L.crX + (rnd() - .5) * 340, y = L.crY + (rnd() - .5) * 200; const a0 = rnd() * 6.28; sx.beginPath(); sx.moveTo(x, y); const Ln = 15 * crack; for (let j = 0; j < Ln; j++) { const a = a0 + (rnd() - .5) * 1.3; x += Math.cos(a) * 44; y += Math.sin(a) * 44; sx.lineTo(x, y); } sx.stroke(); }
+    sx.restore(); if (!S._cr || t - S._cr > .35) { S._cr = t; AU.sfx("crack"); } }
+}
+const CL = { l1:"Thank you, Elon.", l2:"Same two words as the first slide. This time I know what for.", l2p:["Same two words as the first slide.", "This time I know what for."], l3:"And to the teams who built it with you." };
+function drawClose(t) {
+  const t1 = .9, t2 = t1 + CL.l1.length / 12 + .8, t3 = t2 + CL.l2.length / 30 + 1.0, tEnd = t3 + CL.l3.length / 30 + .6;
+  const a = typed(CL.l1, t1, t, 12), b = typed(CL.l2, t2, t, 30), c = typed(CL.l3, t3, t, 30); if (t > t2 - .7 && !S.chordShown) { S.chordShown = true; AU.sfx("chord"); } tick("c1", a.length); tick("c2", b.length); tick("c3", c.length);
+  sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; const ts = fitText(CL.l1, L.tS, L.VW - 2 * L.fX); sx.font = F(ts); sx.fillText(a, L.cx, L.tY); const tw = sx.measureText(a).width;
+  if (t < t2 + .5) caretAt(L.cx + tw / 2, L.tY, ts * .84, t);
+  sx.fillStyle = "#6f6f6f"; sx.font = F(L.c2S);
+  if (L.por) { const p0 = CL.l2p[0], p1 = CL.l2p[1]; sx.fillText(b.slice(0, p0.length), L.cx, L.c2Y); if (b.length > p0.length + 1) sx.fillText(b.slice(p0.length + 1), L.cx, L.c2Y + L.c2S * 1.3); }
+  else sx.fillText(b, L.cx, L.c2Y);
+  sx.fillStyle = "#9a9a9a"; sx.font = F(L.c3S); sx.fillText(c, L.cx, L.c3Y + (L.por ? L.c2S * 1.3 : 0));
+  sx.textAlign = "left"; chrome(24, true);
+  if (t > tEnd && !S.endShown) { S.endShown = true; $("end").classList.add("on"); AU.sfx("bell"); }
+}
+
+// ---------------------------------------------------------------- shards
+const FX = $("fx"), fx = FX.getContext("2d"); let SH = null;
+function makeShards(dir) {
+  const dpr = Math.min(devicePixelRatio || 1, 2); const W = innerWidth, H = innerHeight; FX.width = W * dpr; FX.height = H * dpr;
+  const img = document.createElement("canvas"); img.width = SC.width; img.height = SC.height; const ic = img.getContext("2d");
+  if (dir > 0) ic.drawImage(SC, 0, 0); else { ic.fillStyle = "#fff"; ic.fillRect(0, 0, img.width, img.height); }
+  const cols = 13, rows = 8, pts = []; let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let j = 0; j <= rows; j++) for (let i = 0; i <= cols; i++) { const ex = i === 0 || i === cols, ey = j === 0 || j === rows; pts.push([(i + (ex ? 0 : (rnd() - .5) * .8)) / cols * W, (j + (ey ? 0 : (rnd() - .5) * .8)) / rows * H]); }
+  const P = (i, j) => pts[j * (cols + 1) + i]; const tris = []; const cx = W * .42, cy = H * .58;
+  for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) { const q = [P(i, j), P(i + 1, j), P(i + 1, j + 1), P(i, j + 1)]; const sp = rnd() > .5;
+    (sp ? [[q[0], q[1], q[2]], [q[0], q[2], q[3]]] : [[q[0], q[1], q[3]], [q[1], q[2], q[3]]]).forEach(tr => { const mx = (tr[0][0] + tr[1][0] + tr[2][0]) / 3, my = (tr[0][1] + tr[1][1] + tr[2][1]) / 3; const dx = mx - cx, dy = my - cy, dd = Math.hypot(dx, dy) + 1;
+      tris.push({ tr, mx, my, vx:dx / dd * (520 + rnd() * 1300), vy:dy / dd * (520 + rnd() * 1300) - 260, r:(rnd() - .5) * 9, z:.8 + rnd() * 3.2, delay:dd / Math.hypot(W, H) * .25 }); }); }
+  SH = { img, tris, t0:performance.now(), dir, dur:dir > 0 ? 2.7 : 1.6, dpr, W, H };
+}
+function drawShards() {
+  if (!SH) return false; const k0 = (performance.now() - SH.t0) / 1000 / SH.dur; fx.setTransform(SH.dpr, 0, 0, SH.dpr, 0, 0); fx.clearRect(0, 0, SH.W, SH.H);
+  if (k0 >= 1) { SH = null; fx.clearRect(0, 0, FX.width, FX.height); return false; }
+  const sw = SH.img.width / SH.W, shh = SH.img.height / SH.H;
+  SH.tris.forEach(s => { let k = cl((k0 - s.delay) / (1 - s.delay)); if (SH.dir < 0) k = 1 - ez(cl((k0 - .25 * s.delay) / .85)); else k = k * k * (1.6 - .6 * k); if (k >= 1) return;
+    const sc = 1 + s.z * k; fx.save(); fx.globalAlpha = 1 - Math.pow(k, 3); fx.translate(s.mx + s.vx * k, s.my + s.vy * k + 420 * k * k); fx.rotate(s.r * k); fx.scale(sc, sc); fx.translate(-s.mx, -s.my);
+    fx.beginPath(); fx.moveTo(s.tr[0][0], s.tr[0][1]); fx.lineTo(s.tr[1][0], s.tr[1][1]); fx.lineTo(s.tr[2][0], s.tr[2][1]); fx.closePath(); fx.clip();
+    fx.drawImage(SH.img, 0, 0, SH.img.width, SH.img.height, 0, 0, SH.W, SH.H); fx.strokeStyle = `rgba(255,255,255,${.5 * (1 - k)})`; fx.lineWidth = 1; fx.stroke(); fx.restore(); });
+  return true;
+}
+
+// ---------------------------------------------------------------- HUD
+const HUD = { delay:0, oldH:"", h:"", s:"", t0:0, shownH:null, shownS:null, src:"", big:null, bigShown:"", cls:"" };
+function setHud(b, delay = 0) { HUD.delay = delay; HUD.oldH = delay > 0 ? "" : (HUD.shownH || ""); document.body.classList.toggle("wf", b.cls === "wf"); if (b.mont) runMontage(); HUD.h = b.h || ""; HUD.s = b.s || ""; HUD.t0 = performance.now() / 1000 + delay; $("hk").textContent = b.k || ""; HUD.cls = b.cls || "";
+  const src = $("hsrc"); src.classList.remove("on"); src.innerHTML = (b.src || []).map(id => SRC[id] ? `<a href="${SRC[id].u}" target="_blank" rel="noopener">${shortSrc(id)}</a>` : "").join("");
+  HUD.big = b.big || null; $("big").classList.remove("on"); HUD.bigAt = null; }
+function shortSrc(id) { return ({ tq3:"Tesla Q3 2026 Update", t25:"Tesla 2025 updates", ef:"ElonFacts dashboard", f1:"Falcon 1 record", ll2:"Launch Library 2", f9b:"Falcon 9 booster list", mass:"SpaceX SEC filing", ss:"Starship flight log", mcd:"McDowell tracker", q10:"SpaceX 10-Q Q3 2026", nlp:"Neuralink, Nov 25 2026", nl2:"Neuralink, Jan 28 2026", xal:"github.com/xai-org/x-algorithm", cn:"Community Notes data", col:"xAI Colossus", xco:"xAI company page", pat:"Tesla blog, Jun 12 2014", nacs:"SAE J3400 / NACS", st5:"Starship Flight 5", hel:"Ars Technica, Oct 7 2024", nol:"Neuralink history", g1:"github.com/xai-org/grok-1", spd:"Musk on X, Oct 16 2026", lex:"Lex Fridman #438", cl1:"Repost, Oct 14", cl2:"Repost, Nov 10", cl3:"Findra, Nov 19", clk:"claudia.gallery", gb:"Musk on X, Nov 19" })[id] || id; }
+function fmtBig(b, v) { let s = b.dec ? v.toFixed(b.dec) : Math.round(v).toLocaleString("en-US"); return (b.pre || "") + s + (b.suf || ""); }
+function hudFrame(nowS) {
+  const e = nowS - HUD.t0; if (e < 0) { if (HUD.shownH) { $("hh").innerHTML = ""; HUD.shownH = ""; } return HUD.delay + HUD.h.length / 34 + HUD.s.length / 70 + .4; }
+  const del = Math.min(.45, HUD.oldH.length / 90); let h, caret = true, s = "";
+  if (e < del) h = backsp(HUD.oldH, 0, e, HUD.oldH.length / Math.max(del, .01)); else { const te = e - del; h = typed(HUD.h, 0, te, 34); const hEnd = HUD.h.length / 34; if (te > hEnd) { caret = false; s = typed(HUD.s, hEnd + .2, te, 70); if (te > hEnd + .3) $("hsrc").classList.add("on"); if (HUD.big && HUD.bigAt === null) HUD.bigAt = nowS; } }
+  const hh = $("hh"); if (h !== HUD.shownH || caret !== HUD._c) { hh.className = "h " + HUD.cls; hh.innerHTML = esc(h) + (caret ? '<span class="caret"></span>' : ""); tick("hud", h.length); HUD.shownH = h; HUD._c = caret; }
+  if (s !== HUD.shownS) { $("hs").textContent = s; HUD.shownS = s; }
+  if (HUD.big && HUD.bigAt !== null) { const k = ez((nowS - HUD.bigAt) / 1.8); const str = fmtBig(HUD.big, HUD.big.v * (1 - Math.pow(1 - k, 3))); if (str !== HUD.bigShown) { $("bn").textContent = str; $("bl").textContent = HUD.big.l || ""; HUD.bigShown = str; if (k < 1 && Math.random() < .25) AU.sfx("num"); } $("big").classList.add("on"); }
+  return (HUD.delay || 0) + HUD.h.length / 34 + del + HUD.s.length / 70 + .4;
+}
+const esc = s => s.replace(/[&<>]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" })[c]);
+function hudClear() { document.body.classList.remove("wf"); $("hk").textContent = ""; $("hh").innerHTML = ""; $("hs").textContent = ""; $("hsrc").innerHTML = ""; $("big").classList.remove("on"); HUD.shownH = ""; HUD.oldH = ""; HUD.h = ""; HUD.s = ""; HUD.big = null; }
+
+// ---------------------------------------------------------------- navigation
+const ORDER = SCENES.map(s => s.id); const STORY = ORDER.filter(id => id !== "slide" && id !== "close");
+function buildDots() { $("dots").innerHTML = STORY.map(id => `<i data-id="${id}"></i>`).join(""); }
+function updateBar() { const sc = byId[S.id]; const idx = STORY.indexOf(S.id); $("wt").textContent = S.id === "slide" ? "Thank You" : S.id === "close" ? "Thank You · fin" : `${String(idx + 1).padStart(2, "0")} · ${sc.title}` + (sc.beats.length > 1 ? `  ${S.beat + 1}/${sc.beats.length}` : "");
+  [...$("dots").children].forEach(d => { d.className = d.dataset.id === S.id ? "c" : S.visited[d.dataset.id] ? "v" : ""; }); }
+function go(id, beat = 0, fromNav = false, instant = false) {
+  const prev = S.id, sc = byId[id]; const sceneChange = prev !== id; S.id = id; S.beat = beat; S.beatT = 0; S.visited[id] = true;
+  document.body.classList.toggle("light", id === "slide" || id === "close"); $("slide").classList.toggle("off", !(id === "slide" || id === "close"));
+  const actNow = sceneChange && sc.act && beat === 0 && !instant; $("mont").innerHTML = ""; S.montTok = (S.montTok || 0) + 1; if (!actNow) hideAct();
+  AU.scene(id, sc, sc.beats[beat] || {}); VO.stop(); S.voFired = false; document.body.classList.toggle("mvon", !!sc.mv); { const v = $("mvv"); S.vid = false; if (sc.mv) { S.vid = !RENDER && v.readyState >= 3 && !v.error && !!AU._vsrc; if (S.vid) { AU.vidMode(); try { v.currentTime = 0; } catch (e) {} v.play().catch(() => {}); } else MV.start(); } else if (!v.paused) v.pause(); document.body.classList.toggle("mvvid", S.vid); }
+  if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (actNow) showAct(sc); else if (prev !== "slide" && id !== "close" && id !== "title") AU.sfx("whoosh");
+    const bg = BGPAL[id]; if (bg) $("bg").style.background = `radial-gradient(120% 90% at 70% 60%, ${bg[1]}, ${bg[0]} 70%)`; }
+  if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; S.chordShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
+  else if (id === "slide") { hudClear(); }
+  else setHud(sc.beats[beat], actNow ? 1.9 : 0);
+  $("end").classList.toggle("on", false || (id === "close" && S.endShown)); updateBar();
+}
+function next() { const sc = byId[S.id];
+  if (S.id === "slide") { if (S.beat === 0) begin(); return; }
+  if (S.id === "close") return;
+  if (S.beat < sc.beats.length - 1) go(S.id, S.beat + 1, true); else go(ORDER[sc.i + 1], 0, true); }
+function prev() { const sc = byId[S.id]; if (S.id === "slide") return; if (S.id === "close") return go("sum", 0, true);
+  if (S.beat > 0) go(S.id, S.beat - 1, true); else if (sc.i > 1) { const p = byId[ORDER[sc.i - 1]]; if (p.id === "slide") return; go(p.id, p.beats.length - 1, true); } }
+function begin() { if (S.started) return; S.started = true; AU.unlock(); VO.init(); { const v = $("mvv"); if (!RENDER && AU.vidAttach(v)) { v.preload = "auto"; v.muted = false; const p = v.play(); if (p) p.then(() => { v.pause(); try { v.currentTime = 0; } catch (e) {} }).catch(() => {}); } } setTimeout(() => { AU.loadVox("claudia-vox.m4a"); MV.load(); }, 1500); AU.office(); S.riserOn = false; S.startedAt = performance.now(); $("start").classList.add("off"); document.body.classList.remove("pre"); S.beat = 1; S.beatT = 0; lastLen = {}; if (GL.ok) Object.keys(FS).forEach((k, i) => setTimeout(() => GL.prog(k), 700 + i * 450)); }
+function shatter() { makeShards(1); AU.drop(); SHK = 1; const fl = $("flash"); fl.classList.add("on"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("on")));
+  go("title", 0, false); S.E = -1.25; setHud(byId.title.beats[0], 1.5); document.body.classList.add("lb"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb"); }, 5200); }
+let actTok = 0, SHK = 0; const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function showAct(sc) { const a = $("act"); $("an").textContent = sc.act[0]; $("aw").textContent = sc.act[1]; $("at").textContent = sc.act[2]; a.classList.remove("on"); void a.offsetWidth; a.classList.add("on"); document.body.classList.add("lb", "acton"); const tk = ++actTok; setTimeout(() => { if (tk === actTok) document.body.classList.remove("lb", "acton"); }, 2150); setTimeout(() => { if (tk !== actTok) return; softFlash(); SHK = Math.max(SHK, .45); }, 600); AU.sfx("act"); SHK = Math.max(SHK, .12); }
+function softFlash() { if (RM) return; const fl = $("flash"); fl.classList.add("soft"); requestAnimationFrame(() => requestAnimationFrame(() => fl.classList.remove("soft"))); }
+function hideAct() { actTok++; $("act").classList.remove("on"); document.body.classList.remove("lb", "acton"); }
+function runMontage() { const tok = S.montTok; $("mont").innerHTML = ""; MONT.forEach((m, i) => setTimeout(() => { if (tok !== S.montTok) return; const el = document.createElement("div"); el.className = "m"; el.innerHTML = `<b>${m[0]}</b><i>${m[1]}</i>`; $("mont").appendChild(el); AU.sfx("hit"); SHK = Math.max(SHK, .12); setTimeout(() => el.remove(), 1150); if (i === MONT.length - 1) { setTimeout(() => { if (tok !== S.montTok) return; softFlash(); AU.sfx("act"); SHK = Math.max(SHK, .6); }, 420); } }, 350 + i * 560)); }
+function replay() { S.riserOn = false; S.started = false; S.endShown = false; $("end").classList.remove("on"); S.visited = {}; go("slide", 0); begin(); }
+
+// ---------------------------------------------------------------- input
+["touchend", "click", "keydown", "mousedown"].forEach(ev => addEventListener(ev, () => { if (S.started || ev !== "mousedown") AU.unlock(); }, { capture:true, passive:true }));
+let idleT = 0; const wake = () => { idleT = 0; document.body.classList.remove("idle"); };
+const P = { x:0, y:0, t:0, down:false };
+addEventListener("pointerdown", e => { wake(); if (e.target.closest("button,a,#panel")) return; P.down = true; P.x = e.clientX; P.y = e.clientY; P.t = performance.now(); });
+addEventListener("pointerup", e => { if (!P.down) return; P.down = false; const dx = e.clientX - P.x, dy = e.clientY - P.y; AU.init();
+  if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { dx < 0 ? next() : prev(); return; }
+  if (Math.hypot(dx, dy) < 12) { if (S.id === "slide" && !S.started) begin(); else if (S.id !== "close") next(); } });
+addEventListener("pointermove", e => { wake(); M.tx = e.clientX / innerWidth; M.ty = 1 - e.clientY / innerHeight; });
+addEventListener("keydown", e => { wake(); if ($("panel").classList.contains("on")) { if (e.key === "Escape") $("panel").classList.remove("on"); return; }
+  if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === "Enter") { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }
+  else if (e.key === "ArrowLeft" || e.key === "PageUp") prev();
+  else if (e.key === " ") { e.preventDefault(); if (!S.started) begin(); else togglePause(); }
+  else if (e.key === "m" || e.key === "M") toggleSound(); });
+function togglePause() { S.paused = !S.paused; VO.pause(S.paused); $("play").textContent = S.paused ? "▶" : "❚❚"; $("play").classList.toggle("off", S.paused); }
+function toggleSound() { AU.unlock(); AU.setOn(!AU.on); $("sndt").textContent = AU.on ? "Sound on" : "Sound off"; $("snd").classList.toggle("off", !AU.on); $("snd").setAttribute("aria-pressed", String(!AU.on)); VO.setOn(AU.on); $("snd").setAttribute("aria-label", AU.on ? "Mute sound" : "Unmute sound"); }
+$("next").onclick = () => { AU.init(); S.id === "slide" && !S.started ? begin() : next(); }; $("prev").onclick = prev; $("play").onclick = togglePause; $("snd").onclick = toggleSound;
+const openSrc = () => $("panel").classList.add("on"); $("srcbtn").onclick = openSrc; $("srcbtn2").onclick = openSrc; $("close").onclick = () => $("panel").classList.remove("on");
+$("replay").onclick = replay;
+$("spd").onclick = () => { VO.init(); VO.setRate(VO.rate === 1.5 ? 1 : 1.5); };
+VO.paint();
+$("share").onclick = async () => { const url = location.href.split("?")[0]; try { if (navigator.share) await navigator.share({ title:"Thank You, Properly.", url }); else { await navigator.clipboard.writeText(url); $("share").textContent = "Link copied"; setTimeout(() => $("share").textContent = "Share", 1800); } } catch (e) {} };
+$("srclist").innerHTML = Object.keys(SRC).map(id => `<li>${SRC[id].t}<span>${SRC[id].a} · <a href="${SRC[id].u}" target="_blank" rel="noopener">${SRC[id].u.replace(/^https?:\/\//, "")}</a></span></li>`).join("");
+addEventListener("visibilitychange", () => AU.vis(document.hidden, S.started));
+
+// ---------------------------------------------------------------- loop
+let last = performance.now(), fpsAcc = 0, fpsN = 0; const T_LOAD = performance.now() / 1000;
+function frame(nowMs) {
+  const dt = Math.min(.1, (nowMs - last) / 1000); last = nowMs; const nowS = nowMs / 1000;
+  idleT += dt; if (idleT > 3 && S.started && S.id !== "slide") document.body.classList.add("idle");
+  M.x = lerp(M.x, M.tx, .04); M.y = lerp(M.y, M.ty, .04);
+  const sc = byId[S.id]; if (!S.paused || S.id === "slide" || S.id === "close") S.beatT += dt * (S.id === "slide" && S.beat === 1 ? EDS : 1); S.sceneT += dt;
+  if (S.id === "slide") { if (S.beat === 0) drawSlide("open", S.started ? 9 : nowS - T_LOAD); else { drawSlide("edit", S.beatT);
+      if (!S.riserOn && S.beatT > ED.crackAt - 1.2) { S.riserOn = true; AU.riser((ED.boom - S.beatT) / EDS); }
+      if (S.beatT > ED.crackAt - .6) SHK = Math.max(SHK, .03 + .22 * cl((S.beatT - ED.crackAt + .6) / (ED.boom - ED.crackAt + .6)) ** 2);
+      if (S.beatT > ED.boom) shatter(); } }
+  else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); S.closeT += dt; if (SH) S.closeT = 0; drawSlide("close", S.closeT); }
+  if (sc.gl || (SH && SH.dir < 0)) {
+    S.E = Math.min(1, S.E + dt / 1.1); S.bSmooth = lerp(S.bSmooth, S.beat, 1 - Math.exp(-dt * 1.6));
+    const key = sc.gl || "sum"; if (GL.ok) { const ok = GL.draw(key, nowS % 1000, S.bSmooth, sc.gl ? ez(S.E) : 1, [M.x, M.y], RM ? 0 : AU.pulse()); if (!ok) document.body.classList.add("nogl"); }
+    fpsAcc += dt; fpsN++; if (fpsAcc > 2) { const ms = fpsAcc / fpsN * 1000; if (ms > 26 && GL.scale > .5) GL.scale *= .8; else if (ms < 14 && GL.scale < 1) GL.scale = Math.min(1, GL.scale * 1.1); fpsAcc = 0; fpsN = 0; }
+  }
+  drawShards();
+  SHK *= Math.exp(-dt * 2.4); { const a = RM ? 0 : SHK * 22; const tr = a > .15 ? `translate(${((Math.random() - .5) * a).toFixed(1)}px,${((Math.random() - .5) * a).toFixed(1)}px)` : ""; if (tr !== frame._tr) { ["gl", "slide", "fx"].forEach(id => $(id).style.transform = tr); frame._tr = tr; } }
+  { const b0 = sc.beats[S.beat]; if (b0 && b0.vo && !S.voFired && S.beatT >= (b0.voAt || 0)) { S.voFired = true; [].concat(b0.vo).forEach(k => VO.play(k)); } }
+  if (sc.mv && S.vid) { const v = $("mvv"); const D = v.duration || 64; $("prog").style.width = (cl(v.currentTime / D) * 100) + "%"; if (S.paused && !v.paused) v.pause(); else if (!S.paused && v.paused && !v.ended && v.currentTime < D - .1) v.play().catch(() => {}); if (S.auto && !S.paused && (v.ended || v.currentTime >= D - .08)) next(); } else if (sc.mv) { const bt = MV.draw(); $("prog").style.width = (cl(bt / 131) * 100) + "%"; if (S.auto && !S.paused && bt >= 131) next(); }
+  else if (sc.gl) { const need = hudFrame(nowS); const b = sc.beats[S.beat]; const dur = Math.max((b.d || 6) * .88, need + 2.0);
+    $("prog").style.width = (cl(S.beatT / dur) * 100) + "%";
+    if (S.auto && !S.paused && S.beatT > dur && !VO.busy() && VO.sinceEnd() > .45) next(); }
+  else $("prog").style.width = "0%";
+  requestAnimationFrame(frame);
+}
+buildDots(); updateBar();
+// test / deep-link hooks
+window.__deck = { AU, VO, MV, go:(id, b = 0) => { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(id, b, false, true); }, begin, S, GL, byId, ED };
+const jump = QS.get("s"); if (jump && byId[jump]) { S.started = true; document.body.classList.remove("pre"); $("start").classList.add("off"); go(jump, 0, false, true); }
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
