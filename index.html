@@ -485,6 +485,7 @@ const AU = (() => {
       return; }
     if (m === "mv") return mvPlay(s, t);
     if (m === "piano") { if (s % 4 === 0) { const k = (s / 4 | 0) % 6, sq = [0, 2, 1, 3, 2, 0]; piano(t, ch[sq[k]], .09); if (k === 0) piano(t, ch[0] / 2, .07); } return; } }
+  A.pianoDownbeat = () => { if (!A.ready) return; A.mode = "piano"; A.chord(7); step = 0; seqT = now(); };
   A.sfx = (k) => { if (!A.ready || !A.on || A.ctx.state !== "running") return; const t = now();
     if (k === "type" || k === "del") { if (performance.now() - lastTick < 34) return; lastTick = performance.now(); const f = k === "type" ? 2600 + Math.random() * 1600 : 1300 + Math.random() * 400; noise(t, .028, k === "type" ? .09 : .07, "bandpass", f, f * .8, 2.5); }
     else if (k === "crack") { noise(t, .09, .26, "highpass", 2500, 1200, 1); tone(t, 70 + Math.random() * 30, .25, .2, "sine", 40); }
@@ -730,16 +731,37 @@ function drawSlide(mode, t) {
 }
 const CL = { l1:"Thank you, Elon.", l2:"Same two words as the first slide. This time I know what for.", l2p:["Same two words as the first slide.", "This time I know what for."], l3:"And to the teams who built it with you." };
 function drawClose(t) {
-  const t1 = .9, t2 = t1 + CL.l1.length / 12 + .8, t3 = t2 + CL.l2.length / 30 + 1.0, tEnd = t3 + CL.l3.length / 30 + .6;
-  const a = typed(CL.l1, t1, t, 12), b = typed(CL.l2, t2, t, 30), c = typed(CL.l3, t3, t, 30); if (t > t2 - .7 && !S.chordShown) { S.chordShown = true; AU.sfx("chord"); } tick("c1", a.length); tick("c2", b.length); tick("c3", c.length);
+  // Ending locks typography to Ara's close VO and the 60 BPM piano pad (A.mode="piano").
+  // Phrase windows are seconds after VO start, measured from ara.m4a sprite [53.89, 58.91] (silencedetect -35dB).
+  // Beat grid is 60 BPM from typography clock start (after 1.6s rewind shards; immediate on instant go). voAt is on beat 1.
+  const voAt = (byId.close && byId.close.beats[0] && byId.close.beats[0].voAt) || 1;
+  const vr = (VO && VO.rate > 0) ? VO.rate : 1;           // default listen rate is 1.5x
+  const sc = (off) => voAt + off / vr;                    // phrase offsets measured at 1x from VO start
+  const l1s = sc(0.100), l1e = sc(0.844);                 // "Thank you, Elon."
+  const l2as = sc(1.153), l2ae = sc(2.742);               // "Same two words as the first slide."
+  const l2bs = sc(3.090), l2be = sc(4.634);               // "This time I know what for."
+  const tChord = l1e;                                     // chord hits as "Elon." lands, at any listen rate
+  const PAD = 2;                                          // piano-mode accompaniment hits every 2s
+  const t3 = Math.ceil((sc(4.634) + 0.12) / PAD) * PAD;   // dedication on the next pad hit after "for."
+  const tEnd = t3 + PAD;                                  // last character + bell on the following pad hit
+  const rate = (s, t0, t1) => s.length / Math.max(0.05, t1 - t0);
+  const a = (RM && t >= l1s) ? CL.l1 : typed(CL.l1, l1s, t, rate(CL.l1, l1s, l1e));
+  const l2a = CL.l2p[0], l2b = CL.l2p[1];
+  let b;
+  if (RM) b = t >= l2bs ? CL.l2 : (t >= l2as ? l2a : "");
+  else if (t < l2as) b = "";
+  else if (t < l2bs) b = typed(l2a, l2as, t, rate(l2a, l2as, l2ae));
+  else b = l2a + " " + typed(l2b, l2bs, t, rate(l2b, l2bs, l2be));
+  const c = (RM && t >= t3) ? CL.l3 : typed(CL.l3, t3, t, rate(CL.l3, t3, tEnd));
+  if (t >= tChord && !S.chordShown) { S.chordShown = true; AU.sfx("chord"); } tick("c1", a.length); tick("c2", b.length); tick("c3", c.length);
   sx.textAlign = "center"; sx.fillStyle = "#1f1f1f"; const ts = fitText(CL.l1, L.tS, L.VW - 2 * L.fX); sx.font = F(ts); sx.fillText(a, L.cx, L.tY); const tw = sx.measureText(a).width;
-  if (t < t2 + .5) caretAt(L.cx + tw / 2, L.tY, ts * .84, t);
+  if (t < tChord + .35) caretAt(L.cx + tw / 2, L.tY, ts * .84, t);
   sx.fillStyle = "#6f6f6f"; sx.font = F(L.c2S);
   if (L.por) { const p0 = CL.l2p[0], p1 = CL.l2p[1]; sx.fillText(b.slice(0, p0.length), L.cx, L.c2Y); if (b.length > p0.length + 1) sx.fillText(b.slice(p0.length + 1), L.cx, L.c2Y + L.c2S * 1.3); }
   else sx.fillText(b, L.cx, L.c2Y);
   sx.fillStyle = "#9a9a9a"; sx.font = F(L.c3S); sx.fillText(c, L.cx, L.c3Y + (L.por ? L.c2S * 1.3 : 0));
   sx.textAlign = "left"; chrome(24, true);
-  if (t > tEnd && !S.endShown) { S.endShown = true; $("end").classList.add("on"); AU.sfx("bell"); }
+  if (t >= tEnd && !S.endShown) { S.endShown = true; $("end").classList.add("on"); AU.sfx("bell"); }
 }
 
 // ---------------------------------------------------------------- shards
@@ -807,7 +829,7 @@ function go(id, beat = 0, fromNav = false, instant = false) {
   AU.scene(id, sc, sc.beats[beat] || {}); VO.stop(); S.voFired = false; document.body.classList.toggle("mvon", !!sc.mv); { const v = $("mvv"); S.vid = false; if (sc.mv) { S.vid = !RENDER && !v.error && !!v.getAttribute("src"); if (S.vid) { if (!AU._vsrc) AU.vidAttach(v); AU.vidMode(); try { v.currentTime = 0; } catch (e) {} v.muted = false; v.playsInline = true; const playVid = () => { const p = v.play(); if (p) p.catch(() => {}); }; if (v.readyState >= 2) playVid(); else v.addEventListener("canplay", playVid, { once:true }); } else MV.start(); } else if (!v.paused) v.pause(); document.body.classList.toggle("mvvid", S.vid); }
   if (sceneChange) { S.sceneT = 0; S.E = instant ? 1 : 0; S.bSmooth = beat; if (actNow) showAct(sc); else if (!RM && prev !== "slide" && id !== "close" && id !== "title") AU.sfx("whoosh");
     const bg = BGPAL[id]; if (bg) $("bg").style.background = `radial-gradient(120% 90% at 70% 60%, ${bg[1]}, ${bg[0]} 70%)`; }
-  if (id === "close") { hudClear(); S.closeT = 0; S.endShown = false; S.chordShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
+  if (id === "close") { hudClear(); S.closeT = 0; S.beatT = 0; S.closeClock = false; S.endShown = false; S.chordShown = false; $("end").classList.remove("on"); lastLen = {}; if (!instant) { makeShards(-1); AU.sfx("rewind"); } }
   else if (id === "slide") { hudClear(); }
   else { if (sceneChange) HUD.oldH = ""; setHud(sc.beats[beat], actNow ? (RM ? 0.4 : 2.05) : 0); }
   $("end").classList.toggle("on", false || (id === "close" && S.endShown)); updateBar();
@@ -885,7 +907,7 @@ function frame(nowMs) {
       if (!S.riserOn && S.beatT > ED.crackAt - 1.2) { S.riserOn = true; AU.riser((ED.boom - S.beatT) / EDS); }
       if (S.beatT > ED.crackAt - .6) SHK = Math.max(SHK, .03 + .22 * cl((S.beatT - ED.crackAt + .6) / (ED.boom - ED.crackAt + .6)) ** 2);
       if (S.beatT > ED.boom) shatter(); } }
-  else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); S.closeT += dt; if (SH) S.closeT = 0; drawSlide("close", S.closeT); }
+  else if (S.id === "close") { $("slide").classList.toggle("off", !!SH); if (SH) { S.closeT = 0; S.beatT = 0; } else { if (!S.closeClock) { S.closeClock = true; AU.pianoDownbeat(); } S.closeT += dt; } drawSlide("close", S.closeT); }
   if (sc.gl || (SH && SH.dir < 0)) {
     S.E = Math.min(1, S.E + dt / (RM ? 0.25 : 0.95)); S.bSmooth = lerp(S.bSmooth, S.beat, 1 - Math.exp(-dt * (RM ? 8 : 1.8)));
     const key = sc.gl || "sum"; if (GL.ok) { const ok = GL.draw(key, nowS % 1000, S.bSmooth, sc.gl ? ez(S.E) : 1, [M.x, M.y], RM ? 0 : AU.pulse()); if (!ok) document.body.classList.add("nogl"); }
